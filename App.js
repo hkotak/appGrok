@@ -1,9 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 
-export default class App extends React.Component {
+import Login from './app/screens/LoginScreen.js'
+
+export default class App extends Component {
+  // render() {
+  //   return <Login />
+  // }
+
+
+
+
   state = {
     isLoadingComplete: false,
   };
