@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { PropTypes } from 'prop-types';
-// import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
   Text,
@@ -12,19 +10,34 @@ import colors from '../styles/colors/index.js';
 import InputField from '../components/forms/inputField.js';
 import NextArrowButton from '../components/buttons/NextArrowButton.js'
 
-export default class Login extends Component {
-  handleNextButton() {
-    alert('Next Button Pressed')
-  }
 
+export default class Registration extends Component {
   render() {
     return (
-      <KeyboardAvoidingView style={styles.wrapper}>
+      <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
-            <Text style={styles.loginHeader}>Log In</Text>
+            <Text style={styles.loginHeader}>Register</Text>
             <InputField
-              labelText="Email Address"
+              labelText="First Name"
+              labelTextSize={14}
+              labelColor={colors.white}
+              textColor={colors.white}
+              borderBottomColor={colors.white}
+              inputType="first name"
+              customStyle={{ marginBottom: 30 }}
+            />
+            <InputField
+              labelText="Last Name"
+              labelTextSize={14}
+              labelColor={colors.white}
+              textColor={colors.white}
+              borderBottomColor={colors.white}
+              inputType="last name"
+              customStyle={{ marginBottom: 30 }}
+            />
+            <InputField
+              labelText="Email"
               labelTextSize={14}
               labelColor={colors.white}
               textColor={colors.white}
@@ -49,9 +62,10 @@ export default class Login extends Component {
           />
         </View>
       </KeyboardAvoidingView>
-    );
+    )
   }
 }
+
 
 const styles = StyleSheet.create({
   wrapper: {

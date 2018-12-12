@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
-import Icon from 'react-native';
+// import Icon from 'react-native';
 import colors from '../../styles/colors/index.js';
 import {
   View,
@@ -17,12 +17,13 @@ export default class InputField extends Component {
     const color = labelColor || colors.white;
     const inputColor = textColor || colors.white;
     const borderBottom = borderBottomColor || 'transparant';
+
     return (
-      <View> style={[customStyle, styles.wrapper]}
-        <Text styel={[{ color, fontSize }, styles.label]}>{labelText}</Text>
+      <View style={[customStyle, styles.wrapper]}>
+        <Text style={[{ color, fontSize }, styles.label]}>{labelText}</Text>
         <TextInput
           autoCorrect={false}
-          style={[{ color: inputColor, borderBottomColor: borderBottom }, styles.InputField]}
+          style={[{ color: inputColor, borderBottomColor: borderBottom }, styles.inputField]}
           secureTextEntry={inputType === "password"}
         />
       </View>
@@ -30,7 +31,7 @@ export default class InputField extends Component {
   }
 }
 
-InputField.PropTypes = {
+InputField.propTypes = {
   labelText: PropTypes.string.isRequired,
   labelTextSize: PropTypes.number,
   labelColor: PropTypes.string,

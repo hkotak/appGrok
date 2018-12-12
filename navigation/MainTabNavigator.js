@@ -1,15 +1,21 @@
 import React from 'react';
-import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
-
 //~~~~~~~~~~ MY IMPORTS ~~~~~~~~~~//
+import LoggedOut from '../app/screens/LoggedOutScreen.js';
 import LoginScreen from '../app/screens/LoginScreen.js';
 
+//~~~~ LOGGED OUT VIEW ~~~~//
+const LoggedOutStack = createStackNavigator({
+  LoggedOut: LoggedOut,
+})
+
+LoggedOutStack.navigationOptions = {
+  tabBarLabel: 'LogOut'
+}
+
+
+//~~~~ LOGIN SCREEN ~~~~//
 const LoginStack = createStackNavigator({
   Login: LoginScreen,
 });
@@ -19,58 +25,7 @@ LoginStack.navigationOptions = {
 }
 
 
-
-
-//~~~~ CAME BUILT IN ~~~~//
-// const HomeStack = createStackNavigator({
-//   Home: HomeScreen,
-// });
-
-// HomeStack.navigationOptions = {
-//   tabBarLabel: 'Home',
-//   tabBarIcon: ({ focused }) => (
-//     <TabBarIcon
-//       focused={focused}
-//       name={
-//         Platform.OS === 'ios'
-//           ? `ios-information-circle${focused ? '' : '-outline'}`
-//           : 'md-information-circle'
-//       }
-//     />
-//   ),
-// };
-
-const LinksStack = createStackNavigator({
-  Links: LinksScreen,
-});
-
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
-    />
-  ),
-};
-
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
-
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
-  tabBarIcon: ({ focused }) => (
-    <TabBarIcon
-      focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
-    />
-  ),
-};
-
 export default createBottomTabNavigator({
-  // HomeStack,
+  LoggedOutStack,
   LoginStack,
-  LinksStack,
-  SettingsStack,
 });
