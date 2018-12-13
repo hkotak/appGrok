@@ -33,7 +33,6 @@ RoundedButton.propTypes = {
   background: PropTypes.string,
   icon: PropTypes.object,
   handleOnPress: PropTypes.func.isRequired,
-
 }
 
 const styles = StyleSheet.create({

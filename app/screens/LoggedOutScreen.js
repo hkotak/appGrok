@@ -5,6 +5,7 @@ import {
   Text,
   View,
   Image,
+  Button
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RoundedButton from '../components/buttons/RoundedButton.js'
@@ -38,22 +39,30 @@ export default class LoggedOut extends Component {
           <RoundedButton
             text="Create Account"
             textColor={colors.white}
-            handleOnPress={this.onCreateAccount}
+            handleOnPress={this._onCreateAccount}
           />
-
-
+          <Button
+            style={styles.exButton}
+            title="Example Button"
+            onPress={this._onPressLearnMore}
+          />
         </View>
       </View>
     )
   }
+
 
   onGetStarted() {
     console.log('hitting')
 
   }
 
-  onCreateAccount() {
+  _onCreateAccount() {
     alert('Create Account Pressed')
+  }
+
+  _onPressLearnMore() {
+    alert('LOL')
   }
 }
 
@@ -87,6 +96,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     left: 20,
     zIndex: 8,
-  }
+  },
+
 })
 
