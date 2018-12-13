@@ -12,11 +12,18 @@ import RoundedButton from '../components/buttons/RoundedButton.js'
 
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
-// import LoginScreen from '../app/screens/LoginScreen.js';
+
+// screens for nav
+import LoginScreen from './LoginScreen.js';
+import Register from './RegistrationScreen.js'
 
 export default class LoggedOut extends Component {
   static navigationOptions = {
-    title: "LoggedOut",
+    title: "Welcome",
+  }
+
+  componentDidMount() {
+    console.log("PROPS", this.props.navigation)
   }
 
   render() {
@@ -52,13 +59,16 @@ export default class LoggedOut extends Component {
   }
 
 
-  onGetStarted() {
-    console.log('hitting')
+  onGetStarted = () => {
+    // console.log('hitting')
+    this.props.navigation.navigate('Login')
 
   }
 
-  _onCreateAccount() {
-    alert('Create Account Pressed')
+  _onCreateAccount = () => {
+    // alert('Create Account Pressed')
+    // console.log('can i register???')
+    this.props.navigation.navigate('Register')
   }
 
   _onPressLearnMore() {

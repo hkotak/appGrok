@@ -13,6 +13,10 @@ import InputField from '../components/forms/inputField.js';
 import NextArrowButton from '../components/buttons/NextArrowButton.js'
 
 export default class Login extends Component {
+  static navigationOptions = {
+    title: "Login",
+  }
+
   handleNextButton() {
     alert('Next Button Pressed')
   }
