@@ -15,6 +15,7 @@ export default class Registration extends Component {
   static navigationOptions = {
     title: "Register",
   }
+  
   render() {
     return (
       <KeyboardAvoidingView style={styles.wrapper} behavior="padding">

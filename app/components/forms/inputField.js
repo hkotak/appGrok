@@ -39,6 +39,7 @@ InputField.propTypes = {
   borderBottomColor: PropTypes.string,
   inputType: PropTypes.string.isRequired,
   customStyle: PropTypes.object,
+  onChangeText: PropTypes.string
 };
 
 const styles = StyleSheet.create({

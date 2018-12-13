@@ -1,9 +1,24 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+
+//aws auth
+import { Auth } from 'aws-amplify'
 
 class Home extends React.Component {
   static navigationOptions = {
     title: "Home",
+  }
+
+  logout = () => {
+    alert('LOL')
+    Auth.signOut()
+      .then(data => {
+        console.log("signout data", data)
+        this.props.navigation.navigate('Auth')
+      })
+      .catch(err => {
+        console.log("signout err", err)
+      })
   }
 
   render() {
@@ -11,6 +26,11 @@ class Home extends React.Component {
     return (
       <View style={styles.container}>
         <Text>HOME SCREEN</Text>
+        <Button
+            style={styles.exButton}
+            title="LOGOUT FOR TESTING"
+            onPress={this.logout}
+          />
       </View>
     );
   }
