@@ -72,8 +72,9 @@ export default class Login extends Component {
               inputType="password"
               customStyle={{ marginBottom: 30 }}
             /> */}
-            <TextInput 
+            <TextInput style={styles.label}
               label="Email"
+              placeholderTextColor="white"
               // leftIcon={{ type: "font-awesome", name: "envelope" }}
               onChangeText={
                 // this updates this.state.email to value in this Input
@@ -81,8 +82,10 @@ export default class Login extends Component {
               }
               placeholder="Enter email"
             />
-            <TextInput 
+            <TextInput style={styles.label}
               label="password"
+              placeholderTextColor="white"
+              secureTextEntry
               // leftIcon={{ type: "font-awesome", name: "envelope" }}
               onChangeText={
                 // this updates this.state.email to value in this Input
@@ -133,5 +136,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     right: 20,
     bottom: 20,
+  },
+  label: {
+    // fontWeight: '300',
+    fontSize: 20,
+    color: "white",
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    paddingTop: 5,
+    paddingBottom: 5,
   }
 })

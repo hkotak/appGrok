@@ -64,7 +64,7 @@ export default class ConfirmRegistration extends Component {
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
             <Text style={styles.loginHeader}>Confirm Registration</Text>
-            <TextInput
+            <TextInput style={styles.label}
             label="confirmationCode"
             // leftIcon={{ type: "font-awesome", name: "envelope" }}
             onChangeText={
@@ -72,6 +72,7 @@ export default class ConfirmRegistration extends Component {
               (value) => this.setState({confirmCode: value})
             }
             placeholder="Confirmation Code"
+            placeholderTextColor="white"
             />
             
 
@@ -119,5 +120,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     right: 20,
     bottom: 20,
+  },
+  label: {
+    // fontWeight: '300',
+    fontSize: 20,
+    color: "white",
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    paddingTop: 5,
+    paddingBottom: 5,
   }
 })
