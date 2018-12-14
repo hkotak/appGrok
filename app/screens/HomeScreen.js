@@ -7,7 +7,7 @@ import { Auth } from 'aws-amplify'
 import { connect } from 'react-redux';
 
 // import * as Actions from '../redux/actions/actions.js';
-import { getMyCard } from '../redux/actions/actions.js';
+import { getMyCard, authenticated } from '../redux/actions/actions.js';
 
 
 // const mapStateToProps = (state) => {
@@ -16,11 +16,13 @@ import { getMyCard } from '../redux/actions/actions.js';
 //   }
 // }
 
+
 const mapStateToProps = (state) => {
   console.log("state", state)
   return {
     MyCardData: state.MyCardData,
-    myCardCSS: state.myCardCSS
+    myCardCSS: state.myCardCSS,
+    authInfo: state.authInfo
   }
 }
 
@@ -30,7 +32,12 @@ class HomeScreen extends Component {
   }
 
   componentDidMount = () => {
+    const { navigation } = this.props
+    const userInfo = navigation.getParam('authInfo')
+    
+    this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard())
+    
   }
 
   logout = () => {
@@ -47,6 +54,7 @@ class HomeScreen extends Component {
 
   render() {
     console.log('this.props: ', this.props)
+
     return (
       <View style={styles.container}>
         <Text>HOME SCREEN</Text>

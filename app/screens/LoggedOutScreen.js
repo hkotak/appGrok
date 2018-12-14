@@ -24,7 +24,7 @@ export default class LoggedOut extends Component {
   }
 
   componentDidMount() {
-    console.log("PROPS", this.props.navigation)
+    // console.log("PROPS", this.props.navigation)
   }
 
   render() {

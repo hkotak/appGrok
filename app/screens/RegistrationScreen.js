@@ -43,7 +43,7 @@ export default class Registration extends Component {
         }
       })
       .then(user => {
-        console.log("register data", user)
+        // console.log("register data", user)
         this.props.navigation.navigate('Confirm', {email: this.state.email})
       })
       .catch(err => {

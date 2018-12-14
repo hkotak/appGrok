@@ -1,6 +1,6 @@
 // import { combineReducers } from 'redux';
 
-import { GET_ALL_CARDS, GET_MY_CARD } from '../actions/actions.js';
+import { GET_ALL_CARDS, GET_MY_CARD, AUTH_INFO } from '../actions/actions.js';
 
 // let dataState = { data: [], loading: true };
 // let cardState = { data: {}, loading: true };
@@ -9,12 +9,20 @@ const reducers = (state = {
   allCardsData: [],
   allCardsCSS: [],
   myCardData: {},
-  myCardCSS: {}
+  myCardCSS: {},
+  authInfo: {}
 }, action) => {
 
   switch (action.type) {
 
     //~~~~ Cases ~~~~//
+    case AUTH_INFO:
+      const newAuthInfo = {
+        user: action.payload
+      }
+      // console.log("AUTH REDUCER", action.payload)
+      return {...state, authInfo: newAuthInfo}
+
     case GET_ALL_CARDS:
       action.payload.forEach(card => {
         state.allCardsData.push(card.data)
