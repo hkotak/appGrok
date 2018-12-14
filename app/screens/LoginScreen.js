@@ -34,7 +34,6 @@ export default class Login extends Component {
 
   logginIn = () => {
     // alert('Next Button Pressed')
-    console.log("STATE", this.state)
     const {email, password} = this.state
     Auth.signIn(email, password)
       .then( user => {

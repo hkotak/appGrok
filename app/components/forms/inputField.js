@@ -25,6 +25,7 @@ export default class InputField extends Component {
           autoCorrect={false}
           style={[{ color: inputColor, borderBottomColor: borderBottom }, styles.inputField]}
           secureTextEntry={inputType === "password"}
+          onChangeText={(value)}
         />
       </View>
     );

@@ -49,11 +49,11 @@ export default class LoggedOut extends Component {
             textColor={colors.white}
             handleOnPress={this._onCreateAccount}
           />
-          <Button
+          {/* <Button
             style={styles.exButton}
             title="LOGOUT FOR TESTING"
             onPress={this._onPressLearnMore}
-          />
+          /> */}
         </View>
       </View>
     )
