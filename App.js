@@ -11,14 +11,17 @@ import Registration from './app/screens/RegistrationScreen.js';
 import Home from './app/screens/Home.js'
 import HomeScreen from './app/screens/HomeScreen.js'
 
+
 import AppNavigator from './navigation/AppNavigator';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 
+
 export default class App extends Component {
+
   render() {
     return (
       <Provider store={store}>
-        <HomeScreen />
+        <AppNavigator />
       </Provider>
     );
   }
