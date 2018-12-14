@@ -6,6 +6,7 @@ import { createStackNavigator, createBottomTabNavigator, createAppContainer } fr
 import LoginScreen from '../app/screens/LoginScreen.js';
 import RegistrationScreen from '../app/screens/RegistrationScreen.js';
 import LoggedOutScreen from '../app/screens/LoggedOutScreen.js';
+import ConfirmScreen from '../app/screens/ConfirmRegistration.js'
 
 // component 
 // import TabBarIcon from '../components/TabBarIcon.js'
@@ -13,7 +14,8 @@ import LoggedOutScreen from '../app/screens/LoggedOutScreen.js';
 const AuthStack = createStackNavigator({
   LoggedOut: LoggedOutScreen,
   Login: LoginScreen,
-  Register: RegistrationScreen
+  Register: RegistrationScreen,
+  Confirm: ConfirmScreen
 })
 
 

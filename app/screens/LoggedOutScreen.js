@@ -12,6 +12,7 @@ import RoundedButton from '../components/buttons/RoundedButton.js'
 
 import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
 
+import { Auth } from 'aws-amplify';
 
 // screens for nav
 import LoginScreen from './LoginScreen.js';
@@ -48,11 +49,11 @@ export default class LoggedOut extends Component {
             textColor={colors.white}
             handleOnPress={this._onCreateAccount}
           />
-          <Button
+          {/* <Button
             style={styles.exButton}
-            title="Example Button"
+            title="LOGOUT FOR TESTING"
             onPress={this._onPressLearnMore}
-          />
+          /> */}
         </View>
       </View>
     )
@@ -73,6 +74,13 @@ export default class LoggedOut extends Component {
 
   _onPressLearnMore() {
     alert('LOL')
+    Auth.signOut()
+      .then(data => {
+        console.log("signout data", data)
+      })
+      .catch(err => {
+        console.log("signout err", err)
+      })
   }
 }
 

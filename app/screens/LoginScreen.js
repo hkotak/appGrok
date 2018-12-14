@@ -7,18 +7,44 @@ import {
   ScrollView,
   StyleSheet,
   KeyboardAvoidingView,
+  Button,
+  TextInput
 } from 'react-native';
 import colors from '../styles/colors/index.js';
 import InputField from '../components/forms/inputField.js';
 import NextArrowButton from '../components/buttons/NextArrowButton.js'
+
+//aws authentication
+import { Auth } from 'aws-amplify'
 
 export default class Login extends Component {
   static navigationOptions = {
     title: "Login",
   }
 
-  handleNextButton() {
-    alert('Next Button Pressed')
+  constructor(props){
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      isAuthenticated: false,
+    }
+  }
+  
+
+  logginIn = () => {
+    // alert('Next Button Pressed')
+    const {email, password} = this.state
+    Auth.signIn(email, password)
+      .then( user => {
+        console.log("user data", user)
+        this.setState({isAuthenticated: true})
+        this.props.navigation.navigate('Home')
+      })
+      .catch( err => {
+        console.log("user sign in err", err);
+        alert("Email address or Password do not match, please try again")
+      })
   }
 
   render() {
@@ -27,7 +53,7 @@ export default class Login extends Component {
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
             <Text style={styles.loginHeader}>Log In</Text>
-            <InputField
+            {/* <InputField
               labelText="Email Address"
               labelTextSize={14}
               labelColor={colors.white}
@@ -35,6 +61,7 @@ export default class Login extends Component {
               borderBottomColor={colors.white}
               inputType="email"
               customStyle={{ marginBottom: 30 }}
+              onChangeText={(value)=>this.setState({email: value})}
             />
             <InputField
               labelText="Password"
@@ -44,13 +71,35 @@ export default class Login extends Component {
               borderBottomColor={colors.white}
               inputType="password"
               customStyle={{ marginBottom: 30 }}
+            /> */}
+            <TextInput 
+              label="Email"
+              // leftIcon={{ type: "font-awesome", name: "envelope" }}
+              onChangeText={
+                // this updates this.state.email to value in this Input
+                (value) => this.setState({email: value})
+              }
+              placeholder="Enter email"
+            />
+            <TextInput 
+              label="password"
+              // leftIcon={{ type: "font-awesome", name: "envelope" }}
+              onChangeText={
+                // this updates this.state.email to value in this Input
+                (value) => this.setState({password: value})
+              }
+              placeholder="Enter password"
             />
           </ScrollView>
         </View>
         <View style={styles.nextButton}>
-          <NextArrowButton
-            handleNextButton={this.handleNextButton}
+          <Button
+            title="Login"
+            onPress={this.logginIn}
           />
+          {/* <NextArrowButton
+            onPress={this.handleNextButton}
+          /> */}
         </View>
       </KeyboardAvoidingView>
     );

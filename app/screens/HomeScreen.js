@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ActivityIndicator,
-} from 'react-native';
+import { StyleSheet, Text, View, Button, ActivityIndicator } from 'react-native';
+
+//aws auth
+import { Auth } from 'aws-amplify'
 
 import { connect } from 'react-redux';
 
@@ -35,12 +33,33 @@ class HomeScreen extends Component {
     this.props.dispatch(getMyCard())
   }
 
+  logout = () => {
+    alert('LOL')
+    Auth.signOut()
+      .then(data => {
+        console.log("signout data", data)
+        this.props.navigation.navigate('Auth')
+      })
+      .catch(err => {
+        console.log("signout err", err)
+      })
+  }
+
   render() {
     console.log('this.props: ', this.props)
     return (
+      <View style={styles.container}>
+        <Text>HOME SCREEN</Text>
+        <Button
+            style={styles.exButton}
+            title="LOGOUT FOR TESTING"
+            onPress={this.logout}
+          />
+      
       <View>
         <Text style={styles.text1}>DATA SCREEN</Text>
       </View>
+    </View>
     )
   }
 }

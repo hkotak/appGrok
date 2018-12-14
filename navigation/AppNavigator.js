@@ -9,20 +9,34 @@ import {
 } from 'react-native';
 import { createSwitchNavigator } from 'react-navigation';
 
+// aws authentication
+import Amplify, { Auth } from 'aws-amplify'
+
+// navigators
 import MainTabNavigator from './MainTabNavigator';
 import AuthNavigator from './AuthNavigator.js'
 
 class AppLoad extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isAuthenticated: true
-    }
+  constructor(){
+  super();
+  this.state = {
+    isAuthenticated: false
+   }
   }
 
-  componentDidMount() {
-    const user = this.state.isAuthenticated
-    this.props.navigation.navigate(!user ? 'Auth' : 'Main')
+  componentDidMount(){
+    const user = this.state.isAuthenticated;
+    // this.props.navigation.navigate(!user ? 'Auth' : 'Main')
+
+    Auth.currentSession()
+    .then( data => {
+      console.log("session data", data)
+      this.props.navigation.navigate('Home')
+    })
+    .catch(err => {
+      console.log("session err", err)
+      this.props.navigation.navigate('Auth')
+    })
   }
 
   render() {
