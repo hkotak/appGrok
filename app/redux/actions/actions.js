@@ -1,19 +1,43 @@
-export const DATA_AVAILABLE = 'DATA_AVAILABLE';
+import axios from 'axios';
+
+export const GET_MY_CARD = "GET_MY_CARD";
+export const GET_ALL_CARDS = 'GET_ALL_CARDS'
 
 //~~~~ IMPORT THE SAMPLE DATA ~~~~//
 import Data from '../instructions.json'
 
-export function getData() {
-  return (dispatch) => {
-    //Make API Call
-    //For this example, I will be using the sample data in the json file
-    //delay the retrieval [Sample reasons only]
 
-    setTimeout(() => {
-      const data = Data.instructions;
-      dispatch({
-        type: DATA_AVAILABLE, data
+//~~~~ GET USER CARD ~~~~//
+export const getMyCard = (id) => {
+  return dispatch => {
+    axios
+      .get(`http://localhost:8000/specific/${"A100001001"}`)
+      .then(response => {
+        dispatch({
+          type: GET_MY_CARD,
+          payload: response.data
+        })
       })
-    }, 2000)
-  };
+      .catch(err => {
+        console.log("Error at getting my card", err)
+      })
+  }
+}
+
+
+//~~~~ ACTION TO GET ALL CARDS ~~~~//
+export const getAllCards = () => {
+  return dispatch => {
+    axios
+      .get(`http://localhost:8000/all/${"A100001001"}`)
+      .then(response => {
+        dispatch({
+          type: GET_ALL_CARDS,
+          payload: response.data
+        })
+      })
+      .catch(err => {
+        console.log("Error at getting all cards", err)
+      })
+  }
 }

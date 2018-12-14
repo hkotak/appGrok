@@ -1,12 +1,36 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button, ActivityIndicator } from 'react-native';
 
 //aws auth
 import { Auth } from 'aws-amplify'
 
-class Home extends React.Component {
-  static navigationOptions = {
-    title: "Home",
+import { connect } from 'react-redux';
+
+// import * as Actions from '../redux/actions/actions.js';
+import { getMyCard } from '../redux/actions/actions.js';
+
+
+// const mapStateToProps = (state) => {
+//   return {
+//     data: state.dataReducer.data
+//   }
+// }
+
+const mapStateToProps = (state) => {
+  console.log("state", state)
+  return {
+    MyCardData: state.MyCardData,
+    myCardCSS: state.myCardCSS
+  }
+}
+
+class HomeScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount = () => {
+    this.props.dispatch(getMyCard())
   }
 
   logout = () => {
@@ -22,7 +46,7 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log("Hit the Home Screen")
+    console.log('this.props: ', this.props)
     return (
       <View style={styles.container}>
         <Text>HOME SCREEN</Text>
@@ -31,18 +55,27 @@ class Home extends React.Component {
             title="LOGOUT FOR TESTING"
             onPress={this.logout}
           />
+      
+      <View>
+        <Text style={styles.text1}>DATA SCREEN</Text>
       </View>
-    );
+    </View>
+    )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
-export default Home
+export default connect(mapStateToProps)(HomeScreen)
+
+
+
+//~~~~ STYLESHEET ~~~~//
+const styles = StyleSheet.create({
+  text1: {
+    display: 'flex',
+    marginTop: 50,
+    textAlign: 'center',
+    fontSize: 30,
+
+  }
+})

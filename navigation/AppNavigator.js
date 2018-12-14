@@ -6,7 +6,7 @@ import {
   StatusBar,
   StyleSheet,
   View,
-} from 'react-native'; 
+} from 'react-native';
 import { createSwitchNavigator } from 'react-navigation';
 
 // aws authentication
@@ -39,7 +39,7 @@ class AppLoad extends React.Component {
     })
   }
 
-  render(){
+  render() {
     return (
       <View style={styles.container}>
         <ActivityIndicator />
@@ -65,6 +65,6 @@ export default createSwitchNavigator({
   Auth: AuthNavigator,
   Main: MainTabNavigator,
 },
-{
-  initialRouteName: 'Loading',
-});
+  {
+    initialRouteName: 'Loading',
+  });
