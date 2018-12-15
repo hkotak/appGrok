@@ -65,7 +65,7 @@ class HomeScreen extends Component {
   render() {
     // console.log("AVAILABLE PROPS: ", this.props);
     const Data = this.props.myCardData;
-    console.log("CARD DATA: ", Data);
+    // console.log("CARD DATA: ", Data);
 
 
     return (

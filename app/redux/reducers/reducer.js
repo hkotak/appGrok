@@ -31,7 +31,8 @@ const reducers = (state = {
       return { ...state, allCards: action.payload }
 
     case GET_MY_CARD:
-      return { ...state, myCardData: action.payload.data, myCardCSS: action.payload.css }
+      // console.log("MY CARD REDUCER", action.payload.data.data)
+      return { ...state, myCardData: action.payload.data.data, myCardCSS: action.payload.data.css }
 
     default:
       return state

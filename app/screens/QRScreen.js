@@ -30,7 +30,7 @@ class QRScreen extends React.Component {
 
 
   componentDidMount = () => {
-    // console.log("QRSCREEN", this.props.authInfo)
+    console.log("QRSCREEN", this.props.myCardData)
     
   }
 
@@ -39,7 +39,7 @@ class QRScreen extends React.Component {
       <View style={styles.container}>
         {/* <Text>QRScreen!!!</Text> */}
         <QRCode 
-         value={this.props.authInfo}
+         value={this.props.myCardData}
          size={200}
          bgColor='purple'
          fgColor='white'
