@@ -22,7 +22,7 @@ export const authenticated = (data) => {
 export const getMyCard = (id) => {
   return dispatch => {
     axios
-      .get(`http://localhost:8000/specific/${"A100001001"}`)
+      .get("http://localhost:8000/specific/A100001001")
       .then(response => {
         dispatch({
           type: GET_MY_CARD,
