@@ -97,7 +97,7 @@ export default class Registration extends Component {
               inputType="password"
               customStyle={{ marginBottom: 30 }}
             /> */}
-            <TextInput
+            <TextInput style={styles.label}
             label="email"
             // leftIcon={{ type: "font-awesome", name: "envelope" }}
             onChangeText={
@@ -105,8 +105,9 @@ export default class Registration extends Component {
               (value) => this.setState({email: value})
             }
             placeholder="Enter email"
+            placeholderTextColor="white"
             />
-            <TextInput
+            <TextInput style={styles.label}
             label="password"
             // leftIcon={{ type: "font-awesome", name: "envelope" }}
             onChangeText={
@@ -114,8 +115,10 @@ export default class Registration extends Component {
               (value) => this.setState({password: value})
             }
             placeholder="Enter password"
+            placeholderTextColor="white"
+            secureTextEntry
             />
-            <TextInput
+            <TextInput style={styles.label}
             label="confirm-password"
             // leftIcon={{ type: "font-awesome", name: "envelope" }}
             onChangeText={
@@ -123,6 +126,8 @@ export default class Registration extends Component {
               (value) => this.setState({confirmPassword: value})
             }
             placeholder="Confirm password"
+            placeholderTextColor="white"
+            secureTextEntry
             />
 
           </ScrollView>
@@ -169,5 +174,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     right: 20,
     bottom: 20,
+  },
+  label: {
+    // fontWeight: '300',
+    fontSize: 20,
+    color: "white",
+    marginBottom: 20,
+    borderBottomWidth: 1,
+    paddingTop: 5,
+    paddingBottom: 5,
   }
 })

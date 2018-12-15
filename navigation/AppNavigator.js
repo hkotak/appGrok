@@ -29,21 +29,7 @@ class AppLoad extends React.Component {
   }
 
   componentDidMount(){
-    // const user = this.state.isAuthenticated;
-
-    // Auth.currentUserInfo()
-    // .then( data => {
-    //   console.log("session data", data)
-    //   console.log("PROPPPS", this.props)
-    //   // this.props.dispatch(authenticated(data.attributes))
-    //   this.props.navigation.navigate('Home')
-    // })
-    // .catch(err => {
-    //   console.log("session err", err)
-    //   this.props.navigation.navigate('Auth')
-    // })
-
-
+ 
     Auth.currentSession()
     .then( data => {
       // console.log("session data", data.getIdToken().payload)
