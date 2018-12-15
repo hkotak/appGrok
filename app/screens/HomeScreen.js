@@ -5,7 +5,8 @@ import {
   View,
   Text,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
+  Button
 } from 'react-native';
 
 //aws auth
