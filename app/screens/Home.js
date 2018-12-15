@@ -23,7 +23,7 @@ class Home extends Component {
 
   componentDidMount() {
     this.props.getData();
-    console.log('THISPROPS: ', this.props)
+    // console.log('THISPROPS: ', this.props)
   }
 
   render() {

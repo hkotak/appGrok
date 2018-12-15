@@ -4,6 +4,7 @@ import {
   View,
   Text,
   ActivityIndicator,
+  ScrollView
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -19,16 +20,17 @@ import { getMyCard } from '../redux/actions/actions.js';
 // }
 
 const mapStateToProps = (state) => {
-  console.log("state", state)
+  // console.log("STATE", state)
   return {
-    MyCardData: state.MyCardData,
+    myCardData: state.myCardData,
     myCardCSS: state.myCardCSS
   }
 }
 
 class HomeScreen extends Component {
-  constructor(props) {
-    super(props);
+
+  componentWillMount = () => {
+    console.log('THIS HITS FIRST??');
   }
 
   componentDidMount = () => {
@@ -36,11 +38,24 @@ class HomeScreen extends Component {
   }
 
   render() {
-    console.log('this.props: ', this.props)
+    // console.log("AVAILABLE PROPS: ", this.props);
+    const Data = this.props.myCardData;
+    console.log("CARD DATA: ", Data);
+
+
     return (
-      <View>
-        <Text style={styles.text1}>DATA SCREEN</Text>
+      <View style={styles.wrapper}>
+        <Text style={styles.text1}>Welcome</Text>
+        <Text style={styles.text2}>{Data.name}</Text>
+        <View style={styles.cardWrapper}>
+          <Text>Name: {Data.name}</Text>
+          <Text>Company Name: {Data.company_name}</Text>
+          <Text>Email: {Data.email}</Text>
+          <Text>Phone #: {Data.phone}</Text>
+          <Text>Title: {Data.title}</Text>
+        </View>
       </View>
+
     )
   }
 }
@@ -52,11 +67,28 @@ export default connect(mapStateToProps)(HomeScreen)
 
 //~~~~ STYLESHEET ~~~~//
 const styles = StyleSheet.create({
-  text1: {
+  wrapper: {
     display: 'flex',
+    backgroundColor: "lightblue",
+    height: '100%',
+    alignItems: 'center',
+  },
+  text1: {
     marginTop: 50,
     textAlign: 'center',
+    fontSize: 35,
+  },
+  text2: {
+    textAlign: 'center',
     fontSize: 30,
-
+  },
+  cardWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 30,
+    backgroundColor: 'red',
+    width: '80%',
+    height: '30%',
+    borderRadius: 50,
   }
 })
