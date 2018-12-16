@@ -36,17 +36,21 @@ const mapStateToProps = (state) => {
 }
 
 class HomeScreen extends Component {
+  constructor(props){
+    super(props)
+    const { navigation } = props
+    const userInfo = navigation.getParam('authInfo')
+    this.props.dispatch(authenticated(userInfo))
+    this.props.dispatch(getMyCard())
+    
+  }
 
   componentWillMount = () => {
     console.log('THIS HITS FIRST??');
   }
 
   componentDidMount = () => {
-    const { navigation } = this.props
-    const userInfo = navigation.getParam('authInfo')
-    
-    this.props.dispatch(authenticated(userInfo))
-    this.props.dispatch(getMyCard())
+    // console.log("DA STATE", this.props)
     
   }
 

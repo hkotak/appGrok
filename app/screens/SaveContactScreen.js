@@ -26,10 +26,11 @@ const mapStateToProps = (state) => {
 
 class SaveContactScreen extends Component {
   constructor(props){
-    console.log("YYYYY", props)
+    super(props);
+    // console.log("YYYYY", props)
     const { navigation } =  props
     const userInfo = navigation.getParam('cardData')
-    super(props);
+  
     this.state = {
       saveCard: userInfo
     }
@@ -38,11 +39,13 @@ class SaveContactScreen extends Component {
   
 
   componentDidMount = () => {
-  //  const { navigation } = this.props
-  //  const userInfo = navigation.getParam('cardData')
+  
    console.log("SAVE SCREEN", this.state)
-  //  this.setState({saveCard: userInfo})
-       
+  }
+
+  handleSave = () => {
+    alert("Establish Save/Post method")
+    this.props.navigation.navigate('Home')
   }
 
   render() {
@@ -50,7 +53,7 @@ class SaveContactScreen extends Component {
     const cardInfo = this.state.saveCard.myCardData
     return (
       <View style={styles.wrapper}>
-        <Text style={styles.text1}>Hi!</Text>
+        <Text style={styles.text1}>SCANNED USER INFO</Text>
         <Text style={styles.text2}>{cardInfo.name}</Text>
         <View style={styles.cardWrapper}>
           <Text>Name: {cardInfo.name}</Text>
@@ -59,11 +62,14 @@ class SaveContactScreen extends Component {
           <Text>Phone #: {cardInfo.phone}</Text>
           <Text>Title: {cardInfo.title}</Text>
         </View>
-        {/* <Button
-            style={styles.exButton}
-            title="LOGOUT FOR TESTING"
-            onPress={this.logout}
-          /> */}
+        <Button
+          title={"SAVE"}
+          onPress={this.handleSave}
+        />
+        <Button
+          title="Try Again"
+          onPress={ () => this.props.navigation.navigate('Scan')}
+        />
       </View>
 
     )
