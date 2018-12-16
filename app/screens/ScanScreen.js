@@ -19,11 +19,8 @@ export default class App extends Component {
   };
 
   _handleBarCodeRead = data => {
-    console.log("QR DATA", data)
-    alert(
-      'Scan successful!',
-      JSON.stringify(data)
-    );
+    console.log("QR DATA", JSON.parse(data.data))
+    alert('Scan successful!');
   };
 
   render() {

@@ -24,28 +24,35 @@ const mapStateToProps = (state) => {
 }
 
 
-class QRScreen extends React.Component {
 
-  
+
+
+class QRScreen extends React.Component {
+  state = {
+    myCardCSS: this.props.myCardCSS,
+    myCardData: this.props.myCardData
+  }
 
 
   componentDidMount = () => {
-    // console.log("QRSCREEN", this.props.myCardData)
-    console.log("QRCODE" )
-    
+    // console.log("state", this.state)   
+    console.log("QRSCREEN", this.qrCodeData())
+
+  }
+
+  qrCodeData = () => {
+    return JSON.stringify(this.state)
   }
 
   render(){
-    const qrData = [this.props.myCardData]
-    console.log(qrData)
+   
     return(
       <View style={styles.container}>
         {/* <Text>QRScreen!!!</Text> */}
         <QRCode 
-         value={this.qrData}
-         size={200}
-         bgColor='purple'
-         fgColor='white'
+         value={this.qrCodeData()}
+         size={250}
+         
         />
        <View>
         <Button
