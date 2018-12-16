@@ -9,20 +9,51 @@ import {
 } from 'react-native';
 import { createSwitchNavigator } from 'react-navigation';
 
+//redux
+import { connect } from 'react-redux'
+import { authenticated } from '../app/redux/actions/actions.js'
+
+// aws authentication
+import Amplify, { Auth } from 'aws-amplify'
+
+// navigators
 import MainTabNavigator from './MainTabNavigator';
 import AuthNavigator from './AuthNavigator.js'
 
 class AppLoad extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isAuthenticated: true
-    }
+  constructor(){
+  super();
+  // this.state = {
+  //   isAuthenticated: false
+  //  }
   }
 
-  componentDidMount() {
-    const user = this.state.isAuthenticated
-    this.props.navigation.navigate(!user ? 'Auth' : 'Main')
+  componentDidMount(){
+    // const user = this.state.isAuthenticated;
+
+    // Auth.currentUserInfo()
+    // .then( data => {
+    //   console.log("session data", data)
+    //   console.log("PROPPPS", this.props)
+    //   // this.props.dispatch(authenticated(data.attributes))
+    //   this.props.navigation.navigate('Home')
+    // })
+    // .catch(err => {
+    //   console.log("session err", err)
+    //   this.props.navigation.navigate('Auth')
+    // })
+
+
+    Auth.currentSession()
+    .then( data => {
+      // console.log("session data", data.getIdToken().payload)
+      // this.props.dispatch(authenticated(data.getIdToken().payload))
+      this.props.navigation.navigate('Home', {authInfo: data.getIdToken().payload})
+    })
+    .catch(err => {
+      console.log("session err", err)
+      this.props.navigation.navigate('Auth')
+    })
   }
 
   render() {
@@ -43,6 +74,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
 
 export default createSwitchNavigator({
   // You could add another route here for authentication.

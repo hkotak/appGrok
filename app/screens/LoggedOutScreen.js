@@ -5,19 +5,25 @@ import {
   Text,
   View,
   Image,
-  Button
+  Dimensions
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RoundedButton from '../components/buttons/RoundedButton.js'
 
-import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
+import { Auth } from 'aws-amplify';
 
+const { width, height } = Dimensions.get('window');
 
-// screens for nav
-import LoginScreen from './LoginScreen.js';
-import Register from './RegistrationScreen.js'
 
 export default class LoggedOut extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      size: { width, height },
+    };
+  }
+
   static navigationOptions = {
     title: "Welcome",
   }
@@ -48,13 +54,14 @@ export default class LoggedOut extends Component {
             textColor={colors.white}
             handleOnPress={this._onCreateAccount}
           />
-          <Button
+          {/* <Button
             style={styles.exButton}
-            title="Example Button"
+            title="LOGOUT FOR TESTING"
             onPress={this._onPressLearnMore}
-          />
+          /> */}
         </View>
       </View>
+
     )
   }
 
@@ -73,6 +80,13 @@ export default class LoggedOut extends Component {
 
   _onPressLearnMore() {
     alert('LOL')
+    Auth.signOut()
+      .then(data => {
+        console.log("signout data", data)
+      })
+      .catch(err => {
+        console.log("signout err", err)
+      })
   }
 }
 
