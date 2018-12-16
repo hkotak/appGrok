@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+
 import {
   StyleSheet,
   View,
   Text,
   ActivityIndicator,
   ScrollView,
-
+  Button
 } from 'react-native';
 
+//aws auth
+import { Auth } from 'aws-amplify'
+
+// redux
 import { connect } from 'react-redux';
 
 import { Card, ListItem, Button } from 'react-native-elements'
