@@ -20,7 +20,9 @@ export default class App extends Component {
 
   _handleBarCodeRead = data => {
     console.log("QR DATA", JSON.parse(data.data))
-    alert('Scan successful!');
+    const cardData = JSON.parse(data.data)
+    Alert.alert('Scan successful!');
+    this.props.navigation.navigate('Save', {cardData: cardData} )
   };
 
   render() {

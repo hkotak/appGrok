@@ -24,10 +24,10 @@ const reducers = (state = {
       return {...state, authInfo: newAuthInfo}
 
     case GET_ALL_CARDS:
-      action.payload.forEach(card => {
-        state.allCardsData.push(card.data)
-        state.allCardsCSS.push(card.css)
-      });
+      // action.payload.forEach(card => {
+      //   state.allCardsData.push(card.data)
+      //   state.allCardsCSS.push(card.css)
+      // });
       return { ...state, allCards: action.payload }
 
     case GET_MY_CARD:
