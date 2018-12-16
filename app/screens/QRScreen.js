@@ -30,16 +30,19 @@ class QRScreen extends React.Component {
 
 
   componentDidMount = () => {
-    console.log("QRSCREEN", this.props.myCardData)
+    // console.log("QRSCREEN", this.props.myCardData)
+    console.log("QRCODE" )
     
   }
 
   render(){
+    const qrData = [this.props.myCardData]
+    console.log(qrData)
     return(
       <View style={styles.container}>
         {/* <Text>QRScreen!!!</Text> */}
         <QRCode 
-         value={this.props.myCardData}
+         value={this.qrData}
          size={200}
          bgColor='purple'
          fgColor='white'
