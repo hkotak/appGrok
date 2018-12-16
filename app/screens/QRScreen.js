@@ -6,7 +6,7 @@ import {
   FlatList,
   View,
   Text,
-  ActivityIndicator
+  Button
 } from 'react-native';
 
 // qrcode generator
@@ -24,26 +24,43 @@ const mapStateToProps = (state) => {
 }
 
 
-class QRScreen extends React.Component {
 
-  
+
+
+class QRScreen extends React.Component {
+  state = {
+    myCardCSS: this.props.myCardCSS,
+    myCardData: this.props.myCardData
+  }
 
 
   componentDidMount = () => {
-    // console.log("QRSCREEN", this.props.authInfo)
-    
+    // console.log("state", this.state)   
+    console.log("QRSCREEN", this.qrCodeData())
+
+  }
+
+  qrCodeData = () => {
+    return JSON.stringify(this.state)
   }
 
   render(){
+   
     return(
       <View style={styles.container}>
         {/* <Text>QRScreen!!!</Text> */}
         <QRCode 
-         value={this.props.authInfo}
-         size={200}
-         bgColor='purple'
-         fgColor='white'
+         value={this.qrCodeData()}
+         size={250}
+         
         />
+       <View>
+        <Button
+        style={styles.exButton}
+        title="SCAN WITH CAMERA"
+        onPress={ () => this.props.navigation.navigate('Scan')}
+        />
+       </View>
       </View>
     )
   }

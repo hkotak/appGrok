@@ -24,14 +24,15 @@ const reducers = (state = {
       return {...state, authInfo: newAuthInfo}
 
     case GET_ALL_CARDS:
-      action.payload.forEach(card => {
-        state.allCardsData.push(card.data)
-        state.allCardsCSS.push(card.css)
-      });
+      // action.payload.forEach(card => {
+      //   state.allCardsData.push(card.data)
+      //   state.allCardsCSS.push(card.css)
+      // });
       return { ...state, allCards: action.payload }
 
     case GET_MY_CARD:
-      return { ...state, myCardData: action.payload.data, myCardCSS: action.payload.css }
+      // console.log("MY CARD REDUCER", action.payload.data.data)
+      return { ...state, myCardData: action.payload.data.data, myCardCSS: action.payload.data.css }
 
     default:
       return state

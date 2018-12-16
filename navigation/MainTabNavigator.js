@@ -5,6 +5,8 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import HomeScreen from '../app/screens/HomeScreen.js'
 import ContactScreen from '../app/screens/ContactScreen.js'
 import QRScreen from '../app/screens/QRScreen.js'
+import ScanScreen from '../app/screens/ScanScreen.js'
+import SaveContactScreen from '../app/screens/SaveContactScreen.js'
 import { create } from 'uuid-js';
 
 //~~~~ LOGGED OUT VIEW ~~~~//
@@ -26,6 +28,8 @@ ContactStack.navigationOptions = {
 
 const QRStack = createStackNavigator({
   QRcode: QRScreen,
+  Scan: ScanScreen,
+  Save: SaveContactScreen
 })
 
 QRStack.navigationOptions = {
