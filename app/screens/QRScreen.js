@@ -6,7 +6,7 @@ import {
   FlatList,
   View,
   Text,
-  ActivityIndicator
+  Button
 } from 'react-native';
 
 // qrcode generator
@@ -44,6 +44,13 @@ class QRScreen extends React.Component {
          bgColor='purple'
          fgColor='white'
         />
+       <View>
+        <Button
+        style={styles.exButton}
+        title="SCAN WITH CAMERA"
+        onPress={ () => this.props.navigation.navigate('Scan')}
+        />
+       </View>
       </View>
     )
   }
