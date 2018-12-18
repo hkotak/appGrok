@@ -23,10 +23,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-
-
-
 class QRScreen extends React.Component {
   state = {
     myCardCSS: this.props.myCardCSS,

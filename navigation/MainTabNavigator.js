@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
+// import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import { Icon } from 'react-native-elements'
 //~~~~~~~~~~ MY IMPORTS ~~~~~~~~~~//
 import HomeScreen from '../app/screens/HomeScreen.js'
 import ContactScreen from '../app/screens/ContactScreen.js'
@@ -15,7 +16,8 @@ const HomeStack = createStackNavigator({
 })
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home'
+  tabBarLabel: 'Home',
+  tabBarIcon: <Icon name="home-circle" type="material-community"/>
 }
 
 const ContactStack = createStackNavigator({
@@ -23,7 +25,8 @@ const ContactStack = createStackNavigator({
 })
 
 ContactStack.navigationOptions = {
-  tabBarLabel: 'Contacts'
+  tabBarLabel: 'Contacts',
+  tabBarIcon: <Icon name="contact-mail" type="material-community" />
 }
 
 const QRStack = createStackNavigator({
@@ -33,7 +36,8 @@ const QRStack = createStackNavigator({
 })
 
 QRStack.navigationOptions = {
-  tabBarLabel: 'Share'
+  tabBarLabel: 'Share',
+  tabBarIcon: <Icon name="camera-front" type="material" />
 }
 
 
@@ -44,4 +48,11 @@ export default createBottomTabNavigator({
   ContactStack,
   QRStack
   // LoginStack,
+},
+{
+  tabBarOptions:{
+    style: {
+      backgroundColor: 'light-grey'
+    }
+  }
 });

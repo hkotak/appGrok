@@ -7,6 +7,10 @@ export const AUTH_INFO = 'AUTH_INFO'
 //~~~~ IMPORT THE SAMPLE DATA ~~~~//
 import Data from '../instructions.json'
 
+// ip address changes
+
+const ip = "192.168.173.225"
+
 //Auth Actions 
 export const authenticated = (data) => {
   return dispatch => {
@@ -22,7 +26,7 @@ export const authenticated = (data) => {
 export const getMyCard = (id) => {
   return dispatch => {
     axios
-      .get("http://192.168.200.130:8000/specific/A100001001")
+      .get(`http://${ip}:8000/specific/A100001001`)
       .then(response => {
         dispatch({
           type: GET_MY_CARD,
@@ -40,7 +44,7 @@ export const getMyCard = (id) => {
 export const getAllCards = () => {
   return dispatch => {
     axios
-      .get(`http://192.168.200.130:8000/all/A100001001`)
+      .get(`http://${ip}:8000/all/A100001001`)
       .then(response => {
         dispatch({
           type: GET_ALL_CARDS,

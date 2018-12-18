@@ -6,8 +6,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   TextInput,
-  Button
 } from 'react-native';
+import { Button } from 'react-native-elements';
 import colors from '../styles/colors/index.js';
 import InputField from '../components/forms/inputField.js';
 import NextArrowButton from '../components/buttons/NextArrowButton.js'
@@ -79,10 +79,9 @@ export default class ConfirmRegistration extends Component {
           </ScrollView>
         </View>
         <View style={styles.nextButton}>
-          {/* <NextArrowButton
-            handleNextButton={this.handleNextButton}
-          /> */}
           <Button
+          large
+          rounded
           title="Submit"
           onPress={this.handleConfirm}
           />
