@@ -7,8 +7,7 @@ import {
   Image,
   ImageBackground
 } from 'react-native';
-
-import { List, ListItem, Card } from 'react-native-elements';
+import { SearchBar } from 'react-native-elements'
 
 import { connect } from 'react-redux';
 import { getAllCards } from '../redux/actions/actions.js';
@@ -35,6 +34,11 @@ class ContactScreen extends Component {
 
     return (
       <ScrollView>
+        <SearchBar
+          lightTheme
+          // onChangeText={}
+          // onClearText={}
+          placeholder='Type Here...' />
         <View style={styles.wrapper}>
           <Text style={styles.heading}>Your Connections</Text>
           {
@@ -77,6 +81,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     margin: 15,
+    backgroundColor: 'lightblue',
+    height: 150,
+
+
 
   }
   // img: {

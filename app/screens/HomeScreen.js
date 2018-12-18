@@ -8,6 +8,8 @@ import {
   ScrollView,
   Button
 } from 'react-native';
+import { Icon } from 'react-native-elements'
+
 
 //aws auth
 import { Auth } from 'aws-amplify'
@@ -15,11 +17,9 @@ import { Auth } from 'aws-amplify'
 // redux
 import { connect } from 'react-redux';
 
-import { Card, ListItem, Button } from 'react-native-elements'
 
 import { getMyCard, authenticated } from '../redux/actions/actions.js';
 
-import { Auth } from 'aws-amplify'
 
 
 
@@ -33,6 +33,9 @@ const mapStateToProps = (state) => {
 }
 
 class HomeScreen extends Component {
+  static navigationOptions = {
+    title: "Grok",
+  }
 
   componentWillMount = () => {
     // console.log('THIS HITS FIRST??');

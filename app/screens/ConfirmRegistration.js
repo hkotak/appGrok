@@ -21,9 +21,9 @@ export default class ConfirmRegistration extends Component {
     title: "Confirm",
   }
 
-  constructor(){
+  constructor() {
     super();
-    this.state ={
+    this.state = {
       email: '',
       confirmCode: '',
       isAuthenticated: ''
@@ -31,22 +31,22 @@ export default class ConfirmRegistration extends Component {
   }
 
   componentDidMount() {
-  
+
     const { navigation } = this.props
     const confirmEmail = navigation.getParam('email')
     console.log("EMAIL", confirmEmail)
-    this.setState({email: confirmEmail})
+    this.setState({ email: confirmEmail })
 
   }
-  
+
   handleConfirm = () => {
 
     // Auth.currentCredentials()
     console.log("STATE", this.state)
 
-    const {email, confirmCode} = this.state
+    const { email, confirmCode } = this.state
 
-      Auth.confirmSignUp(email, confirmCode)
+    Auth.confirmSignUp(email, confirmCode)
       .then(user => {
         console.log("confirm data", user)
         this.props.navigation.navigate('Login')
@@ -55,7 +55,7 @@ export default class ConfirmRegistration extends Component {
         console.log("confirm error", err)
         alert(`Error while confirming, please try again. Error: ${err.message}`)
       })
-   
+
   }
 
   render() {
@@ -65,16 +65,16 @@ export default class ConfirmRegistration extends Component {
           <ScrollView style={styles.scrollView}>
             <Text style={styles.loginHeader}>Confirm Registration</Text>
             <TextInput style={styles.label}
-            label="confirmationCode"
-            // leftIcon={{ type: "font-awesome", name: "envelope" }}
-            onChangeText={
-              // this updates this.state.email to value in this Input
-              (value) => this.setState({confirmCode: value})
-            }
-            placeholder="Confirmation Code"
-            placeholderTextColor="white"
+              label="confirmationCode"
+              // leftIcon={{ type: "font-awesome", name: "envelope" }}
+              onChangeText={
+                // this updates this.state.email to value in this Input
+                (value) => this.setState({ confirmCode: value })
+              }
+              placeholder="Confirmation Code"
+              placeholderTextColor="white"
             />
-            
+
 
           </ScrollView>
         </View>
@@ -83,8 +83,8 @@ export default class ConfirmRegistration extends Component {
             handleNextButton={this.handleNextButton}
           /> */}
           <Button
-          title="Submit"
-          onPress={this.handleConfirm}
+            title="Submit"
+            onPress={this.handleConfirm}
           />
         </View>
       </KeyboardAvoidingView>
