@@ -103,7 +103,7 @@ export default connect(mapStateToProps)(HomeScreen)
 const styles = StyleSheet.create({
   wrapper: {
     display: 'flex',
-    backgroundColor: "lightblue",
+    backgroundColor: "#273746",
     height: '100%',
     alignItems: 'center',
   },
@@ -111,10 +111,12 @@ const styles = StyleSheet.create({
     marginTop: 50,
     textAlign: 'center',
     fontSize: 35,
+    color: "white"
   },
   text2: {
     textAlign: 'center',
     fontSize: 30,
+    color: "white"
   },
   cardWrapper: {
     justifyContent: 'center',
