@@ -6,8 +6,7 @@ import { GET_ALL_CARDS, GET_MY_CARD, AUTH_INFO } from '../actions/actions.js';
 // let cardState = { data: {}, loading: true };
 
 const reducers = (state = {
-  allCardsData: [],
-  allCardsCSS: [],
+  allCards: [],
   myCardData: {},
   myCardCSS: {},
   authInfo: {}
@@ -20,8 +19,7 @@ const reducers = (state = {
       const newAuthInfo = {
         user: action.payload
       }
-      // console.log("AUTH REDUCER", action.payload)
-      return {...state, authInfo: newAuthInfo}
+      return { ...state, authInfo: newAuthInfo }
 
     case GET_ALL_CARDS:
       // action.payload.forEach(card => {

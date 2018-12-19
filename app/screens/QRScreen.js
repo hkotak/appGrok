@@ -61,19 +61,13 @@ class QRScreen extends React.Component {
     return JSON.stringify(this.state)
   }
 
-  component1 = () => <QRScreen />
-  component2 = () => <ScanScreen />
 
   render(){
-    const buttons = [{element: component1}, {element: component2} ]
    
     return(
       <View style={styles.container}>
         {/* <Text>QRScreen!!!</Text> */}
-        <ButtonGroup
-          buttons={['My Code', 'Scan']}
-          
-        />
+       
         <Text>{this.state.myCardData.name}</Text>
         <QRCode medium
          value={this.qrCodeData()}

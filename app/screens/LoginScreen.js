@@ -23,7 +23,7 @@ export default class Login extends Component {
     title: "Login",
   }
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       email: '',
@@ -31,18 +31,18 @@ export default class Login extends Component {
       isAuthenticated: false,
     }
   }
-  
 
-  logginIn = () => {
+
+  _logginIn = () => {
     // alert('Next Button Pressed')
-    const {email, password} = this.state
+    const { email, password } = this.state
     Auth.signIn(email, password)
-      .then( user => {
+      .then(user => {
         console.log("user data", user)
-        this.setState({isAuthenticated: true})
+        this.setState({ isAuthenticated: true })
         this.props.navigation.navigate('Home')
       })
-      .catch( err => {
+      .catch(err => {
         console.log("user sign in err", err);
         alert("Email address or Password do not match, please try again")
       })

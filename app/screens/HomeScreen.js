@@ -8,6 +8,8 @@ import {
   ScrollView,
   Button
 } from 'react-native';
+import { Icon } from 'react-native-elements'
+
 
 //aws auth
 import { Auth } from 'aws-amplify'
@@ -15,19 +17,14 @@ import { Auth } from 'aws-amplify'
 // redux
 import { connect } from 'react-redux';
 
-// import * as Actions from '../redux/actions/actions.js';
+
 import { getMyCard, authenticated } from '../redux/actions/actions.js';
 
 
-// const mapStateToProps = (state) => {
-//   return {
-//     data: state.dataReducer.data
-//   }
-// }
 
 
 const mapStateToProps = (state) => {
-  // console.log("STATE", state)
+  // console.log("STATE", state.authInfo)
   return {
     myCardData: state.myCardData,
     myCardCSS: state.myCardCSS,
@@ -46,7 +43,7 @@ class HomeScreen extends Component {
   }
 
   componentWillMount = () => {
-    console.log('THIS HITS FIRST??');
+    // console.log('THIS HITS FIRST??');
   }
 
   componentDidMount = () => {
@@ -54,7 +51,7 @@ class HomeScreen extends Component {
     
   }
 
-  logout = () => {
+  _logOut = () => {
     alert('LOL')
     Auth.signOut()
       .then(data => {
@@ -71,7 +68,6 @@ class HomeScreen extends Component {
     const Data = this.props.myCardData;
     // console.log("CARD DATA: ", Data);
 
-
     return (
       <View style={styles.wrapper}>
         <Text style={styles.text1}>Welcome</Text>
@@ -84,10 +80,10 @@ class HomeScreen extends Component {
           <Text>Title: {Data.title}</Text>
         </View>
         <Button
-            style={styles.exButton}
-            title="LOGOUT FOR TESTING"
-            onPress={this.logout}
-          />
+          onPress={this._logOut}
+          title="Log Out"
+        />
+
       </View>
 
     )

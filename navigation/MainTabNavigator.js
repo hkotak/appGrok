@@ -10,6 +10,7 @@ import ScanScreen from '../app/screens/ScanScreen.js'
 import SaveContactScreen from '../app/screens/SaveContactScreen.js'
 import { create } from 'uuid-js';
 
+
 //~~~~ LOGGED OUT VIEW ~~~~//
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
@@ -27,6 +28,7 @@ HomeStack.navigationOptions = {
   tabBarIcon: <Icon name="home-circle" type="material-community" color="white"/>
 }
 
+
 const ContactStack = createStackNavigator({
   Contacts: ContactScreen
 },
@@ -42,6 +44,7 @@ ContactStack.navigationOptions = {
   tabBarLabel: 'Contacts',
   tabBarIcon: <Icon name="contact-mail" type="material-community" color="white" />
 }
+
 
 const QRStack = createStackNavigator({
   QRcode: QRScreen,
@@ -63,11 +66,13 @@ QRStack.navigationOptions = {
 
 
 
-
 export default createBottomTabNavigator({
   HomeStack,
   ContactStack,
-  QRStack
+  QRStack,
+
+
+
   // LoginStack,
 },
 {

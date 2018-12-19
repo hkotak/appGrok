@@ -5,20 +5,26 @@ import {
   Text,
   View,
   Image,
-  Button
+  Dimensions,
+  ImageBackground
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import RoundedButton from '../components/buttons/RoundedButton.js'
 
-import { createAppContainer, createStackNavigator, StackActions, NavigationActions } from 'react-navigation';
-
 import { Auth } from 'aws-amplify';
 
-// screens for nav
-import LoginScreen from './LoginScreen.js';
-import Register from './RegistrationScreen.js'
+// const { width, height } = Dimensions.get('window');
+
 
 export default class LoggedOut extends Component {
+  constructor(props) {
+    super(props);
+
+    // this.state = {
+    //   size: { width, height },
+    // };
+  }
+
   static navigationOptions = {
     // title: "Welcome",
   }
@@ -29,33 +35,72 @@ export default class LoggedOut extends Component {
 
   render() {
     // const { navigate } = this.props.navigation;
+    const remote = "https://images.pexels.com/photos/1668928/pexels-photo-1668928.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+
     return (
-      <View style={styles.wrapper}>
-        <View style={styles.welcomeWrapper}>
-          <Image
-            source={require('../img/dino.png')}
-            style={styles.logo}
-          />
-          <Text style={styles.welcomeText}>Welcome to Grok</Text>
-          <RoundedButton
-            text="Get Started"
-            textColor={colors.lightBlack}
-            background={colors.white}
-            icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
-            handleOnPress={this.onGetStarted}
-          />
-          <RoundedButton
-            text="Create Account"
-            textColor={colors.white}
-            handleOnPress={this._onCreateAccount}
-          />
-          {/* <Button
+      <ImageBackground
+        style={styles.container}
+        resizeMode='cover'
+        source={{ uri: remote }}
+      >
+        <View style={styles.wrapper}>
+          <View style={styles.welcomeWrapper}>
+            <Image
+              source={require('../img/dino.png')}
+              style={styles.logo}
+            />
+            <Text style={styles.welcomeText}>Welcome to Grok</Text>
+            <RoundedButton
+              text="Get Started"
+              textColor={colors.lightBlack}
+              background={colors.white}
+              // icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
+              handleOnPress={this.onGetStarted}
+            />
+            <RoundedButton
+              text="Create Account"
+              textColor={colors.lightBlack}
+              background={colors.white}
+              handleOnPress={this._onCreateAccount}
+            />
+            {/* <Button
             style={styles.exButton}
             title="LOGOUT FOR TESTING"
             onPress={this._onPressLearnMore}
           /> */}
+          </View>
         </View>
-      </View>
+      </ImageBackground>
+
+      // <View style={styles.wrapper}>
+      //   <View style={styles.welcomeWrapper}>
+      //     <Image
+      //       source={require('../img/dino.png')}
+      //       style={styles.logo}
+      //     />
+      //     <Text style={styles.welcomeText}>Welcome to Grok</Text>
+      //     <RoundedButton
+      //       text="Get Started"
+      //       textColor={colors.lightBlack}
+      //       background={colors.white}
+      //       icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
+      //       handleOnPress={this.onGetStarted}
+      //     />
+      //     <RoundedButton
+      //       text="Create Account"
+      //       textColor={colors.white}
+      //       handleOnPress={this._onCreateAccount}
+      //     />
+      //     {/* <Button
+      //   style={styles.exButton}
+      //   title="LOGOUT FOR TESTING"
+      //   onPress={this._onPressLearnMore}
+      // /> */}
+      //   </View>
+      // </View>
+
+
+
     )
   }
 
@@ -85,16 +130,22 @@ export default class LoggedOut extends Component {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
+  container: {
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  wrapper: {
     display: 'flex',
-    backgroundColor: colors.lightBlack,
+    justifyContent: 'flex-end'
+    // backgroundColor: colors.lightBlack,
   },
   welcomeWrapper: {
     flex: 1,
     display: 'flex',
     marginTop: 30,
     padding: 20,
+
   },
   welcomeText: {
     fontSize: 30,
