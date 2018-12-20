@@ -40,15 +40,6 @@ class HomeScreen extends Component {
     
   }
 
-  componentWillMount = () => {
-    // console.log('THIS HITS FIRST??');
-  }
-
-  componentDidMount = () => {
-    // console.log("DA STATE", this.props)
-    
-  }
-
   _logOut = () => {
     alert('LOL')
     Auth.signOut()

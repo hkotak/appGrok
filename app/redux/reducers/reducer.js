@@ -16,6 +16,7 @@ const reducers = (state = {
       front: {},
       info: {}
     },
+    users: [],
   },
   authInfo: {}
 }, action) => {
@@ -59,6 +60,7 @@ const reducers = (state = {
       }
       const myData = {
         user_id: action.payload.user_id,
+        users: action.payload.users,
         data: action.payload.data,
         css: parsedMyCss
       }

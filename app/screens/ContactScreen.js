@@ -16,26 +16,24 @@ const mapStateToProps = (state) => {
   // console.log("STATE: ", state);
   return {
     allCards: state.allCards,
+    myCard: state.myCard
   }
 }
 
 class ContactScreen extends Component {
   constructor(props){
     super(props)
+    this.props.dispatch(getMyCard())
     this.props.dispatch(getAllCards())
-    this.props.dispatch(getMyCard("user"))
-
-  }
-  // state = {
-  //   allCards: this.props.allCards
-  // }
-
-  componentDidMount = () => {
-    
   }
 
   componentDidUpdate = (prevProps) => {
-    // if(this.props )
+    // console.log("CAN I SEE PREV PROPS", prevProps.myCard.users.length)
+    // console.log("CURRENT PROPS", this.props.myCard.users.length)
+    if(this.props.myCard.users.length !== prevProps.myCard.users.length){
+      console.log("NEW PROPS!!!")
+      this.props.dispatch(getAllCards())
+    }
   }
 
   allContacts = () => {
@@ -44,7 +42,7 @@ class ContactScreen extends Component {
 
 
   render() {
-    console.log("FULL PROPS", this.props)
+    // console.log("MYCARD PROPS", this.props.myCard)
     let contactData = this.props.allCards
     // console.log('CONTACT DATA: ', contactData);
 
