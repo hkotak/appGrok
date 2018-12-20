@@ -7,8 +7,16 @@ import { GET_ALL_CARDS, GET_MY_CARD, AUTH_INFO } from '../actions/actions.js';
 
 const reducers = (state = {
   allCards: [],
-  myCardData: {},
-  myCardCSS: {},
+  myCard: {
+    user_id: "",
+    data: {},
+    css: {
+      back: {},
+      company: {},
+      front: {},
+      info: {}
+    },
+  },
   authInfo: {}
 }, action) => {
 
@@ -22,10 +30,41 @@ const reducers = (state = {
       return { ...state, authInfo: newAuthInfo }
 
     case GET_ALL_CARDS:
-      return { ...state, allCards: action.payload }
+      if (!action.payload) {
+        return {
+          ...state
+        }
+      } else {
+        const newPayload = action.payload.map(card => {
+          let parsedAllCss = {};
+          for (var key in card.css) {
+            parsedAllCss[key] = JSON.parse(card.css[key])
+          }
+          return {
+            ...card,
+            css: parsedAllCss
+          }
+        })
+        return {
+          ...state,
+          allCards: newPayload
+        }
+      }
 
     case GET_MY_CARD:
-      return { ...state, myCardData: action.payload.data, myCardCSS: action.payload.css }
+      let parsedMyCss = {};
+      for (var key in action.payload.css) {
+        parsedMyCss[key] = JSON.parse(action.payload.css[key])
+      }
+      const myData = {
+        user_id: action.payload.user_id,
+        data: action.payload.data,
+        css: parsedMyCss
+      }
+      return {
+        ...state,
+        myCard: myData
+      }
 
     default:
       return state

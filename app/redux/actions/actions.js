@@ -40,7 +40,7 @@ export const getMyCard = (id) => {
 export const getAllCards = () => {
   return dispatch => {
     axios
-      .get(`http://localhost:8000/all/${"A100001001"}`)
+      .get(`http://localhost:8000/all/A100001001`)
       .then(response => {
         dispatch({
           type: GET_ALL_CARDS,

@@ -20,9 +20,17 @@ const mapStateToProps = (state) => {
 }
 
 class ContactScreen extends Component {
+  state = {
+    allCards: this.props.allCards
+  }
 
   componentDidMount = () => {
     this.props.dispatch(getAllCards())
+    console.log("HUH", this.state)
+  }
+
+  allContacts = () => {
+    this.props.data
   }
 
 

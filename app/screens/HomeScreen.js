@@ -20,21 +20,24 @@ import { connect } from 'react-redux';
 
 import { getMyCard, authenticated } from '../redux/actions/actions.js';
 
-
-
-
 const mapStateToProps = (state) => {
-  // console.log("STATE", state.authInfo)
+  console.log("STATE", state)
   return {
-    myCardData: state.myCardData,
-    myCardCSS: state.myCardCSS,
+    myCard: state.myCard,
+    // myCardData: state.myCardData,
+    // myCardCSS: state.myCardCSS,
     authInfo: state.authInfo
   }
 }
 
 class HomeScreen extends Component {
-  static navigationOptions = {
-    title: "Grok",
+  constructor(props) {
+    super(props)
+    const { navigation } = props
+    const userInfo = navigation.getParam('authInfo')
+    this.props.dispatch(authenticated(userInfo))
+    this.props.dispatch(getMyCard())
+
   }
 
   componentWillMount = () => {
@@ -42,11 +45,7 @@ class HomeScreen extends Component {
   }
 
   componentDidMount = () => {
-    const { navigation } = this.props
-    const userInfo = navigation.getParam('authInfo')
-
-    this.props.dispatch(authenticated(userInfo))
-    this.props.dispatch(getMyCard())
+    // console.log("DA STATE", this.props)
 
   }
 
@@ -64,8 +63,8 @@ class HomeScreen extends Component {
 
   render() {
     // console.log("AVAILABLE PROPS: ", this.props);
-    const Data = this.props.myCardData;
-    // console.log("CARD DATA: ", Data);
+    const Data = this.props.myCard.data;
+    console.log("CARD DATA: ", this.props);
 
     return (
       <View style={styles.wrapper}>
