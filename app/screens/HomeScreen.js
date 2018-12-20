@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
 import { getMyCard, authenticated } from '../redux/actions/actions.js';
 
 const mapStateToProps = (state) => {
-  console.log("STATE", state)
+  // console.log("STATE", state)
   return {
     myCard: state.myCard,
     // myCardData: state.myCardData,
@@ -37,16 +37,7 @@ class HomeScreen extends Component {
     const userInfo = navigation.getParam('authInfo')
     this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard())
-
-  }
-
-  componentWillMount = () => {
-    // console.log('THIS HITS FIRST??');
-  }
-
-  componentDidMount = () => {
-    // console.log("DA STATE", this.props)
-
+    
   }
 
   _logOut = () => {
@@ -64,7 +55,7 @@ class HomeScreen extends Component {
   render() {
     // console.log("AVAILABLE PROPS: ", this.props);
     const Data = this.props.myCard.data;
-    console.log("CARD DATA: ", this.props);
+    // console.log("CARD DATA: ", this.props);
 
     return (
       <View style={styles.wrapper}>
@@ -97,7 +88,7 @@ export default connect(mapStateToProps)(HomeScreen)
 const styles = StyleSheet.create({
   wrapper: {
     display: 'flex',
-    backgroundColor: "lightblue",
+    backgroundColor: "#273746",
     height: '100%',
     alignItems: 'center',
   },
@@ -105,10 +96,12 @@ const styles = StyleSheet.create({
     marginTop: 50,
     textAlign: 'center',
     fontSize: 35,
+    color: "white"
   },
   text2: {
     textAlign: 'center',
     fontSize: 30,
+    color: "white"
   },
   cardWrapper: {
     justifyContent: 'center',

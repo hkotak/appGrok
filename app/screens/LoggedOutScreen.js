@@ -26,7 +26,7 @@ export default class LoggedOut extends Component {
   }
 
   static navigationOptions = {
-    title: "Welcome",
+    // title: "Welcome",
   }
 
   componentDidMount() {

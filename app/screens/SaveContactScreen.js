@@ -9,17 +9,19 @@ import {
   Button
 } from 'react-native';
 
+import { scanCard } from '../redux/actions/actions.js'
+
 //aws auth
 import { Auth } from 'aws-amplify'
 
 // redux
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 const mapStateToProps = (state) => {
   // console.log("STATE", state)
   return {
-    myCardData: state.myCardData,
-    myCardCSS: state.myCardCSS,
+    myCard: state.myCard,
     authInfo: state.authInfo
   }
 }
@@ -45,22 +47,25 @@ class SaveContactScreen extends Component {
 
   handleSave = () => {
     alert("Establish Save/Post method")
-    this.props.navigation.navigate('Home')
+
+    this.props.dispatch(scanCard(1, 'A100001014'))
+
+    this.props.navigation.navigate('Contacts')
   }
 
   render() {
     console.log("WHAT STATE", this.state)
-    const cardInfo = this.state.saveCard.myCardData
+    const cardInfo = this.state.saveCard
     return (
       <View style={styles.wrapper}>
         <Text style={styles.text1}>SCANNED USER INFO</Text>
-        <Text style={styles.text2}>{cardInfo.name}</Text>
+        <Text style={styles.text2}>{cardInfo.data.name}</Text>
         <View style={styles.cardWrapper}>
-          <Text>Name: {cardInfo.name}</Text>
-          <Text>Company Name: {cardInfo.company_name}</Text>
-          <Text>Email: {cardInfo.email}</Text>
-          <Text>Phone #: {cardInfo.phone}</Text>
-          <Text>Title: {cardInfo.title}</Text>
+          <Text>Name: {cardInfo.data.name}</Text>
+          <Text>Company Name: {cardInfo.data.company_name}</Text>
+          <Text>Email: {cardInfo.data.email}</Text>
+          <Text>Phone #: {cardInfo.data.phone}</Text>
+          <Text>Title: {cardInfo.data.title}</Text>
         </View>
         <Button
           title={"SAVE"}

@@ -6,8 +6,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   TextInput,
-  Button
 } from 'react-native';
+import { Button } from 'react-native-elements'
 import colors from '../styles/colors/index.js';
 import InputField from '../components/forms/inputField.js';
 import NextArrowButton from '../components/buttons/NextArrowButton.js'
@@ -61,42 +61,7 @@ export default class Registration extends Component {
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
             <Text style={styles.loginHeader}>Register</Text>
-            {/* <InputField
-              labelText="First Name"
-              labelTextSize={14}
-              labelColor={colors.white}
-              textColor={colors.white}
-              borderBottomColor={colors.white}
-              inputType="first name"
-              customStyle={{ marginBottom: 30 }}
-            />
-            <InputField
-              labelText="Last Name"
-              labelTextSize={14}
-              labelColor={colors.white}
-              textColor={colors.white}
-              borderBottomColor={colors.white}
-              inputType="last name"
-              customStyle={{ marginBottom: 30 }}
-            /> */}
-            {/* <InputField
-              labelText="Email"
-              labelTextSize={14}
-              labelColor={colors.white}
-              textColor={colors.white}
-              borderBottomColor={colors.white}
-              inputType="email"
-              customStyle={{ marginBottom: 30 }}
-            />
-            <InputField
-              labelText="Password"
-              labelTextSize={14}
-              labelColor={colors.white}
-              textColor={colors.white}
-              borderBottomColor={colors.white}
-              inputType="password"
-              customStyle={{ marginBottom: 30 }}
-            /> */}
+           
             <TextInput style={styles.label}
               label="email"
               // leftIcon={{ type: "font-awesome", name: "envelope" }}
@@ -133,12 +98,11 @@ export default class Registration extends Component {
           </ScrollView>
         </View>
         <View style={styles.nextButton}>
-          {/* <NextArrowButton
-            handleNextButton={this.handleNextButton}
-          /> */}
           <Button
-            title="Sign Up!"
-            onPress={this.handleRegister}
+          title="Sign Up!"
+          onPress={this.handleRegister}
+          rounded
+          large
           />
         </View>
       </KeyboardAvoidingView>

@@ -10,23 +10,30 @@ import {
 import { SearchBar } from 'react-native-elements'
 
 import { connect } from 'react-redux';
-import { getAllCards } from '../redux/actions/actions.js';
+import { getAllCards, getMyCard } from '../redux/actions/actions.js';
 
 const mapStateToProps = (state) => {
   // console.log("STATE: ", state);
   return {
     allCards: state.allCards,
+    myCard: state.myCard
   }
 }
 
 class ContactScreen extends Component {
-  state = {
-    allCards: this.props.allCards
+  constructor(props){
+    super(props)
+    this.props.dispatch(getMyCard())
+    this.props.dispatch(getAllCards())
   }
 
-  componentDidMount = () => {
-    this.props.dispatch(getAllCards())
-    console.log("HUH", this.state)
+  componentDidUpdate = (prevProps) => {
+    // console.log("CAN I SEE PREV PROPS", prevProps.myCard.users.length)
+    // console.log("CURRENT PROPS", this.props.myCard.users.length)
+    if(this.props.myCard.users.length !== prevProps.myCard.users.length){
+      console.log("NEW PROPS!!!")
+      this.props.dispatch(getAllCards())
+    }
   }
 
   allContacts = () => {
@@ -35,8 +42,9 @@ class ContactScreen extends Component {
 
 
   render() {
+    // console.log("MYCARD PROPS", this.props.myCard)
     let contactData = this.props.allCards
-    console.log('CONTACT DATA: ', contactData);
+    // console.log('CONTACT DATA: ', contactData);
 
     // const remote = "https://images.pexels.com/photos/1580625/pexels-photo-1580625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
 
