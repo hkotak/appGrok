@@ -8,6 +8,8 @@ import QRScreen from '../app/screens/QRScreen.js'
 import ScanScreen from '../app/screens/ScanScreen.js'
 import SaveContactScreen from '../app/screens/SaveContactScreen.js'
 import { create } from 'uuid-js';
+import { Icon } from 'react-native-elements'
+
 
 //~~~~ LOGGED OUT VIEW ~~~~//
 const HomeStack = createStackNavigator({
@@ -15,16 +17,22 @@ const HomeStack = createStackNavigator({
 })
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home'
+  tabBarLabel: <Icon
+    name="home"
+  />
 }
+
 
 const ContactStack = createStackNavigator({
   Contacts: ContactScreen
 })
 
 ContactStack.navigationOptions = {
-  tabBarLabel: 'Contacts'
+  tabBarLabel: <Icon
+    name="search"
+  />
 }
+
 
 const QRStack = createStackNavigator({
   QRcode: QRScreen,
@@ -33,8 +41,13 @@ const QRStack = createStackNavigator({
 })
 
 QRStack.navigationOptions = {
-  tabBarLabel: 'Share'
+  tabBarLabel: <Icon
+    name="add-circle"
+
+  />
 }
+
+
 
 
 
@@ -42,6 +55,9 @@ QRStack.navigationOptions = {
 export default createBottomTabNavigator({
   HomeStack,
   ContactStack,
-  QRStack
+  QRStack,
+
+
+
   // LoginStack,
 });

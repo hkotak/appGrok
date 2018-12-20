@@ -3,18 +3,19 @@ import {
   StyleSheet,
   View,
   Text,
-  ScrollView
+  ScrollView,
+  Image,
+  ImageBackground
 } from 'react-native';
+import { SearchBar } from 'react-native-elements'
 
 import { connect } from 'react-redux';
-
 import { getAllCards } from '../redux/actions/actions.js';
 
 const mapStateToProps = (state) => {
-  console.log("STATE: ", state);
+  // console.log("STATE: ", state);
   return {
-    allCardsData: state.allCardsData,
-    allCardsCSS: state.allCardsCSS
+    allCards: state.allCards,
   }
 }
 
@@ -34,10 +35,30 @@ class ContactScreen extends Component {
 
 
   render() {
+    let contactData = this.props.allCards
+    console.log('CONTACT DATA: ', contactData);
+
+    // const remote = "https://images.pexels.com/photos/1580625/pexels-photo-1580625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+
     return (
       <ScrollView>
-        <View>
-          <Text>All Contacts Here</Text>
+        <SearchBar
+          lightTheme
+          // onChangeText={}
+          // onClearText={}
+          placeholder='Type Here...' />
+        <View style={styles.wrapper}>
+          <Text style={styles.heading}>Your Connections</Text>
+          {
+            contactData.map(data => {
+              return (
+                <View key={data.user_id} style={styles.contacts}>
+                  <Text>{data.data.name}</Text>
+                  <Text>{data.data.email}</Text>
+                </View>
+              )
+            })
+          }
         </View>
       </ScrollView>
     )
@@ -45,3 +66,39 @@ class ContactScreen extends Component {
 }
 
 export default connect(mapStateToProps)(ContactScreen)
+
+//~~~~ STYLESHEET ~~~~//
+const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    height: '100%',
+    padding: 15
+  },
+  heading: {
+    fontSize: 25,
+    textAlign: 'center',
+    marginBottom: 15,
+  },
+  contacts: {
+    borderWidth: .5,
+    borderColor: 'red',
+    alignItems: 'center',
+    padding: 20,
+    margin: 15,
+    backgroundColor: 'lightblue',
+    height: 150,
+
+
+
+  }
+  // img: {
+  //   flex: 1,
+  //   resizeMode: 'cover',
+  //   width: '100%',
+  //   height: '100%'
+  // }
+})

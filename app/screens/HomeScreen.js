@@ -8,6 +8,8 @@ import {
   ScrollView,
   Button
 } from 'react-native';
+import { Icon } from 'react-native-elements'
+
 
 //aws auth
 import { Auth } from 'aws-amplify'
@@ -15,46 +17,39 @@ import { Auth } from 'aws-amplify'
 // redux
 import { connect } from 'react-redux';
 
-// import * as Actions from '../redux/actions/actions.js';
+
 import { getMyCard, authenticated } from '../redux/actions/actions.js';
 
-
-// const mapStateToProps = (state) => {
-//   return {
-//     data: state.dataReducer.data
-//   }
-// }
-
-
 const mapStateToProps = (state) => {
-  // console.log("STATE", state)
+  console.log("STATE", state)
   return {
-    myCardData: state.myCardData,
-    myCardCSS: state.myCardCSS,
+    myCard: state.myCard,
+    // myCardData: state.myCardData,
+    // myCardCSS: state.myCardCSS,
     authInfo: state.authInfo
   }
 }
 
 class HomeScreen extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     const { navigation } = props
     const userInfo = navigation.getParam('authInfo')
     this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard())
-    
+
   }
 
   componentWillMount = () => {
-    console.log('THIS HITS FIRST??');
+    // console.log('THIS HITS FIRST??');
   }
 
   componentDidMount = () => {
     // console.log("DA STATE", this.props)
-    
+
   }
 
-  logout = () => {
+  _logOut = () => {
     alert('LOL')
     Auth.signOut()
       .then(data => {
@@ -68,9 +63,8 @@ class HomeScreen extends Component {
 
   render() {
     // console.log("AVAILABLE PROPS: ", this.props);
-    const Data = this.props.myCardData;
-    // console.log("CARD DATA: ", Data);
-
+    const Data = this.props.myCard.data;
+    console.log("CARD DATA: ", this.props);
 
     return (
       <View style={styles.wrapper}>
@@ -84,10 +78,10 @@ class HomeScreen extends Component {
           <Text>Title: {Data.title}</Text>
         </View>
         <Button
-            style={styles.exButton}
-            title="LOGOUT FOR TESTING"
-            onPress={this.logout}
-          />
+          onPress={this._logOut}
+          title="Log Out"
+        />
+
       </View>
 
     )

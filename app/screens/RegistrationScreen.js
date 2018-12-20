@@ -21,20 +21,20 @@ export default class Registration extends Component {
     title: "Register",
   }
 
-  constructor(){
+  constructor() {
     super();
-    this.state ={
+    this.state = {
       email: '',
       password: '',
-      confirmPassword:'',
+      confirmPassword: '',
       isAuthenticated: ''
     }
   }
-  
-  handleRegister = () => {
-    const {email, password, confirmPassword} = this.state
 
-    if(password === confirmPassword){
+  handleRegister = () => {
+    const { email, password, confirmPassword } = this.state
+
+    if (password === confirmPassword) {
       Auth.signUp({
         username: email,
         password,
@@ -42,14 +42,14 @@ export default class Registration extends Component {
           email: email
         }
       })
-      .then(user => {
-        // console.log("register data", user)
-        this.props.navigation.navigate('Confirm', {email: this.state.email})
-      })
-      .catch(err => {
-        console.log("register error", err)
-        alert(`Error while registering, please try again. Error: ${err.message}`)
-      })
+        .then(user => {
+          // console.log("register data", user)
+          this.props.navigation.navigate('Confirm', { email: this.state.email })
+        })
+        .catch(err => {
+          console.log("register error", err)
+          alert(`Error while registering, please try again. Error: ${err.message}`)
+        })
     } else {
       alert('Password do not match')
     }
@@ -98,36 +98,36 @@ export default class Registration extends Component {
               customStyle={{ marginBottom: 30 }}
             /> */}
             <TextInput style={styles.label}
-            label="email"
-            // leftIcon={{ type: "font-awesome", name: "envelope" }}
-            onChangeText={
-              // this updates this.state.email to value in this Input
-              (value) => this.setState({email: value})
-            }
-            placeholder="Enter email"
-            placeholderTextColor="white"
+              label="email"
+              // leftIcon={{ type: "font-awesome", name: "envelope" }}
+              onChangeText={
+                // this updates this.state.email to value in this Input
+                (value) => this.setState({ email: value })
+              }
+              placeholder="Enter email"
+              placeholderTextColor="white"
             />
             <TextInput style={styles.label}
-            label="password"
-            // leftIcon={{ type: "font-awesome", name: "envelope" }}
-            onChangeText={
-              // this updates this.state.email to value in this Input
-              (value) => this.setState({password: value})
-            }
-            placeholder="Enter password"
-            placeholderTextColor="white"
-            secureTextEntry
+              label="password"
+              // leftIcon={{ type: "font-awesome", name: "envelope" }}
+              onChangeText={
+                // this updates this.state.email to value in this Input
+                (value) => this.setState({ password: value })
+              }
+              placeholder="Enter password"
+              placeholderTextColor="white"
+              secureTextEntry
             />
             <TextInput style={styles.label}
-            label="confirm-password"
-            // leftIcon={{ type: "font-awesome", name: "envelope" }}
-            onChangeText={
-              // this updates this.state.email to value in this Input
-              (value) => this.setState({confirmPassword: value})
-            }
-            placeholder="Confirm password"
-            placeholderTextColor="white"
-            secureTextEntry
+              label="confirm-password"
+              // leftIcon={{ type: "font-awesome", name: "envelope" }}
+              onChangeText={
+                // this updates this.state.email to value in this Input
+                (value) => this.setState({ confirmPassword: value })
+              }
+              placeholder="Confirm password"
+              placeholderTextColor="white"
+              secureTextEntry
             />
 
           </ScrollView>
@@ -137,8 +137,8 @@ export default class Registration extends Component {
             handleNextButton={this.handleNextButton}
           /> */}
           <Button
-          title="Sign Up!"
-          onPress={this.handleRegister}
+            title="Sign Up!"
+            onPress={this.handleRegister}
           />
         </View>
       </KeyboardAvoidingView>
