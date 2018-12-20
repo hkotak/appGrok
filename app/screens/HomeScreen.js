@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
 import { getMyCard, authenticated } from '../redux/actions/actions.js';
 
 const mapStateToProps = (state) => {
-  console.log("STATE", state)
+  // console.log("STATE", state)
   return {
     myCard: state.myCard,
     // myCardData: state.myCardData,
@@ -64,7 +64,7 @@ class HomeScreen extends Component {
   render() {
     // console.log("AVAILABLE PROPS: ", this.props);
     const Data = this.props.myCard.data;
-    console.log("CARD DATA: ", this.props);
+    // console.log("CARD DATA: ", this.props);
 
     return (
       <View style={styles.wrapper}>

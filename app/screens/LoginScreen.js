@@ -75,7 +75,7 @@ export default class Login extends Component {
             large
             rounded
             title="Login"
-            onPress={this.logginIn}
+            onPress={this._logginIn}
             />
         </View>
       </KeyboardAvoidingView>

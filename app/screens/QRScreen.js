@@ -22,8 +22,9 @@ import { connect } from 'react-redux'
 const mapStateToProps = (state) => {
   // console.log("STATE", state)
   return {
-    myCardData: state.myCardData,
-    myCardCSS: state.myCardCSS,
+    // myCardData: state.myCardData,
+    // myCardCSS: state.myCardCSS,
+    myCard: state.myCard,
     authInfo: state.authInfo
   }
 }
@@ -31,13 +32,14 @@ const mapStateToProps = (state) => {
 class QRScreen extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      selectedIndex: 1,
-      myCardCSS: props.myCardCSS,
-      myCardData: props.myCardData
-    }
-    this.updateIndex = this.updateIndex.bind(this)
-    console.log("ALL THE PROPS",)
+    // this.state = {
+    //   // selectedIndex: 1,
+    //   myCard: props.myCard
+    //   // myCardCSS: props.myCardCSS,
+    //   // myCardData: props.myCardData
+    // }
+    // this.updateIndex = this.updateIndex.bind(this)
+    console.log("ALL THE PROPS", props)
   }
 
   // state = {
@@ -52,13 +54,13 @@ class QRScreen extends React.Component {
 
 
   componentDidMount = () => {
-    // console.log("state", this.state)   
+    // console.log("state", this.props)   
     console.log("QRSCREEN", this.qrCodeData())
 
   }
 
   qrCodeData = () => {
-    return JSON.stringify(this.state)
+    return JSON.stringify(this.props.myCard)
   }
 
 
@@ -68,10 +70,10 @@ class QRScreen extends React.Component {
       <View style={styles.container}>
         {/* <Text>QRScreen!!!</Text> */}
        
-        <Text>{this.state.myCardData.name}</Text>
+        {/* <Text>{this.state.myCardData.name}</Text> */}
         <QRCode medium
          value={this.qrCodeData()}
-         size={250}
+         size={350}
          
         />
        <View>

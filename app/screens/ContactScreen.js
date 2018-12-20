@@ -10,7 +10,7 @@ import {
 import { SearchBar } from 'react-native-elements'
 
 import { connect } from 'react-redux';
-import { getAllCards } from '../redux/actions/actions.js';
+import { getAllCards, getMyCard } from '../redux/actions/actions.js';
 
 const mapStateToProps = (state) => {
   // console.log("STATE: ", state);
@@ -20,13 +20,22 @@ const mapStateToProps = (state) => {
 }
 
 class ContactScreen extends Component {
-  state = {
-    allCards: this.props.allCards
+  constructor(props){
+    super(props)
+    this.props.dispatch(getAllCards())
+    this.props.dispatch(getMyCard("user"))
+
   }
+  // state = {
+  //   allCards: this.props.allCards
+  // }
 
   componentDidMount = () => {
-    this.props.dispatch(getAllCards())
-    console.log("HUH", this.state)
+    
+  }
+
+  componentDidUpdate = (prevProps) => {
+    // if(this.props )
   }
 
   allContacts = () => {
@@ -35,8 +44,9 @@ class ContactScreen extends Component {
 
 
   render() {
+    console.log("FULL PROPS", this.props)
     let contactData = this.props.allCards
-    console.log('CONTACT DATA: ', contactData);
+    // console.log('CONTACT DATA: ', contactData);
 
     // const remote = "https://images.pexels.com/photos/1580625/pexels-photo-1580625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
 
@@ -49,7 +59,7 @@ class ContactScreen extends Component {
           placeholder='Type Here...' />
         <View style={styles.wrapper}>
           <Text style={styles.heading}>Your Connections</Text>
-          {/* {
+          {
             contactData.map(data => {
               return (
                 <View key={data.user_id} style={styles.contacts}>
@@ -58,7 +68,7 @@ class ContactScreen extends Component {
                 </View>
               )
             })
-          } */}
+          }
         </View>
       </ScrollView>
     )
