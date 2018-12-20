@@ -20,26 +20,32 @@ import { connect } from 'react-redux';
 
 import { getMyCard, authenticated } from '../redux/actions/actions.js';
 
-
-
-
 const mapStateToProps = (state) => {
-  // console.log("STATE", state.authInfo)
+  console.log("STATE", state)
   return {
-    myCardData: state.myCardData,
-    myCardCSS: state.myCardCSS,
+    myCard: state.myCard,
+    // myCardData: state.myCardData,
+    // myCardCSS: state.myCardCSS,
     authInfo: state.authInfo
   }
 }
 
 class HomeScreen extends Component {
+<<<<<<< HEAD
   constructor(props){
+=======
+  constructor(props) {
+>>>>>>> development
     super(props)
     const { navigation } = props
     const userInfo = navigation.getParam('authInfo')
     this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard())
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> development
   }
 
   componentWillMount = () => {
@@ -48,7 +54,11 @@ class HomeScreen extends Component {
 
   componentDidMount = () => {
     // console.log("DA STATE", this.props)
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> development
   }
 
   _logOut = () => {
@@ -65,8 +75,13 @@ class HomeScreen extends Component {
 
   render() {
     // console.log("AVAILABLE PROPS: ", this.props);
+<<<<<<< HEAD
     const Data = this.props.myCardData;
     // console.log("CARD DATA: ", Data);
+=======
+    const Data = this.props.myCard.data;
+    console.log("CARD DATA: ", this.props);
+>>>>>>> development
 
     return (
       <View style={styles.wrapper}>
