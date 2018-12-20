@@ -60,8 +60,7 @@ class QRScreen extends React.Component {
         
         <QRCode medium
          value={this.qrCodeData()}
-         size={350}
-         
+         size={350}         
         />
        <View>
         <Button
