@@ -10,8 +10,8 @@ import Data from '../instructions.json'
 
 // ip address changes
 
-const ip = "192.168.173.225" // DC Home
-// const ip = "192.168.200.130" // DevLeague
+// const ip = "192.168.173.225" // DC Home
+const ip = "192.168.200.130" // DevLeague
 
 //Auth Actions 
 export const authenticated = (data) => {
