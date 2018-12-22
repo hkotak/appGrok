@@ -1,6 +1,6 @@
 // import { combineReducers } from 'redux';
 
-import { GET_ALL_CARDS, GET_MY_CARD, AUTH_INFO } from '../actions/actions.js';
+import { GET_ALL_CARDS, GET_MY_CARD, AUTH_INFO, SCAN_CARD } from '../actions/actions.js';
 
 // let dataState = { data: [], loading: true };
 // let cardState = { data: {}, loading: true };
@@ -16,6 +16,7 @@ const reducers = (state = {
       front: {},
       info: {}
     },
+    users: [],
   },
   authInfo: {}
 }, action) => {
@@ -52,12 +53,14 @@ const reducers = (state = {
       }
 
     case GET_MY_CARD:
+      // console.log("CARD REDUCER", action.payload)
       let parsedMyCss = {};
       for (var key in action.payload.css) {
         parsedMyCss[key] = JSON.parse(action.payload.css[key])
       }
       const myData = {
         user_id: action.payload.user_id,
+        users: action.payload.users,
         data: action.payload.data,
         css: parsedMyCss
       }
@@ -65,6 +68,10 @@ const reducers = (state = {
         ...state,
         myCard: myData
       }
+
+    // case SCAN_CARD:
+    //   return {...state, myCard: myData}
+
 
     default:
       return state

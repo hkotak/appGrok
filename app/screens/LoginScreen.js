@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
+import { Icon } from 'react-native-elements'
 // import Icon from 'react-native-vector-icons/FontAwesome'
 import {
   View,
@@ -7,9 +8,9 @@ import {
   ScrollView,
   StyleSheet,
   KeyboardAvoidingView,
-  Button,
   TextInput
 } from 'react-native';
+import { Button } from 'react-native-elements'
 import colors from '../styles/colors/index.js';
 import InputField from '../components/forms/inputField.js';
 import NextArrowButton from '../components/buttons/NextArrowButton.js'
@@ -18,9 +19,9 @@ import NextArrowButton from '../components/buttons/NextArrowButton.js'
 import { Auth } from 'aws-amplify'
 
 export default class Login extends Component {
-  static navigationOptions = {
-    title: "Login",
-  }
+  // static navigationOptions = {
+  //   title: "Login",
+  // }
 
   constructor(props) {
     super(props);
@@ -30,6 +31,16 @@ export default class Login extends Component {
       isAuthenticated: false,
     }
   }
+
+  static navigationOptions = () => ({
+    title: 'Login',
+    headerStyle: {
+      backgroundColor: 'transparent',
+    },
+    // header: null
+
+
+  });
 
 
   _logginIn = () => {
@@ -49,60 +60,33 @@ export default class Login extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={styles.wrapper}>
+      <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
             <Text style={styles.loginHeader}>Log In</Text>
-            {/* <InputField
-              labelText="Email Address"
-              labelTextSize={14}
-              labelColor={colors.white}
-              textColor={colors.white}
-              borderBottomColor={colors.white}
-              inputType="email"
-              customStyle={{ marginBottom: 30 }}
-              onChangeText={(value)=>this.setState({email: value})}
-            />
-            <InputField
-              labelText="Password"
-              labelTextSize={14}
-              labelColor={colors.white}
-              textColor={colors.white}
-              borderBottomColor={colors.white}
-              inputType="password"
-              customStyle={{ marginBottom: 30 }}
-            /> */}
-            <TextInput style={styles.label}
-              label="Email"
-              placeholderTextColor="white"
-              // leftIcon={{ type: "font-awesome", name: "envelope" }}
-              onChangeText={
-                // this updates this.state.email to value in this Input
-                (value) => this.setState({ email: value })
-              }
-              placeholder="Enter email"
-            />
+            <View styles={styles.fieldContainer}>
+              <TextInput style={styles.label}
+                label="Email"
+                placeholderTextColor="white"
+                onChangeText={(value) => this.setState({ email: value })} // this updates this.state.email to value in this Input                 
+                placeholder="Enter email"
+              />
+            </View>
             <TextInput style={styles.label}
               label="password"
               placeholderTextColor="white"
               secureTextEntry
               // leftIcon={{ type: "font-awesome", name: "envelope" }}
-              onChangeText={
-                // this updates this.state.email to value in this Input
-                (value) => this.setState({ password: value })
-              }
+              onChangeText={(value) => this.setState({ password: value })} // this updates this.state.email to value in this Input
               placeholder="Enter password"
             />
           </ScrollView>
-        </View>
-        <View style={styles.nextButton}>
-          <Button
+          <Button style={styles.nextButton}
+            large
+            rounded
             title="Login"
             onPress={this._logginIn}
           />
-          {/* <NextArrowButton
-            onPress={this.handleNextButton}
-          /> */}
         </View>
       </KeyboardAvoidingView>
     );
@@ -113,7 +97,8 @@ const styles = StyleSheet.create({
   wrapper: {
     display: 'flex',
     flex: 1,
-    backgroundColor: colors.lightBlack,
+    backgroundColor: '#273746',
+    justifyContent: 'center'
 
   },
   scrollViewWrapper: {
@@ -132,10 +117,18 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     marginBottom: 40,
   },
+  fieldContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  icon: {
+    padding: 10,
+  },
   nextButton: {
     alignItems: 'flex-end',
     right: 20,
-    bottom: 20,
+    bottom: 40,
   },
   label: {
     // fontWeight: '300',

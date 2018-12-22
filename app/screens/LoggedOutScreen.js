@@ -13,21 +13,18 @@ import RoundedButton from '../components/buttons/RoundedButton.js'
 
 import { Auth } from 'aws-amplify';
 
-// const { width, height } = Dimensions.get('window');
 
 
 export default class LoggedOut extends Component {
+
   constructor(props) {
     super(props);
-
-    // this.state = {
-    //   size: { width, height },
-    // };
   }
 
   static navigationOptions = {
-    title: "Welcome",
+    header: null
   }
+
 
   componentDidMount() {
     // console.log("PROPS", this.props.navigation)
@@ -35,7 +32,7 @@ export default class LoggedOut extends Component {
 
   render() {
     // const { navigate } = this.props.navigation;
-    const remote = "https://images.pexels.com/photos/1668928/pexels-photo-1668928.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260";
+    const remote = "https://images.pexels.com/photos/533424/pexels-photo-533424.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 
     return (
       <ImageBackground
@@ -63,42 +60,10 @@ export default class LoggedOut extends Component {
               background={colors.white}
               handleOnPress={this._onCreateAccount}
             />
-            {/* <Button
-            style={styles.exButton}
-            title="LOGOUT FOR TESTING"
-            onPress={this._onPressLearnMore}
-          /> */}
+
           </View>
         </View>
       </ImageBackground>
-
-      // <View style={styles.wrapper}>
-      //   <View style={styles.welcomeWrapper}>
-      //     <Image
-      //       source={require('../img/dino.png')}
-      //       style={styles.logo}
-      //     />
-      //     <Text style={styles.welcomeText}>Welcome to Grok</Text>
-      //     <RoundedButton
-      //       text="Get Started"
-      //       textColor={colors.lightBlack}
-      //       background={colors.white}
-      //       icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
-      //       handleOnPress={this.onGetStarted}
-      //     />
-      //     <RoundedButton
-      //       text="Create Account"
-      //       textColor={colors.white}
-      //       handleOnPress={this._onCreateAccount}
-      //     />
-      //     {/* <Button
-      //   style={styles.exButton}
-      //   title="LOGOUT FOR TESTING"
-      //   onPress={this._onPressLearnMore}
-      // /> */}
-      //   </View>
-      // </View>
-
 
 
     )
@@ -131,14 +96,14 @@ export default class LoggedOut extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
   wrapper: {
-    display: 'flex',
-    justifyContent: 'flex-end'
-    // backgroundColor: colors.lightBlack,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'stretch',
   },
   welcomeWrapper: {
     flex: 1,

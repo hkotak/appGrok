@@ -31,6 +31,19 @@ const mapStateToProps = (state) => {
 }
 
 class HomeScreen extends Component {
+  // static navigationOptions = {
+  //   // headerTitle: <LogoTitle />,
+  //   headerRight: (
+  //     <Button
+  //       onPress={() => alert('This is a button!')}
+  //       title="Log Out"
+  //     />
+  //   ),
+
+  // };
+
+
+
   constructor(props) {
     super(props)
     const { navigation } = props
@@ -40,17 +53,22 @@ class HomeScreen extends Component {
 
   }
 
-  componentWillMount = () => {
-    // console.log('THIS HITS FIRST??');
-  }
+  static navigationOptions = () => ({
+    headerStyle: {
+      backgroundColor: 'transparent',
+    },
+    headerRight: (
+      <Button
+        onPress={() => HomeScreen._logOut()}
+        title="Log Out"
+      />
+    )
 
-  componentDidMount = () => {
-    // console.log("DA STATE", this.props)
 
-  }
+  });
 
   _logOut = () => {
-    alert('LOL')
+    // alert('LOL')
     Auth.signOut()
       .then(data => {
         // console.log("signout data", data)

@@ -9,49 +9,58 @@ import {
   Button
 } from 'react-native';
 
+// small navigator and Avatar
+import { ButtonGroup, Avatar } from 'react-native-elements'
+
 // qrcode generator
 import QRCode from 'react-native-qrcode'
+
+import ScanScreen from './ScanScreen.js'
 
 import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
   // console.log("STATE", state)
   return {
-    myCardData: state.myCardData,
-    myCardCSS: state.myCardCSS,
+    myCard: state.myCard,
     authInfo: state.authInfo
   }
 }
 
-
-
-
-
 class QRScreen extends React.Component {
-  state = {
-    myCardCSS: this.props.myCardCSS,
-    myCardData: this.props.myCardData
+  constructor (props) {
+    super(props)
+    console.log("ALL THE PROPS", props)
   }
 
 
-  componentDidMount = () => {
-    // console.log("state", this.state)   
+
+  // updateIndex = (selectedIndex) => {
+  //   this.setState({selectedIndex})
+  // }
+
+
+
+  componentDidMount = () => {  
     console.log("QRSCREEN", this.qrCodeData())
 
   }
 
   qrCodeData = () => {
-    return JSON.stringify(this.state)
+    return JSON.stringify(this.props.myCard)
   }
+
 
   render(){
    
     return(
       <View style={styles.container}>
-        {/* <Text>QRScreen!!!</Text> */}
-        <QRCode 
+       
+        <Text>{this.props.myCard.data.name}</Text>
+        
+        <QRCode medium
          value={this.qrCodeData()}
-         size={250}
+         size={350}
          
         />
        <View>
