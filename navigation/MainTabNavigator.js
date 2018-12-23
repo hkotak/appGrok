@@ -15,30 +15,30 @@ import { create } from 'uuid-js';
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 },
-{
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: '#273746'
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#273746'
+      }
     }
-  }
-})
+  })
 
 HomeStack.navigationOptions = {
   tabBarLabel: 'Home',
-  tabBarIcon: <Icon name="home-circle" type="material-community" color="white"/>
+  tabBarIcon: <Icon name="home-circle" type="material-community" color="white" />
 }
 
 
 const ContactStack = createStackNavigator({
   Contacts: ContactScreen
 },
-{
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: '#273746'
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#273746'
+      }
     }
-  }
-})
+  })
 
 ContactStack.navigationOptions = {
   tabBarLabel: 'Contacts',
@@ -51,13 +51,13 @@ const QRStack = createStackNavigator({
   Scan: ScanScreen,
   Save: SaveContactScreen
 },
-{
-  defaultNavigationOptions: {
-    headerStyle: {
-      backgroundColor: '#273746'
+  {
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#273746'
+      }
     }
-  }
-})
+  })
 
 QRStack.navigationOptions = {
   tabBarLabel: 'Share',
@@ -75,15 +75,15 @@ export default createBottomTabNavigator({
 
   // LoginStack,
 },
-{
-  tabBarOptions:{
-    activeTintColor: '#ffeeb0',
-    activeBackgroundColor: '#e37874',
-    style: {
-      backgroundColor: '#273746'
-    },
-    labelStyle: {
-      color: "white"
-    },
-  }
-});
+  {
+    tabBarOptions: {
+      activeTintColor: '#ffeeb0',
+      activeBackgroundColor: '#e37874',
+      style: {
+        backgroundColor: '#273746'
+      },
+      labelStyle: {
+        color: "white"
+      },
+    }
+  });

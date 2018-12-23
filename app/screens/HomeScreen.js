@@ -7,15 +7,20 @@ import {
   ActivityIndicator,
   ScrollView,
   Button,
-  ImageBackground
+  ImageBackground,
+  Image
 } from 'react-native';
+
 import { Icon } from 'react-native-elements'
 
+//~~~~ Card Data ~~~~//
+import { Card } from '../components/CardComponent.js';
+import { cardContainer, front, title, back, info, company, name, address, phone, email } from '../components/CardClassing.js';
 
-//aws auth
+//~~~~ AWS Auth ~~~~//
 import { Auth } from 'aws-amplify'
 
-// redux
+//~~~~ Redux ~~~~//
 import { connect } from 'react-redux';
 
 // CSS stuff
@@ -36,6 +41,19 @@ const mapStateToProps = (state) => {
 }
 
 class HomeScreen extends Component {
+  // static navigationOptions = {
+  //   // headerTitle: <LogoTitle />,
+  //   headerRight: (
+  //     <Button
+  //       onPress={() => alert('This is a button!')}
+  //       title="Log Out"
+  //     />
+  //   ),
+
+  // };
+
+
+
   constructor(props) {
     super(props)
     const { navigation } = props
@@ -49,11 +67,25 @@ class HomeScreen extends Component {
 
   }
 
+  static navigationOptions = () => ({
+    headerStyle: {
+      backgroundColor: 'transparent',
+    },
+    headerRight: (
+      <Button
+        onPress={() => HomeScreen._logOut()}
+        title="Log Out"
+      />
+    )
+
+
+  });
+
   _logOut = () => {
-    alert('LOL')
+    // alert('LOL')
     Auth.signOut()
       .then(data => {
-        console.log("signout data", data)
+        // console.log("signout data", data)
         this.props.navigation.navigate('Auth')
       })
       .catch(err => {
@@ -93,44 +125,66 @@ class HomeScreen extends Component {
     const Data = this.props.myCard.data;
 
     console.log("CARD DATA: ", transform(this.transformCss(this.props.myCard.css.info)));
-    const css = this.props.myCard.css;
-    console.log("can i see only the css", css)
+    // const css = this.props.myCard.css;
+    // console.log("can i see only the css", css)
+    const { myCard } = this.props;
+    const { data, css } = myCard;
     let string = `${css.front.backgroundImage}`
     let backString = `${css.back.backgroundImage}`
     let frontImage = string.split("'")[1]
     let backImage = string.split("'")[1]
     console.log("WHAT", backImage)
 
-    
+    let transformed = transform(this.transformCss(this.props.myCard.css.info))
+
+    console.log("~~~~PROP DATA~~~~");
+    console.log(data);
+    console.log("CSS:", css);
+
+
+    // console.log("STYLES: ", styles1);
 
     return (
       <View style={styles.wrapper}>
         <Text style={styles.text1}>Welcome</Text>
         <Text style={styles.text2}>{Data.name}</Text>
-        <View style={styles.cardWrapper}>
+        
           <FlipCard
             flip={this.state.flip}
+            style={styles.cardWrapper}
            >
-            <View>
+            <View style={{alignItems: 'center', width:300}}>
             <ImageBackground source={{uri: frontImage}} 
               style={{
                 backgroundRepeat: css.front.backgroundRepeat,
-                resizeMode: css.front.backgroundSize }} >
+                resizeMode: css.front.backgroundSize,
+                borderRadius: 50,
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center'
+               }} >
                   {/* <Text style={transform(this.transformCss(this.props.myCard.css.company))}>Company Name: {Data.company_name}</Text> */}
                     <View style={transform(this.transformCss(this.props.myCard.css.info))}>
-                      <Text>Name: {Data.name}</Text>
-                      <Text>Email: {Data.email}</Text>
-                      <Text>Phone #: {Data.phone}</Text>
-                      <Text>Title: {Data.title}</Text>
+                      <Text> {Data.name}</Text>
+                      <Text> {Data.email}</Text>
+                      <Text> {Data.phone}</Text>
+                      <Text> {Data.title}</Text>
                     </View>
             </ImageBackground>
             </View>
+
             <View>
             <ImageBackground source={{uri: backImage}} 
-              style={{
+              style={{ 
                 backgroundRepeat: css.back.backgroundRepeat,
                 resizeMode: css.back.backgroundSize,
-                alignContent: css.back.textAlign }} >
+                borderRadius: 50,
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }} >
                   <Text style={transform(this.transformCss(this.props.myCard.css.company))}>{Data.company_name}</Text>
             </ImageBackground>
             </View>
@@ -138,23 +192,29 @@ class HomeScreen extends Component {
           </FlipCard>
 
           <Icon
+            containerStyle={styles.icon}
             raised
             reverse
             name='refresh'
             type='font-awesome'
+            size={30}
             onPress={()=>this.setState({flip: !this.state.flip})}
           />
           
-        </View>
-        <Button
-          onPress={this._logOut}
+          <Button
+          onPress={ () => this._logOut()}
           title="Log Out"
-        />
+          />
+
+        
+        
 
       </View>
-
     )
   }
+
+
+
 }
 
 
@@ -163,42 +223,34 @@ export default connect(mapStateToProps)(HomeScreen)
 
 
 //~~~~ STYLESHEET ~~~~//
+
+
 const styles = StyleSheet.create({
   wrapper: {
-    display: 'flex',
+    flex: 1,
     backgroundColor: "#273746",
-    height: '100%',
     alignItems: 'center',
   },
   text1: {
-    // flex: 1,
+    color: 'white',
     marginTop: 50,
     textAlign: 'center',
     fontSize: 35,
-    color: "white"
   },
   text2: {
-    // flex: 2,
+    color: 'white',
     textAlign: 'center',
     fontSize: 30,
-    color: "white"
   },
   cardWrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    flex: 0,
     marginTop: 30,
-    // backgroundColor: 'red',
-    width: '90%',
-    height: '30%',
+    width: 300,
+    height: 200,
     borderRadius: 50,
   },
-  bImage: {
-    height: 400,
-    width: 300,
-    
-  },
-  flip: {
-
+  icon: {
+    // position: 'absolute',
+    right: 5
   }
-
 })

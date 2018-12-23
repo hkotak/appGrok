@@ -17,10 +17,6 @@ import { Auth } from 'aws-amplify'
 
 
 export default class Registration extends Component {
-  static navigationOptions = {
-    title: "Register",
-  }
-
   constructor() {
     super();
     this.state = {
@@ -30,6 +26,16 @@ export default class Registration extends Component {
       isAuthenticated: ''
     }
   }
+
+  static navigationOptions = () => ({
+    title: 'Register',
+    headerStyle: {
+      backgroundColor: 'transparent',
+    },
+    // header: null
+
+
+  });
 
   handleRegister = () => {
     const { email, password, confirmPassword } = this.state
@@ -61,7 +67,7 @@ export default class Registration extends Component {
         <View style={styles.scrollViewWrapper}>
           <ScrollView style={styles.scrollView}>
             <Text style={styles.loginHeader}>Register</Text>
-           
+
             <TextInput style={styles.label}
               label="email"
               // leftIcon={{ type: "font-awesome", name: "envelope" }}
@@ -99,10 +105,10 @@ export default class Registration extends Component {
         </View>
         <View style={styles.nextButton}>
           <Button
-          title="Sign Up!"
-          onPress={this.handleRegister}
-          rounded
-          large
+            title="Sign Up!"
+            onPress={this.handleRegister}
+            rounded
+            large
           />
         </View>
       </KeyboardAvoidingView>
