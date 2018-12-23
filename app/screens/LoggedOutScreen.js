@@ -47,20 +47,21 @@ export default class LoggedOut extends Component {
               style={styles.logo}
             />
             <Text style={styles.welcomeText}>Welcome to Grok</Text>
-            <RoundedButton
-              text="Get Started"
-              textColor={colors.lightBlack}
-              background={colors.white}
-              // icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
-              handleOnPress={this.onGetStarted}
-            />
-            <RoundedButton
-              text="Create Account"
-              textColor={colors.lightBlack}
-              background={colors.white}
-              handleOnPress={this._onCreateAccount}
-            />
-
+            <View style={styles.buttonWrapper}>
+              <RoundedButton
+                text="Get Started"
+                textColor={colors.lightBlack}
+                background={colors.white}
+                // icon={<Icon name="facebook" size={20} style={styles.facebookButtonIcon} />}
+                handleOnPress={this.onGetStarted}
+              />
+              <RoundedButton
+                text="Create Account"
+                textColor={colors.lightBlack}
+                background={colors.white}
+                handleOnPress={this._onCreateAccount}
+              />
+            </View>
           </View>
         </View>
       </ImageBackground>
@@ -98,25 +99,28 @@ const styles = StyleSheet.create({
   container: {
     // flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
   },
   wrapper: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'stretch',
   },
   welcomeWrapper: {
+    // flex: 1,
+    marginTop: 120,
+    paddingLeft: 25,
+    paddingRight: 25,
+    // justifyContent: 'center',
+  },
+  buttonWrapper: {
     flex: 1,
-    display: 'flex',
-    marginTop: 30,
-    padding: 20,
-
   },
   welcomeText: {
-    fontSize: 30,
+    fontSize: 35,
     color: colors.white,
     fontWeight: '300',
     marginBottom: 40,
+    fontWeight: 'bold'
   },
   logo: {
     width: 80,

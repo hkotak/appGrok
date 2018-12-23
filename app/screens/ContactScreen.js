@@ -21,7 +21,7 @@ const mapStateToProps = (state) => {
 }
 
 class ContactScreen extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.props.dispatch(getMyCard())
     this.props.dispatch(getAllCards())
@@ -30,7 +30,7 @@ class ContactScreen extends Component {
   componentDidUpdate = (prevProps) => {
     // console.log("CAN I SEE PREV PROPS", prevProps.myCard.users.length)
     // console.log("CURRENT PROPS", this.props.myCard.users.length)
-    if(this.props.myCard.users.length !== prevProps.myCard.users.length){
+    if (this.props.myCard.users.length !== prevProps.myCard.users.length) {
       console.log("NEW PROPS!!!")
       this.props.dispatch(getAllCards())
     }
@@ -38,6 +38,10 @@ class ContactScreen extends Component {
 
   allContacts = () => {
     this.props.data
+  }
+
+  _handleKeyUp = () => {
+    alert('test')
   }
 
 
@@ -52,7 +56,7 @@ class ContactScreen extends Component {
       <ScrollView>
         <SearchBar
           lightTheme
-          // onChangeText={}
+          onKeyUp={this._handleKeyUp}
           // onClearText={}
           placeholder='Type Here...' />
         <View style={styles.wrapper}>
@@ -99,7 +103,7 @@ const styles = StyleSheet.create({
     margin: 15,
     backgroundColor: 'lightblue',
     height: 150,
-
+    display: 'flex'
 
 
   }
