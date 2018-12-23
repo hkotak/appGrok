@@ -18,7 +18,9 @@ import { Auth } from 'aws-amplify'
 // redux
 import { connect } from 'react-redux';
 
+// CSS stuff
 import transform from 'css-to-react-native'
+import FlipCard from 'react-native-flip-card'
 
 
 import { getMyCard, authenticated } from '../redux/actions/actions.js';
@@ -41,6 +43,10 @@ class HomeScreen extends Component {
     this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard())
     
+    this.state = {
+      flip: false
+    }
+
   }
 
   _logOut = () => {
@@ -90,8 +96,10 @@ class HomeScreen extends Component {
     const css = this.props.myCard.css;
     console.log("can i see only the css", css)
     let string = `${css.front.backgroundImage}`
-    let newImage = string.split("'")[1]
-    console.log("WHAT", newImage)
+    let backString = `${css.back.backgroundImage}`
+    let frontImage = string.split("'")[1]
+    let backImage = string.split("'")[1]
+    console.log("WHAT", backImage)
 
     
 
@@ -100,21 +108,42 @@ class HomeScreen extends Component {
         <Text style={styles.text1}>Welcome</Text>
         <Text style={styles.text2}>{Data.name}</Text>
         <View style={styles.cardWrapper}>
-        <ImageBackground source={{uri: newImage}} 
-          style={{
-            backgroundRepeat: css.front.backgroundRepeat,
-            resizeMode: css.front.backgroundSize }} >
-              <Text style={transform(this.transformCss(this.props.myCard.css.company))}>Company Name: {Data.company_name}</Text>
-                <View style={transform(this.transformCss(this.props.myCard.css.info))}>
-            {/* <View style={styles.info}> */}
-                  <Text>Name: {Data.name}</Text>
-                  <Text>Email: {Data.email}</Text>
-                  <Text>Phone #: {Data.phone}</Text>
-                  <Text>Title: {Data.title}</Text>
-            {/* </View> */}
-          
-                </View>
-        </ImageBackground>
+          <FlipCard
+            flip={this.state.flip}
+           >
+            <View>
+            <ImageBackground source={{uri: frontImage}} 
+              style={{
+                backgroundRepeat: css.front.backgroundRepeat,
+                resizeMode: css.front.backgroundSize }} >
+                  {/* <Text style={transform(this.transformCss(this.props.myCard.css.company))}>Company Name: {Data.company_name}</Text> */}
+                    <View style={transform(this.transformCss(this.props.myCard.css.info))}>
+                      <Text>Name: {Data.name}</Text>
+                      <Text>Email: {Data.email}</Text>
+                      <Text>Phone #: {Data.phone}</Text>
+                      <Text>Title: {Data.title}</Text>
+                    </View>
+            </ImageBackground>
+            </View>
+            <View>
+            <ImageBackground source={{uri: backImage}} 
+              style={{
+                backgroundRepeat: css.back.backgroundRepeat,
+                resizeMode: css.back.backgroundSize,
+                alignContent: css.back.textAlign }} >
+                  <Text style={transform(this.transformCss(this.props.myCard.css.company))}>{Data.company_name}</Text>
+            </ImageBackground>
+            </View>
+            
+          </FlipCard>
+
+          <Icon
+            raised
+            reverse
+            name='refresh'
+            type='font-awesome'
+            onPress={()=>this.setState({flip: !this.state.flip})}
+          />
           
         </View>
         <Button
@@ -142,12 +171,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text1: {
+    // flex: 1,
     marginTop: 50,
     textAlign: 'center',
     fontSize: 35,
     color: "white"
   },
   text2: {
+    // flex: 2,
     textAlign: 'center',
     fontSize: 30,
     color: "white"
@@ -160,5 +191,14 @@ const styles = StyleSheet.create({
     width: '90%',
     height: '30%',
     borderRadius: 50,
+  },
+  bImage: {
+    height: 400,
+    width: 300,
+    
+  },
+  flip: {
+
   }
+
 })
