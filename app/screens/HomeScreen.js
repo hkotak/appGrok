@@ -31,17 +31,19 @@ const mapStateToProps = (state) => {
 }
 
 class HomeScreen extends Component {
-  // static navigationOptions = {
-  //   // headerTitle: <LogoTitle />,
-  //   headerRight: (
-  //     <Button
-  //       onPress={() => alert('This is a button!')}
-  //       title="Log Out"
-  //     />
-  //   ),
-
-  // };
-
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: 'transparent',
+      },
+      headerRight: (
+        <Button
+          onPress={navigation.getParam('LogOut')}
+          title="Log Out"
+        />
+      )
+    }
+  };
 
 
   constructor(props) {
@@ -53,22 +55,13 @@ class HomeScreen extends Component {
 
   }
 
-  static navigationOptions = () => ({
-    headerStyle: {
-      backgroundColor: 'transparent',
-    },
-    headerRight: (
-      <Button
-        onPress={() => HomeScreen._logOut()}
-        title="Log Out"
-      />
-    )
 
-
-  });
+  componentDidMount() {
+    this.props.navigation.setParams({ LogOut: this._logOut })
+  }
 
   _logOut = () => {
-    // alert('LOL')
+    alert('Good Bye :)')
     Auth.signOut()
       .then(data => {
         // console.log("signout data", data)
@@ -80,6 +73,7 @@ class HomeScreen extends Component {
   }
 
   render() {
+    console.disableYellowBox = true;
     // console.log("AVAILABLE PROPS: ", this.props);
     // console.log("CARD DATA: ", this.props);
 
@@ -170,10 +164,10 @@ class HomeScreen extends Component {
           {/* </ImageBackground> */}
 
         </View>
-        <Button
+        {/* <Button
           onPress={this._logOut}
           title="Log Out"
-        />
+        /> */}
 
       </View>
     )
