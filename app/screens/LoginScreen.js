@@ -8,7 +8,8 @@ import {
   ScrollView,
   StyleSheet,
   KeyboardAvoidingView,
-  TextInput
+  TextInput,
+  ImageBackground
 } from 'react-native';
 import { Button } from 'react-native-elements'
 import colors from '../styles/colors/index.js';
@@ -59,35 +60,48 @@ export default class Login extends Component {
   }
 
   render() {
+    const remote = "https://images.pexels.com/photos/1705093/pexels-photo-1705093.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+
     return (
       <KeyboardAvoidingView style={styles.wrapper} behavior="padding">
-        <View style={styles.scrollViewWrapper}>
-          <ScrollView style={styles.scrollView}>
-            <Text style={styles.loginHeader}>Log In</Text>
-            <View styles={styles.fieldContainer}>
+        <ImageBackground
+          style={styles.container}
+          resizeMode='cover'
+          source={{ uri: remote }}
+        >
+          <View style={styles.scrollViewWrapper}>
+            <ScrollView style={styles.scrollView}>
+              <Text style={styles.loginHeader}>Log In</Text>
+              <View styles={styles.fieldContainer}>
+                <TextInput style={styles.label}
+                  label="Email"
+                  placeholderTextColor="white"
+                  onChangeText={(value) => this.setState({ email: value })} // this updates this.state.email to value in this Input                 
+                  placeholder="Enter email"
+                  borderColor="white"
+                />
+              </View>
               <TextInput style={styles.label}
-                label="Email"
+                label="password"
                 placeholderTextColor="white"
-                onChangeText={(value) => this.setState({ email: value })} // this updates this.state.email to value in this Input                 
-                placeholder="Enter email"
+                secureTextEntry
+                // leftIcon={{ type: "font-awesome", name: "envelope" }}
+                onChangeText={(value) => this.setState({ password: value })} // this updates this.state.email to value in this Input
+                placeholder="Enter password"
+                borderColor="white"
               />
-            </View>
-            <TextInput style={styles.label}
-              label="password"
-              placeholderTextColor="white"
-              secureTextEntry
-              // leftIcon={{ type: "font-awesome", name: "envelope" }}
-              onChangeText={(value) => this.setState({ password: value })} // this updates this.state.email to value in this Input
-              placeholder="Enter password"
+            </ScrollView>
+            <Button style={styles.nextButton}
+              large
+              rounded
+              title="Login"
+              onPress={this._logginIn}
+              backgroundColor="#f5f5f5"
+              color="black"
             />
-          </ScrollView>
-          <Button style={styles.nextButton}
-            large
-            rounded
-            title="Login"
-            onPress={this._logginIn}
-          />
-        </View>
+          </View>
+
+        </ImageBackground>
       </KeyboardAvoidingView>
     );
   }
@@ -95,11 +109,15 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    display: 'flex',
+    // display: 'flex',
     flex: 1,
     backgroundColor: '#273746',
-    justifyContent: 'center'
-
+    // justifyContent: 'center'
+  },
+  container: {
+    height: '100%',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
   scrollViewWrapper: {
     marginTop: 70,
@@ -109,18 +127,21 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 20,
-    flex: 1,
+    // flex: 1,
   },
   loginHeader: {
-    fontSize: 30,
+    fontSize: 35,
     color: colors.white,
     fontWeight: '300',
     marginBottom: 40,
+    fontWeight: 'bold',
+
   },
   fieldContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 15
   },
   icon: {
     padding: 10,

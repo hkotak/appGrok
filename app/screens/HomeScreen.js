@@ -41,17 +41,19 @@ const mapStateToProps = (state) => {
 }
 
 class HomeScreen extends Component {
-  // static navigationOptions = {
-  //   // headerTitle: <LogoTitle />,
-  //   headerRight: (
-  //     <Button
-  //       onPress={() => alert('This is a button!')}
-  //       title="Log Out"
-  //     />
-  //   ),
-
-  // };
-
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: 'transparent',
+      },
+      headerRight: (
+        <Button
+          onPress={navigation.getParam('LogOut')}
+          title="Log Out"
+        />
+      )
+    }
+  };
 
 
   constructor(props) {
@@ -60,29 +62,20 @@ class HomeScreen extends Component {
     const userInfo = navigation.getParam('authInfo')
     this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard())
-    
+
     this.state = {
       flip: false
     }
 
   }
 
-  static navigationOptions = () => ({
-    headerStyle: {
-      backgroundColor: 'transparent',
-    },
-    headerRight: (
-      <Button
-        onPress={() => HomeScreen._logOut()}
-        title="Log Out"
-      />
-    )
 
-
-  });
+  componentDidMount() {
+    this.props.navigation.setParams({ LogOut: this._logOut })
+  }
 
   _logOut = () => {
-    // alert('LOL')
+    alert('Good Bye :)')
     Auth.signOut()
       .then(data => {
         // console.log("signout data", data)
@@ -93,34 +86,32 @@ class HomeScreen extends Component {
       })
   }
 
-  componentDidMount = () => {
-    // this.transformCss()
-  }
 
   transformCss = (obj) => {
 
-      let arr = [];
-    
-      for(var key in obj) {
-        let innerArr = [];
-        innerArr.push(`${key}`);
-        innerArr.push(`${obj[key]}`);
-        
-        arr.push(innerArr);
-      }
-    
-      return arr;
-    
+    let arr = [];
+
+    for (var key in obj) {
+      let innerArr = [];
+      innerArr.push(`${key}`);
+      innerArr.push(`${obj[key]}`);
+
+      arr.push(innerArr);
+    }
+
+    return arr;
+
     // let mobileCss = transform(Object.entries(this.props.myCard.css.front))
 
     // console.log("WHAT", mobileCss)
   }
 
   getBackgroundImage = (url) => {
-    return url.substr(4, url.length-2)
+    return url.substr(4, url.length - 2)
   }
 
   render() {
+    console.disableYellowBox = true;
     // console.log("AVAILABLE PROPS: ", this.props);
     const Data = this.props.myCard.data;
 
@@ -163,20 +154,20 @@ class HomeScreen extends Component {
                 height: '100%',
                 justifyContent: 'center',
                 alignItems: 'center'
-               }} >
-                  {/* <Text style={transform(this.transformCss(this.props.myCard.css.company))}>Company Name: {Data.company_name}</Text> */}
-                    <View style={transform(this.transformCss(this.props.myCard.css.info))}>
-                      <Text> {Data.name}</Text>
-                      <Text> {Data.email}</Text>
-                      <Text> {Data.phone}</Text>
-                      <Text> {Data.title}</Text>
-                    </View>
+              }} >
+              {/* <Text style={transform(this.transformCss(this.props.myCard.css.company))}>Company Name: {Data.company_name}</Text> */}
+              <View style={transform(this.transformCss(this.props.myCard.css.info))}>
+                <Text> {Data.name}</Text>
+                <Text> {Data.email}</Text>
+                <Text> {Data.phone}</Text>
+                <Text> {Data.title}</Text>
+              </View>
             </ImageBackground>
-            </View>
+          </View>
 
-            <View>
-            <ImageBackground source={{uri: backImage}} 
-              style={{ 
+          <View>
+            <ImageBackground source={{ uri: backImage }}
+              style={{
                 backgroundRepeat: css.back.backgroundRepeat,
                 resizeMode: css.back.backgroundSize,
                 borderRadius: 50,
@@ -185,7 +176,7 @@ class HomeScreen extends Component {
                 justifyContent: 'center',
                 alignItems: css.back.textAlign,
               }} >
-                  <Text style={transform(this.transformCss(this.props.myCard.css.company))}>{Data.company_name}</Text>
+              <Text style={transform(this.transformCss(this.props.myCard.css.company))}>{Data.company_name}</Text>
             </ImageBackground>
             </View>
             
@@ -202,14 +193,6 @@ class HomeScreen extends Component {
           />
           </View>
 
-          
-          <Button
-          onPress={ () => this._logOut()}
-          title="Log Out"
-          />
-
-        
-        
 
       </View>
     )
