@@ -10,8 +10,8 @@ import Data from '../instructions.json'
 
 // ip address changes
 
-const ip = "192.168.173.225" // DC Home
-// const ip = "192.168.200.130" // DevLeague
+// const ip = "192.168.173.225" // DC Home
+const ip = "192.168.200.130" // DevLeague
 
 //Auth Actions 
 export const authenticated = (data) => {
@@ -65,38 +65,38 @@ export const scanCard = (id, newCardId) => {
   return dispatch => {
     axios
       .get(`http://${ip}:8000/specific/A100001004`)
-      .then( response => {
+      .then(response => {
         response.data.users.push(newCardId)
         let newBody = response.data
         return newBody
       })
-      .then( response => {
+      .then(response => {
         console.log("RESPONSE", response)
         axios
-        .put(`http://${ip}:8000/update/A100001004`, response)
-        .then(response => {
+          .put(`http://${ip}:8000/update/A100001004`, response)
+          .then(response => {
             dispatch({
               type: GET_MY_CARD,
               payload: response.data
             })
             console.log("DB RESPONSE", response)
           })
-        .catch(err => {
-          console.log("Error at dispatching scanned card", err)
-        })
+          .catch(err => {
+            console.log("Error at dispatching scanned card", err)
+          })
       })
       .catch(err => {
         console.log("Error at adding a scanned card", err)
       })
-      // .put(`http://${ip}:/update/A100001004`, newCardId)
-      // .then(response => {
-      //   dispatch({
-      //     type: SCAN_CARD,
-      //     payload: response.data
-      //   })
-      //   .catch(err => {
-      //     console.log("Error at adding a scanned card", err)
-      //   })
-      // })
+    // .put(`http://${ip}:/update/A100001004`, newCardId)
+    // .then(response => {
+    //   dispatch({
+    //     type: SCAN_CARD,
+    //     payload: response.data
+    //   })
+    //   .catch(err => {
+    //     console.log("Error at adding a scanned card", err)
+    //   })
+    // })
   }
 }
