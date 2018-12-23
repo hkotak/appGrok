@@ -132,7 +132,7 @@ class HomeScreen extends Component {
     let string = `${css.front.backgroundImage}`
     let backString = `${css.back.backgroundImage}`
     let frontImage = string.split("'")[1]
-    let backImage = string.split("'")[1]
+    let backImage = backString.split("'")[1]
     console.log("WHAT", backImage)
 
     let transformed = transform(this.transformCss(this.props.myCard.css.info))
@@ -153,7 +153,7 @@ class HomeScreen extends Component {
             flip={this.state.flip}
             style={styles.cardWrapper}
            >
-            <View style={{alignItems: 'center', width:300}}>
+            <View>
             <ImageBackground source={{uri: frontImage}} 
               style={{
                 backgroundRepeat: css.front.backgroundRepeat,
@@ -183,14 +183,14 @@ class HomeScreen extends Component {
                 width: '100%',
                 height: '100%',
                 justifyContent: 'center',
-                alignItems: 'center'
+                alignItems: css.back.textAlign,
               }} >
                   <Text style={transform(this.transformCss(this.props.myCard.css.company))}>{Data.company_name}</Text>
             </ImageBackground>
             </View>
             
           </FlipCard>
-
+          <View>
           <Icon
             containerStyle={styles.icon}
             raised
@@ -200,6 +200,8 @@ class HomeScreen extends Component {
             size={30}
             onPress={()=>this.setState({flip: !this.state.flip})}
           />
+          </View>
+
           
           <Button
           onPress={ () => this._logOut()}
