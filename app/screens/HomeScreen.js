@@ -60,7 +60,7 @@ class HomeScreen extends Component {
     super(props)
     const { navigation } = props
     const userInfo = navigation.getParam('authInfo')
-    console.log("HUH", userInfo.sub)
+    // console.log("HUH", userInfo.sub)
     this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard(userInfo.sub))
 
@@ -125,9 +125,9 @@ class HomeScreen extends Component {
     const { css } = myCard.style  
     let string = `${css.front.backgroundImage}`
     let backString = `${css.back.backgroundImage}`
-    let frontImage = string.split("'")[0]
-    let backImage = backString.split("'")[0]
-    console.log("WHAT", backImage)
+    let frontImage = string.split("'")[1]
+    let backImage = backString.split("'")[1]
+    console.log("WHAT", frontImage)
 
     let fontString = `${css.front.fontFamily}`
     let fontCheck = fontString.split(",")[1]
@@ -163,14 +163,16 @@ class HomeScreen extends Component {
                 width: '100%',
                 height: '100%',
                 justifyContent: 'center',
-                alignItems: 'center'
+                textAlign: css.front.textAlign
+                // alignItems: 'center'
               }} >
               {/* <Text style={transform(this.transformCss(this.props.myCard.css.company))}>Company Name: {Data.company_name}</Text> */}
               <View style={{
                 color: css.front.color,
                 fontSize: css.info.fontSize,
-                // fontFamily: 'sans-serif'
+                left: css.info.left,
 
+                // fontFamily: 'sans-serif'
 
               }}>
                 <Text> {Data.name}</Text>
