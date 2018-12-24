@@ -1,6 +1,6 @@
 // import { combineReducers } from 'redux';
 
-import { GET_ALL_CARDS, GET_MY_CARD, AUTH_INFO, SCAN_CARD } from '../actions/actions.js';
+import { GET_ALL_CARDS, GET_MY_CARD, AUTH_INFO, SCAN_CARD, NO_CARD } from '../actions/actions.js';
 
 // let dataState = { data: [], loading: true };
 // let cardState = { data: {}, loading: true };
@@ -10,14 +10,21 @@ const reducers = (state = {
   myCard: {
     user_id: "",
     data: {},
-    css: {
-      back: {},
-      company: {},
-      front: {},
-      info: {}
+    style: {
+      template: "",
+      css: {
+        back: {},
+        company: {},
+        front: {},
+        info: {}
+      }
     },
     users: [],
+    addInfo: {},
+    editInfo: {}
   },
+  added: false,
+  edited: false,
   authInfo: {}
 }, action) => {
 
@@ -25,25 +32,37 @@ const reducers = (state = {
 
     //~~~~ Cases ~~~~//
     case AUTH_INFO:
-      const newAuthInfo = {
-        user: action.payload
-      }
-      return { ...state, authInfo: newAuthInfo }
+    // console.log("IS THIS HITTING", action.payload)
+    const newAuthInfo = {
+      isAuthenticated: true,
+      user: action.payload
+    }
+    return {
+      ...state,
+      authInfo: newAuthInfo
+    }
 
-    case GET_ALL_CARDS:
+    case NO_CARD:
+      let noCard = { ...state.myCard };
+      noCard.no_card = true;
+      return {
+        ...state,
+        myCard: noCard
+      }
+
+      case GET_ALL_CARDS:
       if (!action.payload) {
-        return {
-          ...state
-        }
+        return { ...state }
       } else {
         const newPayload = action.payload.map(card => {
           let parsedAllCss = {};
-          for (var key in card.css) {
-            parsedAllCss[key] = JSON.parse(card.css[key])
+          for (var key in card.style.css) {
+            parsedAllCss[key] = JSON.parse(card.style.css[key])
           }
+          let allStyle = { ...card.style, css: parsedAllCss }
           return {
             ...card,
-            css: parsedAllCss
+            style: allStyle
           }
         })
         return {
@@ -52,25 +71,20 @@ const reducers = (state = {
         }
       }
 
-    case GET_MY_CARD:
-      // console.log("CARD REDUCER", action.payload)
+      case GET_MY_CARD:
       let parsedMyCss = {};
-      for (var key in action.payload.css) {
-        parsedMyCss[key] = JSON.parse(action.payload.css[key])
+      for (var key in action.payload.style.css) {
+        parsedMyCss[key] = JSON.parse(action.payload.style.css[key])
       }
-      const myData = {
-        user_id: action.payload.user_id,
-        users: action.payload.users,
-        data: action.payload.data,
-        css: parsedMyCss
-      }
+      const myStyle = { ...action.payload.style, css: parsedMyCss };
+      const myData = { ...action.payload, style: myStyle };
       return {
         ...state,
         myCard: myData
       }
 
-    // case SCAN_CARD:
-    //   return {...state, myCard: myData}
+    case SCAN_CARD:
+      return {...state, myCard: myData}
 
 
     default:

@@ -2,16 +2,21 @@ import axios from 'axios';
 
 export const GET_MY_CARD = "GET_MY_CARD";
 export const GET_ALL_CARDS = 'GET_ALL_CARDS'
-export const AUTH_INFO = 'AUTH_INFO'
-export const SCAN_CARD = 'SCAN_CARD'
+export const AUTH_INFO = 'AUTH_INFO';
+export const SCAN_CARD = 'SCAN_CARD';
+export const MY_DELETED_CARD = "MY_DELETED_CARD";
+export const NO_CARD = "NO_CARD";
 
 //~~~~ IMPORT THE SAMPLE DATA ~~~~//
 import Data from '../instructions.json'
 
 // ip address changes
-
 // const ip = "192.168.173.225" // DC Home
-const ip = "192.168.200.130" // DevLeague
+// const ip = "192.168.200.130" // DevLeague
+const ip = "34.216.211.92" //EC2
+
+// const id = this.props.data
+
 
 //Auth Actions 
 export const authenticated = (data) => {
@@ -28,26 +33,38 @@ export const authenticated = (data) => {
 export const getMyCard = (id) => {
   return dispatch => {
     axios
-      .get(`http://${ip}:8000/specific/A100001004`)
+      .get(`http://${ip}:8000/specific/${id}`)
       .then(response => {
-        // console.log("GET MY CARD RESPONSE", response.data)
-        dispatch({
-          type: GET_MY_CARD,
-          payload: response.data
-        })
+        if (response.data.is_deleted === true) {
+          dispatch({
+            type: MY_DELETED_CARD,
+            payload: response.data
+          })
+        } else {
+          dispatch({
+            type: GET_MY_CARD,
+            payload: response.data
+          })
+        }
       })
       .catch(err => {
-        console.log("Error at getting my card", err)
+        if (err.response.status === 500) {
+          dispatch({
+            type: NO_CARD
+          })
+        } else {
+          console.log("Error at getting my card", err)
+        }
       })
   }
 }
 
 
 //~~~~ ACTION TO GET ALL CARDS ~~~~//
-export const getAllCards = () => {
+export const getAllCards = (id) => {
   return dispatch => {
     axios
-      .get(`http://${ip}:8000/all/A100001004`)
+      .get(`http://${ip}:8000/all/${id}`)
       .then(response => {
         dispatch({
           type: GET_ALL_CARDS,
@@ -64,7 +81,7 @@ export const getAllCards = () => {
 export const scanCard = (id, newCardId) => {
   return dispatch => {
     axios
-      .get(`http://${ip}:8000/specific/A100001004`)
+      .get(`http://${ip}:8000/specific/${id}`)
       .then(response => {
         response.data.users.push(newCardId)
         let newBody = response.data
@@ -73,7 +90,7 @@ export const scanCard = (id, newCardId) => {
       .then(response => {
         console.log("RESPONSE", response)
         axios
-          .put(`http://${ip}:8000/update/A100001004`, response)
+          .put(`http://${ip}:8000/update/${id}`, response)
           .then(response => {
             dispatch({
               type: GET_MY_CARD,
@@ -88,15 +105,6 @@ export const scanCard = (id, newCardId) => {
       .catch(err => {
         console.log("Error at adding a scanned card", err)
       })
-    // .put(`http://${ip}:/update/A100001004`, newCardId)
-    // .then(response => {
-    //   dispatch({
-    //     type: SCAN_CARD,
-    //     payload: response.data
-    //   })
-    //   .catch(err => {
-    //     console.log("Error at adding a scanned card", err)
-    //   })
-    // })
+   
   }
 }

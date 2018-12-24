@@ -60,8 +60,9 @@ class HomeScreen extends Component {
     super(props)
     const { navigation } = props
     const userInfo = navigation.getParam('authInfo')
+    console.log("HUH", userInfo.sub)
     this.props.dispatch(authenticated(userInfo))
-    this.props.dispatch(getMyCard())
+    this.props.dispatch(getMyCard(userInfo.sub))
 
     this.state = {
       flip: false
@@ -111,25 +112,33 @@ class HomeScreen extends Component {
   }
 
   render() {
+    console.log("IS THIS HITTING", this.props)
     console.disableYellowBox = true;
     // console.log("AVAILABLE PROPS: ", this.props);
     const Data = this.props.myCard.data;
 
-    console.log("CARD DATA: ", transform(this.transformCss(this.props.myCard.css.info)));
+    console.log("CARD DATA: ", transform(this.transformCss(this.props.myCard.style.css.info)));
     // const css = this.props.myCard.css;
     // console.log("can i see only the css", css)
     const { myCard } = this.props;
-    const { data, css } = myCard;
+    const { data } = myCard;
+    const { css } = myCard.style  
     let string = `${css.front.backgroundImage}`
     let backString = `${css.back.backgroundImage}`
-    let frontImage = string.split("'")[1]
-    let backImage = backString.split("'")[1]
+    let frontImage = string.split("'")[0]
+    let backImage = backString.split("'")[0]
     console.log("WHAT", backImage)
 
-    let transformed = transform(this.transformCss(this.props.myCard.css.info))
+    let fontString = `${css.front.fontFamily}`
+    let fontCheck = fontString.split(",")[1]
+
+    let backFontString = `${css.back.fontFamily}`
+    let backCheck = backFontString.split(",")[1]
+
+    let transformed = transform(this.transformCss(this.props.myCard.style.css.info))
 
     console.log("~~~~PROP DATA~~~~");
-    console.log(data);
+    // console.log(data);
     console.log("CSS:", css);
 
 
@@ -149,14 +158,21 @@ class HomeScreen extends Component {
               style={{
                 backgroundRepeat: css.front.backgroundRepeat,
                 resizeMode: css.front.backgroundSize,
-                borderRadius: 50,
+                backgroundColor: css.front.backgroundColor || null,
+                fontColor: css.front.color,
                 width: '100%',
                 height: '100%',
                 justifyContent: 'center',
                 alignItems: 'center'
               }} >
               {/* <Text style={transform(this.transformCss(this.props.myCard.css.company))}>Company Name: {Data.company_name}</Text> */}
-              <View style={transform(this.transformCss(this.props.myCard.css.info))}>
+              <View style={{
+                color: css.front.color,
+                fontSize: css.info.fontSize,
+                // fontFamily: 'sans-serif'
+
+
+              }}>
                 <Text> {Data.name}</Text>
                 <Text> {Data.email}</Text>
                 <Text> {Data.phone}</Text>
@@ -176,7 +192,10 @@ class HomeScreen extends Component {
                 justifyContent: 'center',
                 alignItems: css.back.textAlign,
               }} >
-              <Text style={transform(this.transformCss(this.props.myCard.css.company))}>{Data.company_name}</Text>
+              <Text style={{
+                color: css.company.color,
+                // fontFamily: 'sans-serif',
+              }}>{Data.company_name}</Text>
             </ImageBackground>
             </View>
             
@@ -230,7 +249,7 @@ const styles = StyleSheet.create({
   cardWrapper: {
     flex: 0,
     marginTop: 30,
-    width: 300,
+    width: 350,
     height: 200,
     borderRadius: 50,
   },
