@@ -112,14 +112,11 @@ class HomeScreen extends Component {
   }
 
   render() {
-    console.log("IS THIS HITTING", this.props)
     console.disableYellowBox = true;
     // console.log("AVAILABLE PROPS: ", this.props);
     const Data = this.props.myCard.data;
 
-    console.log("CARD DATA: ", transform(this.transformCss(this.props.myCard.style.css.info)));
-    // const css = this.props.myCard.css;
-    // console.log("can i see only the css", css)
+   
     const { myCard } = this.props;
     const { data } = myCard;
     const { css } = myCard.style  
@@ -135,15 +132,13 @@ class HomeScreen extends Component {
     let backFontString = `${css.back.fontFamily}`
     let backCheck = backFontString.split(",")[1]
 
-    let transformed = transform(this.transformCss(this.props.myCard.style.css.info))
+    let backTransformed = transform(this.transformCss(this.props.myCard.style.css.back))
+    // let frontTransformed = transform(this.transformCss(this.props.myCard.style.css.front))
+    let infoTransformed = transform(this.transformCss(this.props.myCard.style.css.info))
+    // let companyTransformed = transform(this.transformCss(this.props.myCard.style.css.company))
+    let nameTransformed = transform(this.transformCss(this.props.myCard.style.css.name))
 
-    console.log("~~~~PROP DATA~~~~");
-    // console.log(data);
-    console.log("CSS:", css);
-
-
-    // console.log("STYLES: ", styles1);
-
+    
     return (
       <View style={styles.wrapper}>
         <Text style={styles.text1}>Welcome</Text>
@@ -153,36 +148,52 @@ class HomeScreen extends Component {
             flip={this.state.flip}
             style={styles.cardWrapper}
            >
+  {/* Front of the Card */}
+
             <View>
             <ImageBackground source={{uri: frontImage}} 
               style={{
                 backgroundRepeat: css.front.backgroundRepeat,
                 resizeMode: css.front.backgroundSize,
                 backgroundColor: css.front.backgroundColor || null,
-                fontColor: css.front.color,
                 width: '100%',
                 height: '100%',
                 justifyContent: 'center',
-                textAlign: css.front.textAlign
-                // alignItems: 'center'
+                
               }} >
-              {/* <Text style={transform(this.transformCss(this.props.myCard.css.company))}>Company Name: {Data.company_name}</Text> */}
-              <View style={{
+              
+              <View >
+                <Text style={{
+                  fontSize: nameTransformed.fontSize,
+                  fontFamily: 'Cochin',
+                  color: css.front.color,
+                  left: nameTransformed.left,
+                  letterSpacing: nameTransformed.letterSpacing,
+                  padding: nameTransformed.padding,
+                  position: nameTransformed.position,
+                  top: nameTransformed.top
+                  }}> 
+                    {Data.name}
+                </Text>
+                <Text style={{
                 color: css.front.color,
-                fontSize: css.info.fontSize,
-                left: css.info.left,
-
-                // fontFamily: 'sans-serif'
-
+                fontSize: infoTransformed.fontSize,
+                fontFamily: 'Cochin',
+                left: infoTransformed.left,
+                position: infoTransformed.position,
+                textAlign: infoTransformed.text,
+                top: infoTransformed.top
               }}>
-                <Text> {Data.name}</Text>
-                <Text> {Data.email}</Text>
-                <Text> {Data.phone}</Text>
-                <Text> {Data.title}</Text>
+                  {Data.title} {"\n"}
+                  {Data.address} {"\n"}
+                  {Data.phone} {"\n"}
+                  {Data.email}
+                </Text>
               </View>
             </ImageBackground>
           </View>
 
+{/* the back of the card */}
           <View>
             <ImageBackground source={{ uri: backImage }}
               style={{
@@ -191,12 +202,15 @@ class HomeScreen extends Component {
                 borderRadius: 50,
                 width: '100%',
                 height: '100%',
-                justifyContent: 'center',
-                alignItems: css.back.textAlign,
               }} >
               <Text style={{
                 color: css.company.color,
-                // fontFamily: 'sans-serif',
+                fontSize: css.company.fontSize,
+                fontFamily: 'Cochin-Bold',
+                left: css.company.left,
+                position: css.company.position,
+                textAlign: css.company.text,
+                top: css.company.top
               }}>{Data.company_name}</Text>
             </ImageBackground>
             </View>

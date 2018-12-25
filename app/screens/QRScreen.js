@@ -35,12 +35,6 @@ class QRScreen extends React.Component {
 
 
 
-  // updateIndex = (selectedIndex) => {
-  //   this.setState({selectedIndex})
-  // }
-
-
-
   componentDidMount = () => {  
     console.log("QRSCREEN", this.qrCodeData())
 

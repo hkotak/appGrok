@@ -21,15 +21,16 @@ const mapStateToProps = (state) => {
   // console.log("STATE: ", state);
   return {
     allCards: state.allCards,
-    myCard: state.myCard
+    myCard: state.myCard,
+    authInfo: state.authInfo
   }
 }
 
 class ContactScreen extends Component {
   constructor(props) {
     super(props)
-    this.props.dispatch(getMyCard())
-    this.props.dispatch(getAllCards())
+    this.props.dispatch(getMyCard(props.authInfo.user.sub))
+    this.props.dispatch(getAllCards(props.authInfo.user.sub))
 
     this.state = {
       flip: false
@@ -39,10 +40,10 @@ class ContactScreen extends Component {
 
   componentDidUpdate = (prevProps) => {
     // console.log("CAN I SEE PREV PROPS", prevProps.myCard.users.length)
-    // console.log("CURRENT PROPS", this.props.myCard.users.length)
+    // console.log("CURRENT PROPS", this.props.myCard)
     if (this.props.myCard.users.length !== prevProps.myCard.users.length) {
       console.log("NEW PROPS!!!")
-      this.props.dispatch(getAllCards())
+      this.props.dispatch(getAllCards(this.props.authInfo.user.sub))
     }
   }
 
@@ -64,9 +65,6 @@ class ContactScreen extends Component {
   
     return arr;
   
-  // let mobileCss = transform(Object.entries(this.props.myCard.css.front))
-
-  // console.log("WHAT", mobileCss)
 }
 
   render() {
@@ -74,13 +72,10 @@ class ContactScreen extends Component {
     let contactData = this.props.allCards
     console.log('CONTACT DATA: ', contactData);
 
-    // const remote = "https://images.pexels.com/photos/1580625/pexels-photo-1580625.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
-    const Data = this.props.myCard.data;
-
     
     // let transformed = transform(this.transformCss(this.props.allCards.css.info))
 
-    console.log("~~~~PROP DATA~~~~");
+    // console.log("~~~~PROP DATA~~~~");
     // console.log(data);
     // console.log("CSS:", css);
     
@@ -96,7 +91,8 @@ class ContactScreen extends Component {
           {
             contactData.map(info => {
               console.log("can i do this", info)
-              const { data, css } = info;
+              const { data } = info
+              const { css } = info.style;
               let string = `${css.front.backgroundImage}`
               let backString = `${css.back.backgroundImage}`
               let frontImage = string.split("'")[1]
@@ -106,46 +102,79 @@ class ContactScreen extends Component {
 
               return (
                 <View key={info.user_id} style={styles.contacts}>
-                  <FlipCard
-                    flip={this.state.flip}
+                
+                <FlipCard
+                  flip={this.state.flip}
+                  style={styles.flipcard}
                   >
-                    <View style={styles.flipcard}
->
-                    <ImageBackground source={{uri: frontImage}} 
-                      style={{
-                        backgroundRepeat: css.front.backgroundRepeat,
-                        resizeMode: css.front.backgroundSize,
-                        width: '100%',
-                        height: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                      }} >
-                        
-                          <View style={transform(this.transformCss(this.props.myCard.css.info))}>
-                            <Text> {data.name}</Text>
-                            <Text> {data.email}</Text>
-                            <Text> {data.phone}</Text>
-                            <Text> {data.title}</Text>
-                          </View>
-                    </ImageBackground>
-                    </View>
+  {/* Front of the Card */}
 
-                    <View>
-                    <ImageBackground source={{uri: backImage}} 
-                      style={{ 
-                        backgroundRepeat: css.back.backgroundRepeat,
-                        resizeMode: css.back.backgroundSize,
-                        borderRadius: 50,
-                        width: '100%',
-                        height: '100%',
-                        justifyContent: 'center',
-                        alignItems: css.back.textAlign,
-                      }} >
-                          <Text style={transform(this.transformCss(this.props.myCard.css.company))}>{Data.company_name}</Text>
-                    </ImageBackground>
-                    </View>
-                    
-                  </FlipCard>
+            <View>
+            <ImageBackground source={{uri: frontImage}} 
+              style={{
+                backgroundRepeat: css.front.backgroundRepeat,
+                resizeMode: css.front.backgroundSize,
+                backgroundColor: css.front.backgroundColor || null,
+                width: '100%',
+                height: '100%',
+                justifyContent: 'center',
+                
+              }} >
+              
+              <View >
+                <Text style={{
+                  fontSize: css.name.fontSize,
+                  fontFamily: 'Cochin',
+                  color: css.front.color,
+                  left: css.name.left,
+                  letterSpacing: css.name.letterSpacing,
+                  // padding: css.name.padding,
+                  position: css.name.position,
+                  top: css.name.top
+                  }}> 
+                    {data.name}
+                </Text>
+                <Text style={{
+                color: css.front.color,
+                fontSize: css.info.fontSize,
+                fontFamily: 'Cochin',
+                left: css.info.left,
+                position: css.info.position,
+                textAlign: css.info.text,
+                top: css.info.top
+              }}>
+                  {data.title} {"\n"}
+                  {data.address} {"\n"}
+                  {data.phone} {"\n"}
+                  {data.email}
+                </Text>
+              </View>
+            </ImageBackground>
+          </View>
+
+{/* the back of the card */}
+          <View>
+            <ImageBackground source={{ uri: backImage }}
+              style={{
+                backgroundRepeat: css.back.backgroundRepeat,
+                resizeMode: css.back.backgroundSize,
+                borderRadius: 50,
+                width: '100%',
+                height: '100%',
+              }} >
+              <Text style={{
+                color: css.company.color,
+                fontSize: css.company.fontSize,
+                fontFamily: 'Cochin-Bold',
+                left: css.company.left,
+                position: css.company.position,
+                textAlign: css.company.text,
+                top: css.company.top
+              }}>{data.company_name}</Text>
+            </ImageBackground>
+            </View>
+            
+          </FlipCard>
                 </View>
               )
             })

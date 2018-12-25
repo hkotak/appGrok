@@ -25,14 +25,13 @@ const reducers = (state = {
   },
   added: false,
   edited: false,
-  authInfo: {}
+  authInfo: {},
 }, action) => {
 
   switch (action.type) {
 
     //~~~~ Cases ~~~~//
     case AUTH_INFO:
-    // console.log("IS THIS HITTING", action.payload)
     const newAuthInfo = {
       isAuthenticated: true,
       user: action.payload
