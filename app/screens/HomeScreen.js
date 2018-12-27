@@ -134,10 +134,16 @@ class HomeScreen extends Component {
     let backCheck = backFontString.split(",")[1]
 
     let backTransformed = transform(this.transformCss(this.props.myCard.style.css.back))
-    // let frontTransformed = transform(this.transformCss(this.props.myCard.style.css.front))
+    let frontTransformed = transform(this.transformCss(this.props.myCard.style.css.front))
     let infoTransformed = transform(this.transformCss(this.props.myCard.style.css.info))
     let companyTransformed = transform(this.transformCss(this.props.myCard.style.css.company))
     let nameTransformed = transform(this.transformCss(this.props.myCard.style.css.name))
+
+    // console.log("NAME", nameTransformed)
+    // console.log("INFO", infoTransformed)
+    // console.log("BACK", backTransformed)
+    // console.log("FRONT", frontTransformed)
+    // console.log("COMPANY", companyTransformed)
 
 
     return (
@@ -154,9 +160,9 @@ class HomeScreen extends Component {
           <View>
             <ImageBackground source={{ uri: frontImage }}
               style={{
-                backgroundRepeat: css.front.backgroundRepeat,
-                resizeMode: css.front.backgroundSize,
-                backgroundColor: css.front.backgroundColor || null,
+                backgroundRepeat: frontTransformed.backgroundRepeat,
+                resizeMode: frontTransformed.backgroundSize,
+                backgroundColor: frontTransformed.backgroundColor || null,
                 width: '100%',
                 height: '100%',
                 justifyContent: 'center',
@@ -166,23 +172,38 @@ class HomeScreen extends Component {
               <View >
                 <Text style={{
                   fontSize: nameTransformed.fontSize,
-                  fontFamily: css.info.fontFamily,
-                  color: css.front.color,
+                  fontWeight: nameTransformed.fontWeight,
+                  height: nameTransformed.height,
+                  width: nameTransformed.width,
+                  fontFamily: nameTransformed.fontFamily,
+                  color: frontTransformed.color || nameTransformed.color,
                   left: nameTransformed.left,
                   letterSpacing: nameTransformed.letterSpacing,
-                  padding: nameTransformed.padding,
+                  paddingBottom: nameTransformed.paddingBottom,
+                  paddingRight: nameTransformed.paddingRight,
+                  paddingLeft: nameTransformed.paddingLeft,
+                  paddingTop: nameTransformed.paddingTop,
                   position: nameTransformed.position,
-                  top: nameTransformed.top
+                  top: nameTransformed.top,
+                  textAlign: nameTransformed.textAlign,
+                  textTransform: nameTransformed.textTransform
                 }}>
                   {Data.name}
                 </Text>
                 <Text style={{
+                  backgroundColor: infoTransformed.backgroundColor,
                   color: css.front.color,
                   fontSize: infoTransformed.fontSize,
                   fontFamily: css.info.fontFamily,
+                  height: infoTransformed.height,
+                  width: infoTransformed.width,
+                  paddingBottom: infoTransformed.paddingBottom,
+                  paddingTop: infoTransformed.paddingTop,
+                  paddingLeft: infoTransformed.paddingLeft,
+                  paddingRight: infoTransformed.paddingRight,
                   left: infoTransformed.left,
                   position: infoTransformed.position,
-                  textAlign: infoTransformed.text,
+                  textAlign: infoTransformed.textAlign,
                   top: infoTransformed.top
                 }}>
                   {Data.title} {"\n"}
@@ -198,25 +219,34 @@ class HomeScreen extends Component {
           <View>
             <ImageBackground source={{ uri: backImage }}
               style={{
-                backgroundRepeat: css.back.backgroundRepeat,
-                resizeMode: css.back.backgroundSize,
-                borderRadius: 50,
+                backgroundRepeat: backTransformed.backgroundRepeat,
+                resizeMode: backTransformed.backgroundSize, 
+                position: backTransformed.backgroundPosition,
+                paddingBottom: backTransformed.paddingBottom,
+                paddingTop: backTransformed.paddingTop,
+                paddingLeft: backTransformed.paddingLeft,
+                paddingRight: backTransformed.paddingRight,               
                 width: '100%',
                 height: '100%',
               }} >
               <Text style={{
-                color: css.company.color,
-                backgroundColor: css.company.backgroundColor,
-                fontSize: css.company.fontSize,
-                fontFamily: css.company.fontFamily,
-                left: css.company.left,
-                letterSpacing: css.company.letterSpacing,
-                position: css.company.position,
-                textAlign: css.company.textAlign,
-                textTransform: css.company.textTransform,
-                top: css.company.top,
-                height: css.company.height,
-                padding: companyTransformed.padding
+                color: companyTransformed.color,
+                backgroundColor: companyTransformed.backgroundColor,
+                fontSize: companyTransformed.fontSize,
+                fontFamily: companyTransformed.fontFamily,
+                fontWeight: companyTransformed.fontWeight,
+                left: companyTransformed.left,
+                letterSpacing: companyTransformed.letterSpacing,
+                position: companyTransformed.position,
+                textAlign: backTransformed.textAlign,
+                textTransform: companyTransformed.textTransform,
+                top: companyTransformed.top,
+                right: companyTransformed.right,
+                paddingBottom: companyTransformed.paddingBottom,
+                paddingTop: companyTransformed.paddingTop,
+                paddingLeft: companyTransformed.paddingLeft,
+                paddingRight: companyTransformed.paddingRight,
+                height: companyTransformed.height,
               }}>{Data.company_name}</Text>
             </ImageBackground>
           </View>

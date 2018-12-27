@@ -101,11 +101,24 @@ class ContactScreen extends Component {
               console.log("can i do this", info)
               const { data } = info
               const { css } = info.style;
+
+              let backTransformed = transform(this.transformCss(css.back))
+              let frontTransformed = transform(this.transformCss(css.front))
+              let infoTransformed = transform(this.transformCss(css.info))
+              let companyTransformed = transform(this.transformCss(css.company))
+              let nameTransformed = transform(this.transformCss(css.name))
+
+              console.log("NAME", nameTransformed)
+              console.log("INFO", infoTransformed)
+              console.log("BACK", backTransformed)
+              console.log("FRONT", frontTransformed)
+              console.log("COMPANY", companyTransformed)
+
               let string = `${css.front.backgroundImage}`
               let backString = `${css.back.backgroundImage}`
               let frontImage = string.split("'")[1]
               let backImage = backString.split("'")[1]
-              console.log("WHAT", backImage)
+              // console.log("WHAT", backImage)
 
 
               return (
@@ -120,9 +133,9 @@ class ContactScreen extends Component {
                     <View>
                       <ImageBackground source={{ uri: frontImage }}
                         style={{
-                          backgroundRepeat: css.front.backgroundRepeat,
-                          resizeMode: css.front.backgroundSize,
-                          backgroundColor: css.front.backgroundColor || null,
+                          backgroundRepeat: frontTransformed.backgroundRepeat,
+                          resizeMode: frontTransformed.backgroundSize,
+                          backgroundColor: frontTransformed.backgroundColor || null,
                           width: '100%',
                           height: '100%',
                           justifyContent: 'center',
@@ -131,25 +144,40 @@ class ContactScreen extends Component {
 
                         <View >
                           <Text style={{
-                            fontSize: css.name.fontSize,
-                            fontFamily: 'Cochin',
-                            color: css.front.color,
-                            left: css.name.left,
-                            letterSpacing: css.name.letterSpacing,
-                            // padding: css.name.padding,
-                            position: css.name.position,
-                            top: css.name.top
+                            fontSize: nameTransformed.fontSize,
+                            fontWeight: nameTransformed.fontWeight,
+                            height: nameTransformed.height,
+                            width: nameTransformed.width,
+                            fontFamily: nameTransformed.fontFamily,
+                            color: frontTransformed.color || nameTransformed.color,
+                            left: nameTransformed.left,
+                            letterSpacing: nameTransformed.letterSpacing,
+                            paddingBottom: nameTransformed.paddingBottom,
+                            paddingRight: nameTransformed.paddingRight,
+                            paddingLeft: nameTransformed.paddingLeft,
+                            paddingTop: nameTransformed.paddingTop,
+                            position: nameTransformed.position,
+                            top: nameTransformed.top,
+                            textAlign: nameTransformed.textAlign,
+                            textTransform: nameTransformed.textTransform
                           }}>
                             {data.name}
                           </Text>
                           <Text style={{
+                            backgroundColor: infoTransformed.backgroundColor,
                             color: css.front.color,
-                            fontSize: css.info.fontSize,
-                            fontFamily: 'Cochin',
-                            left: css.info.left,
-                            position: css.info.position,
-                            textAlign: css.info.text,
-                            top: css.info.top
+                            fontSize: infoTransformed.fontSize,
+                            fontFamily: css.info.fontFamily,
+                            height: infoTransformed.height,
+                            width: infoTransformed.width,
+                            paddingBottom: infoTransformed.paddingBottom,
+                            paddingTop: infoTransformed.paddingTop,
+                            paddingLeft: infoTransformed.paddingLeft,
+                            paddingRight: infoTransformed.paddingRight,
+                            left: infoTransformed.left,
+                            position: infoTransformed.position,
+                            textAlign: infoTransformed.textAlign,
+                            top: infoTransformed.top
                           }}>
                             {data.title} {"\n"}
                             {data.address} {"\n"}
@@ -164,20 +192,34 @@ class ContactScreen extends Component {
                     <View>
                       <ImageBackground source={{ uri: backImage }}
                         style={{
-                          backgroundRepeat: css.back.backgroundRepeat,
-                          resizeMode: css.back.backgroundSize,
-                          borderRadius: 50,
+                          backgroundRepeat: backTransformed.backgroundRepeat,
+                          resizeMode: backTransformed.backgroundSize, 
+                          position: backTransformed.backgroundPosition,
+                          paddingBottom: backTransformed.paddingBottom,
+                          paddingTop: backTransformed.paddingTop,
+                          paddingLeft: backTransformed.paddingLeft,
+                          paddingRight: backTransformed.paddingRight,
                           width: '100%',
                           height: '100%',
                         }} >
                         <Text style={{
-                          color: css.company.color,
-                          fontSize: css.company.fontSize,
-                          fontFamily: 'Cochin-Bold',
-                          left: css.company.left,
-                          position: css.company.position,
-                          textAlign: css.company.text,
-                          top: css.company.top
+                          color: companyTransformed.color,
+                          backgroundColor: companyTransformed.backgroundColor,
+                          fontSize: companyTransformed.fontSize,
+                          fontFamily: companyTransformed.fontFamily,
+                          fontWeight: companyTransformed.fontWeight,
+                          left: companyTransformed.left,
+                          letterSpacing: companyTransformed.letterSpacing,
+                          position: companyTransformed.position,
+                          textAlign: backTransformed.textAlign,
+                          textTransform: companyTransformed.textTransform,
+                          top: companyTransformed.top,
+                          right: companyTransformed.right,
+                          paddingBottom: companyTransformed.paddingBottom,
+                          paddingTop: companyTransformed.paddingTop,
+                          paddingLeft: companyTransformed.paddingLeft,
+                          paddingRight: companyTransformed.paddingRight,
+                          height: companyTransformed.height,
                         }}>{data.company_name}</Text>
                       </ImageBackground>
                     </View>
