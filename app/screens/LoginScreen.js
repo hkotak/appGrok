@@ -49,9 +49,15 @@ export default class Login extends Component {
     const { email, password } = this.state
     Auth.signIn(email, password)
       .then(user => {
-        console.log("user data", user)
-        this.setState({ isAuthenticated: true })
-        this.props.navigation.navigate('Home')
+        Auth.currentSession()
+        .then(data => {
+          console.log("user data", data.getIdToken())
+          this.setState({ isAuthenticated: true })
+          this.props.navigation.navigate('Home', {authInfo: data.getIdToken().payload})
+        })
+        .catch(err => {
+          console.log("login user error", err)
+        })
       })
       .catch(err => {
         console.log("user sign in err", err);
@@ -95,7 +101,7 @@ export default class Login extends Component {
               large
               rounded
               title="Login"
-              onPress={this._logginIn}
+              onPress={ () => this._logginIn()}
               backgroundColor="#f5f5f5"
               color="black"
             />

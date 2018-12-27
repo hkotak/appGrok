@@ -58,9 +58,10 @@ class HomeScreen extends Component {
 
   constructor(props) {
     super(props)
+    console.log("PRRRROPPS", props)
     const { navigation } = props
     const userInfo = navigation.getParam('authInfo')
-    // console.log("HUH", userInfo.sub)
+    console.log("HUH", userInfo)
     this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard(userInfo.sub))
 

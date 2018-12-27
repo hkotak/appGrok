@@ -14,7 +14,7 @@ import InputField from '../components/forms/inputField.js';
 import NextArrowButton from '../components/buttons/NextArrowButton.js'
 
 // aws auth
-import { Auth } from 'aws-amplify'
+import Amplify, { Auth } from 'aws-amplify'
 
 
 export default class Registration extends Component {
