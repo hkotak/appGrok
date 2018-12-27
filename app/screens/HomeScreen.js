@@ -136,7 +136,7 @@ class HomeScreen extends Component {
     let backTransformed = transform(this.transformCss(this.props.myCard.style.css.back))
     // let frontTransformed = transform(this.transformCss(this.props.myCard.style.css.front))
     let infoTransformed = transform(this.transformCss(this.props.myCard.style.css.info))
-    // let companyTransformed = transform(this.transformCss(this.props.myCard.style.css.company))
+    let companyTransformed = transform(this.transformCss(this.props.myCard.style.css.company))
     let nameTransformed = transform(this.transformCss(this.props.myCard.style.css.name))
 
 
@@ -166,7 +166,7 @@ class HomeScreen extends Component {
               <View >
                 <Text style={{
                   fontSize: nameTransformed.fontSize,
-                  fontFamily: 'Cochin',
+                  fontFamily: css.info.fontFamily,
                   color: css.front.color,
                   left: nameTransformed.left,
                   letterSpacing: nameTransformed.letterSpacing,
@@ -179,7 +179,7 @@ class HomeScreen extends Component {
                 <Text style={{
                   color: css.front.color,
                   fontSize: infoTransformed.fontSize,
-                  fontFamily: 'Cochin',
+                  fontFamily: css.info.fontFamily,
                   left: infoTransformed.left,
                   position: infoTransformed.position,
                   textAlign: infoTransformed.text,
@@ -206,15 +206,17 @@ class HomeScreen extends Component {
               }} >
               <Text style={{
                 color: css.company.color,
-                backgroundColor: css.company.color,
+                backgroundColor: css.company.backgroundColor,
                 fontSize: css.company.fontSize,
                 fontFamily: css.company.fontFamily,
                 left: css.company.left,
                 letterSpacing: css.company.letterSpacing,
                 position: css.company.position,
                 textAlign: css.company.textAlign,
+                textTransform: css.company.textTransform,
                 top: css.company.top,
                 height: css.company.height,
+                padding: companyTransformed.padding
               }}>{Data.company_name}</Text>
             </ImageBackground>
           </View>
