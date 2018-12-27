@@ -58,10 +58,10 @@ class HomeScreen extends Component {
 
   constructor(props) {
     super(props)
-    console.log("PRRRROPPS", props)
+    // console.log("PRRRROPPS", props)
     const { navigation } = props
     const userInfo = navigation.getParam('authInfo')
-    console.log("HUH", userInfo)
+    // console.log("HUH", userInfo)
     this.props.dispatch(authenticated(userInfo))
     this.props.dispatch(getMyCard(userInfo.sub))
 
@@ -125,7 +125,7 @@ class HomeScreen extends Component {
     let backString = `${css.back.backgroundImage}`
     let frontImage = string.split("'")[1]
     let backImage = backString.split("'")[1]
-    console.log("WHAT", frontImage)
+    console.log("WHAT", css)
 
     let fontString = `${css.front.fontFamily}`
     let fontCheck = fontString.split(",")[1]
@@ -206,12 +206,15 @@ class HomeScreen extends Component {
               }} >
               <Text style={{
                 color: css.company.color,
+                backgroundColor: css.company.color,
                 fontSize: css.company.fontSize,
-                fontFamily: 'Cochin-Bold',
+                fontFamily: css.company.fontFamily,
                 left: css.company.left,
+                letterSpacing: css.company.letterSpacing,
                 position: css.company.position,
-                textAlign: css.company.text,
-                top: css.company.top
+                textAlign: css.company.textAlign,
+                top: css.company.top,
+                height: css.company.height,
               }}>{Data.company_name}</Text>
             </ImageBackground>
           </View>
