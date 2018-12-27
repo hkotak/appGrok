@@ -44,7 +44,7 @@ class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerStyle: {
-        backgroundColor: 'transparent',
+        backgroundColor: '#273746',
       },
       headerRight: (
         <Button
@@ -117,10 +117,10 @@ class HomeScreen extends Component {
     // console.log("AVAILABLE PROPS: ", this.props);
     const Data = this.props.myCard.data;
 
-   
+
     const { myCard } = this.props;
     const { data } = myCard;
-    const { css } = myCard.style  
+    const { css } = myCard.style
     let string = `${css.front.backgroundImage}`
     let backString = `${css.back.backgroundImage}`
     let frontImage = string.split("'")[1]
@@ -139,20 +139,20 @@ class HomeScreen extends Component {
     // let companyTransformed = transform(this.transformCss(this.props.myCard.style.css.company))
     let nameTransformed = transform(this.transformCss(this.props.myCard.style.css.name))
 
-    
+
     return (
       <View style={styles.wrapper}>
         <Text style={styles.text1}>Welcome</Text>
         <Text style={styles.text2}>{Data.name}</Text>
-        
-          <FlipCard
-            flip={this.state.flip}
-            style={styles.cardWrapper}
-           >
-  {/* Front of the Card */}
 
-            <View>
-            <ImageBackground source={{uri: frontImage}} 
+        <FlipCard
+          flip={this.state.flip}
+          style={styles.cardWrapper}
+        >
+          {/* Front of the Card */}
+
+          <View>
+            <ImageBackground source={{ uri: frontImage }}
               style={{
                 backgroundRepeat: css.front.backgroundRepeat,
                 resizeMode: css.front.backgroundSize,
@@ -160,9 +160,9 @@ class HomeScreen extends Component {
                 width: '100%',
                 height: '100%',
                 justifyContent: 'center',
-                
+
               }} >
-              
+
               <View >
                 <Text style={{
                   fontSize: nameTransformed.fontSize,
@@ -173,18 +173,18 @@ class HomeScreen extends Component {
                   padding: nameTransformed.padding,
                   position: nameTransformed.position,
                   top: nameTransformed.top
-                  }}> 
-                    {Data.name}
+                }}>
+                  {Data.name}
                 </Text>
                 <Text style={{
-                color: css.front.color,
-                fontSize: infoTransformed.fontSize,
-                fontFamily: 'Cochin',
-                left: infoTransformed.left,
-                position: infoTransformed.position,
-                textAlign: infoTransformed.text,
-                top: infoTransformed.top
-              }}>
+                  color: css.front.color,
+                  fontSize: infoTransformed.fontSize,
+                  fontFamily: 'Cochin',
+                  left: infoTransformed.left,
+                  position: infoTransformed.position,
+                  textAlign: infoTransformed.text,
+                  top: infoTransformed.top
+                }}>
                   {Data.title} {"\n"}
                   {Data.address} {"\n"}
                   {Data.phone} {"\n"}
@@ -194,7 +194,7 @@ class HomeScreen extends Component {
             </ImageBackground>
           </View>
 
-{/* the back of the card */}
+          {/* the back of the card */}
           <View>
             <ImageBackground source={{ uri: backImage }}
               style={{
@@ -214,10 +214,10 @@ class HomeScreen extends Component {
                 top: css.company.top
               }}>{Data.company_name}</Text>
             </ImageBackground>
-            </View>
-            
-          </FlipCard>
-          <View>
+          </View>
+
+        </FlipCard>
+        <View>
           <Icon
             containerStyle={styles.icon}
             raised
@@ -225,9 +225,9 @@ class HomeScreen extends Component {
             name='refresh'
             type='font-awesome'
             size={30}
-            onPress={()=>this.setState({flip: !this.state.flip})}
+            onPress={() => this.setState({ flip: !this.state.flip })}
           />
-          </View>
+        </View>
 
 
       </View>

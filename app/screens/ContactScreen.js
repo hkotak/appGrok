@@ -27,6 +27,14 @@ const mapStateToProps = (state) => {
 }
 
 class ContactScreen extends Component {
+  static navigationOptions = () => {
+    return {
+      headerStyle: {
+        backgroundColor: '#273746',
+      }
+    }
+  };
+
   constructor(props) {
     super(props)
     this.props.dispatch(getMyCard(props.authInfo.user.sub))
@@ -54,31 +62,31 @@ class ContactScreen extends Component {
   transformCss = (obj) => {
 
     let arr = [];
-  
-    for(var key in obj) {
+
+    for (var key in obj) {
       let innerArr = [];
       innerArr.push(`${key}`);
       innerArr.push(`${obj[key]}`);
-      
+
       arr.push(innerArr);
     }
-  
+
     return arr;
-  
-}
+
+  }
 
   render() {
     // console.log("MYCARD PROPS", this.props.myCard)
     let contactData = this.props.allCards
     console.log('CONTACT DATA: ', contactData);
 
-    
+
     // let transformed = transform(this.transformCss(this.props.allCards.css.info))
 
     // console.log("~~~~PROP DATA~~~~");
     // console.log(data);
     // console.log("CSS:", css);
-    
+
     return (
       <ScrollView>
         <SearchBar
@@ -102,79 +110,79 @@ class ContactScreen extends Component {
 
               return (
                 <View key={info.user_id} style={styles.contacts}>
-                
-                <FlipCard
-                  flip={this.state.flip}
-                  style={styles.flipcard}
+
+                  <FlipCard
+                    flip={this.state.flip}
+                    style={styles.flipcard}
                   >
-  {/* Front of the Card */}
+                    {/* Front of the Card */}
 
-            <View>
-            <ImageBackground source={{uri: frontImage}} 
-              style={{
-                backgroundRepeat: css.front.backgroundRepeat,
-                resizeMode: css.front.backgroundSize,
-                backgroundColor: css.front.backgroundColor || null,
-                width: '100%',
-                height: '100%',
-                justifyContent: 'center',
-                
-              }} >
-              
-              <View >
-                <Text style={{
-                  fontSize: css.name.fontSize,
-                  fontFamily: 'Cochin',
-                  color: css.front.color,
-                  left: css.name.left,
-                  letterSpacing: css.name.letterSpacing,
-                  // padding: css.name.padding,
-                  position: css.name.position,
-                  top: css.name.top
-                  }}> 
-                    {data.name}
-                </Text>
-                <Text style={{
-                color: css.front.color,
-                fontSize: css.info.fontSize,
-                fontFamily: 'Cochin',
-                left: css.info.left,
-                position: css.info.position,
-                textAlign: css.info.text,
-                top: css.info.top
-              }}>
-                  {data.title} {"\n"}
-                  {data.address} {"\n"}
-                  {data.phone} {"\n"}
-                  {data.email}
-                </Text>
-              </View>
-            </ImageBackground>
-          </View>
+                    <View>
+                      <ImageBackground source={{ uri: frontImage }}
+                        style={{
+                          backgroundRepeat: css.front.backgroundRepeat,
+                          resizeMode: css.front.backgroundSize,
+                          backgroundColor: css.front.backgroundColor || null,
+                          width: '100%',
+                          height: '100%',
+                          justifyContent: 'center',
 
-{/* the back of the card */}
-          <View>
-            <ImageBackground source={{ uri: backImage }}
-              style={{
-                backgroundRepeat: css.back.backgroundRepeat,
-                resizeMode: css.back.backgroundSize,
-                borderRadius: 50,
-                width: '100%',
-                height: '100%',
-              }} >
-              <Text style={{
-                color: css.company.color,
-                fontSize: css.company.fontSize,
-                fontFamily: 'Cochin-Bold',
-                left: css.company.left,
-                position: css.company.position,
-                textAlign: css.company.text,
-                top: css.company.top
-              }}>{data.company_name}</Text>
-            </ImageBackground>
-            </View>
-            
-          </FlipCard>
+                        }} >
+
+                        <View >
+                          <Text style={{
+                            fontSize: css.name.fontSize,
+                            fontFamily: 'Cochin',
+                            color: css.front.color,
+                            left: css.name.left,
+                            letterSpacing: css.name.letterSpacing,
+                            // padding: css.name.padding,
+                            position: css.name.position,
+                            top: css.name.top
+                          }}>
+                            {data.name}
+                          </Text>
+                          <Text style={{
+                            color: css.front.color,
+                            fontSize: css.info.fontSize,
+                            fontFamily: 'Cochin',
+                            left: css.info.left,
+                            position: css.info.position,
+                            textAlign: css.info.text,
+                            top: css.info.top
+                          }}>
+                            {data.title} {"\n"}
+                            {data.address} {"\n"}
+                            {data.phone} {"\n"}
+                            {data.email}
+                          </Text>
+                        </View>
+                      </ImageBackground>
+                    </View>
+
+                    {/* the back of the card */}
+                    <View>
+                      <ImageBackground source={{ uri: backImage }}
+                        style={{
+                          backgroundRepeat: css.back.backgroundRepeat,
+                          resizeMode: css.back.backgroundSize,
+                          borderRadius: 50,
+                          width: '100%',
+                          height: '100%',
+                        }} >
+                        <Text style={{
+                          color: css.company.color,
+                          fontSize: css.company.fontSize,
+                          fontFamily: 'Cochin-Bold',
+                          left: css.company.left,
+                          position: css.company.position,
+                          textAlign: css.company.text,
+                          top: css.company.top
+                        }}>{data.company_name}</Text>
+                      </ImageBackground>
+                    </View>
+
+                  </FlipCard>
                 </View>
               )
             })
@@ -206,16 +214,13 @@ const styles = StyleSheet.create({
     flex: 0,
     width: 300,
     height: 200,
-    borderWidth: .5,
-    borderColor: 'red',
     alignItems: 'center',
-    backgroundColor: 'lightblue',
     marginTop: 30,
-    
+
   },
   flipcard: {
-    width: '100%',
-    height: '100%'
+    width: 300,
+    // height: '100%'
   }
 
 })

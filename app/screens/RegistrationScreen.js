@@ -88,6 +88,7 @@ export default class Registration extends Component {
                   placeholder="Enter email"
                   placeholderTextColor="white"
                   borderColor="white"
+                  autoCapitalize='none'
                 />
                 <TextInput style={styles.label}
                   label="password"
@@ -100,6 +101,7 @@ export default class Registration extends Component {
                   placeholderTextColor="white"
                   secureTextEntry
                   borderColor="white"
+                  autoCapitalize='none'
                 />
                 <TextInput style={styles.label}
                   label="confirm-password"
@@ -112,6 +114,7 @@ export default class Registration extends Component {
                   placeholderTextColor="white"
                   secureTextEntry
                   borderColor="white"
+                  autoCapitalize='none'
                 />
               </View>
             </ScrollView>

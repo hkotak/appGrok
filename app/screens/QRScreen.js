@@ -28,14 +28,24 @@ const mapStateToProps = (state) => {
 }
 
 class QRScreen extends React.Component {
-  constructor (props) {
+  static navigationOptions = () => {
+    return {
+      headerStyle: {
+        backgroundColor: '#273746',
+      }
+    }
+  };
+
+  constructor(props) {
     super(props)
     console.log("ALL THE PROPS", props)
   }
 
 
 
-  componentDidMount = () => {  
+
+
+  componentDidMount = () => {
     console.log("QRSCREEN", this.qrCodeData())
 
   }
@@ -45,24 +55,24 @@ class QRScreen extends React.Component {
   }
 
 
-  render(){
-   
-    return(
+  render() {
+
+    return (
       <View style={styles.container}>
-       
+
         <Text>{this.props.myCard.data.name}</Text>
-        
+
         <QRCode medium
-         value={this.qrCodeData()}
-         size={350}         
+          value={this.qrCodeData()}
+          size={350}
         />
-       <View>
-        <Button
-        style={styles.exButton}
-        title="SCAN WITH CAMERA"
-        onPress={ () => this.props.navigation.navigate('Scan')}
-        />
-       </View>
+        <View>
+          <Button
+            style={styles.exButton}
+            title="SCAN WITH CAMERA"
+            onPress={() => this.props.navigation.navigate('Scan')}
+          />
+        </View>
       </View>
     )
   }
@@ -70,19 +80,19 @@ class QRScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-      flex: 1,
-      backgroundColor: 'white',
-      alignItems: 'center',
-      justifyContent: 'center'
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   input: {
-      height: 40,
-      borderColor: 'gray',
-      borderWidth: 1,
-      margin: 10,
-      borderRadius: 5,
-      padding: 5,
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    margin: 10,
+    borderRadius: 5,
+    padding: 5,
   }
 });
 

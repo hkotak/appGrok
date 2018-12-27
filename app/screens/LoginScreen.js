@@ -50,14 +50,14 @@ export default class Login extends Component {
     Auth.signIn(email, password)
       .then(user => {
         Auth.currentSession()
-        .then(data => {
-          console.log("user data", data.getIdToken())
-          this.setState({ isAuthenticated: true })
-          this.props.navigation.navigate('Home', {authInfo: data.getIdToken().payload})
-        })
-        .catch(err => {
-          console.log("login user error", err)
-        })
+          .then(data => {
+            console.log("user data", data.getIdToken())
+            this.setState({ isAuthenticated: true })
+            this.props.navigation.navigate('Home', { authInfo: data.getIdToken().payload })
+          })
+          .catch(err => {
+            console.log("login user error", err)
+          })
       })
       .catch(err => {
         console.log("user sign in err", err);
@@ -85,6 +85,7 @@ export default class Login extends Component {
                   onChangeText={(value) => this.setState({ email: value })} // this updates this.state.email to value in this Input                 
                   placeholder="Enter email"
                   borderColor="white"
+                  autoCapitalize='none'
                 />
               </View>
               <TextInput style={styles.label}
@@ -95,13 +96,14 @@ export default class Login extends Component {
                 onChangeText={(value) => this.setState({ password: value })} // this updates this.state.email to value in this Input
                 placeholder="Enter password"
                 borderColor="white"
+                autoCapitalize='none'
               />
             </ScrollView>
             <Button style={styles.nextButton}
               large
               rounded
               title="Login"
-              onPress={ () => this._logginIn()}
+              onPress={() => this._logginIn()}
               backgroundColor="#f5f5f5"
               color="black"
             />
