@@ -220,7 +220,7 @@ const styles = StyleSheet.create({
   },
   flipcard: {
     width: 300,
-    // height: '100%'
+    height: 200,
   }
 
 })

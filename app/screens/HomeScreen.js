@@ -206,7 +206,7 @@ class HomeScreen extends Component {
               }} >
               <Text style={{
                 color: css.company.color,
-                backgroundColor: css.company.color,
+                backgroundColor: css.company.backgroundColor,
                 fontSize: css.company.fontSize,
                 fontFamily: css.company.fontFamily,
                 left: css.company.left,
@@ -271,7 +271,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: 350,
     height: 200,
-    borderRadius: 50,
+    // borderRadius: 50,
   },
   icon: {
     // position: 'absolute',
