@@ -4,11 +4,9 @@ import {
   StyleSheet,
   View,
   Text,
-  ActivityIndicator,
   ScrollView,
   Button,
   ImageBackground,
-  Image
 } from 'react-native';
 
 import { Icon } from 'react-native-elements'
@@ -34,7 +32,7 @@ const mapStateToProps = (state) => {
   // console.log("STATE", state)
   return {
     myCard: state.myCard,
-    authInfo: state.authInfo
+    authInfo: state.authInfo,
   }
 }
 
@@ -71,7 +69,7 @@ class HomeScreen extends Component {
 
 
   componentDidMount() {
-    this.props.navigation.setParams({ LogOut: this._logOut })
+    this.props.navigation.setParams({ LogOut: this._logOut });
   }
 
   _logOut = () => {

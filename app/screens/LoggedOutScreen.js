@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import colors from '../styles/colors/index.js';
 import {
+  Animated,
   StyleSheet,
   Text,
   View,
@@ -14,9 +15,41 @@ import RoundedButton from '../components/buttons/RoundedButton.js'
 import { Auth } from 'aws-amplify';
 
 
+//~~~~~~~~~~ ANIMATION STUFF ~~~~~~~~~~//
+class FadeInView extends React.Component {
+  state = {
+    fadeAnim: new Animated.Value(0),  // Initial value for opacity: 0
+  }
+
+  componentDidMount() {
+    Animated.timing(                  // Animate over time
+      this.state.fadeAnim,            // The animated value to drive
+      {
+        toValue: 1,                   // Animate to opacity: 1 (opaque)
+        duration: 4000,              // Make it take a while
+      }
+    ).start();                        // Starts the animation
+  }
+
+  render() {
+    let { fadeAnim } = this.state;
+
+    return (
+      <Animated.View                 // Special animatable View
+        style={{
+          ...this.props.style,
+          opacity: fadeAnim,         // Bind opacity to animated value
+        }}
+      >
+        {this.props.children}
+      </Animated.View>
+    );
+  }
+}
+
+
 
 export default class LoggedOut extends Component {
-
   constructor(props) {
     super(props);
   }
@@ -30,7 +63,9 @@ export default class LoggedOut extends Component {
     // console.log("PROPS", this.props.navigation)
   }
 
+
   render() {
+
     // const { navigate } = this.props.navigation;
     const remote = "https://images.pexels.com/photos/533424/pexels-photo-533424.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 
@@ -42,11 +77,13 @@ export default class LoggedOut extends Component {
       >
         <View style={styles.wrapper}>
           <View style={styles.welcomeWrapper}>
-            <Image
-              source={require('../img/dino.png')}
-              style={styles.logo}
-            />
-            <Text style={styles.welcomeText}>Welcome to Grok</Text>
+            <FadeInView>
+              <Image
+                source={require('../img/dino.png')}
+                style={styles.logo}
+              />
+              <Text style={styles.welcomeText}>Welcome to Grok</Text>
+            </FadeInView>
             <View style={styles.buttonWrapper}>
               <RoundedButton
                 text="Get Started"
@@ -116,18 +153,18 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   welcomeText: {
-    fontSize: 35,
+    fontSize: 37,
     color: colors.white,
     fontWeight: '300',
     marginBottom: 40,
     fontWeight: 'bold'
   },
   logo: {
-    width: 80,
-    height: 80,
-    marginTop: 50,
-    marginBottom: 40,
+    width: 120,
+    height: 120,
+    marginTop: 55,
     marginLeft: 20,
+    right: 30,
   },
   facebookButtonIcon: {
     color: colors.lightBlack,
