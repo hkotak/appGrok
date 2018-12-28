@@ -3,6 +3,13 @@ import { Text, View, StyleSheet, Alert } from 'react-native';
 import { Constants, BarCodeScanner, Permissions } from 'expo';
 
 export default class App extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerStyle: {
+        backgroundColor: '#273746',
+      }
+    }
+  }
   state = {
     hasCameraPermission: null
   };
