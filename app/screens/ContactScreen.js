@@ -5,7 +5,8 @@ import {
   Text,
   ScrollView,
   Image,
-  ImageBackground
+  ImageBackground,
+  Platform
 } from 'react-native';
 import { SearchBar } from 'react-native-elements'
 
