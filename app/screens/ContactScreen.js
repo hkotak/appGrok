@@ -90,7 +90,7 @@ class ContactScreen extends Component {
     return (
       <ScrollView>
         <SearchBar
-          lightTheme
+          darkTheme
           onKeyUp={this._handleKeyUp}
           // onClearText={}
           placeholder='Type Here...' />
@@ -193,7 +193,7 @@ class ContactScreen extends Component {
                       <ImageBackground source={{ uri: backImage }}
                         style={{
                           backgroundRepeat: backTransformed.backgroundRepeat,
-                          resizeMode: backTransformed.backgroundSize, 
+                          resizeMode: backTransformed.backgroundSize,
                           position: backTransformed.backgroundPosition,
                           paddingBottom: backTransformed.paddingBottom,
                           paddingTop: backTransformed.paddingTop,
@@ -245,12 +245,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'column',
-    padding: 15
+    padding: 15,
+    backgroundColor: "#273746",
   },
   heading: {
     fontSize: 25,
     textAlign: 'center',
     marginBottom: 15,
+    color: 'white',
   },
   contacts: {
     flex: 0,
