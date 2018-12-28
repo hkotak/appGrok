@@ -4,9 +4,11 @@ import {
   StyleSheet,
   View,
   Text,
+  ActivityIndicator,
   ScrollView,
   Button,
   ImageBackground,
+  Image
 } from 'react-native';
 
 import { Icon } from 'react-native-elements'
@@ -32,7 +34,7 @@ const mapStateToProps = (state) => {
   // console.log("STATE", state)
   return {
     myCard: state.myCard,
-    authInfo: state.authInfo,
+    authInfo: state.authInfo
   }
 }
 
@@ -69,7 +71,7 @@ class HomeScreen extends Component {
 
 
   componentDidMount() {
-    this.props.navigation.setParams({ LogOut: this._logOut });
+    this.props.navigation.setParams({ LogOut: this._logOut })
   }
 
   _logOut = () => {
@@ -134,7 +136,7 @@ class HomeScreen extends Component {
     let companyTransformed = transform(this.transformCss(this.props.myCard.style.css.company))
     let nameTransformed = transform(this.transformCss(this.props.myCard.style.css.name))
 
-    // console.log("NAME", nameTransformed)
+    console.log("NAME", nameTransformed)
     // console.log("INFO", infoTransformed)
     // console.log("BACK", backTransformed)
     // console.log("FRONT", frontTransformed)
@@ -180,7 +182,7 @@ class HomeScreen extends Component {
                   paddingTop: nameTransformed.paddingTop,
                   position: nameTransformed.position,
                   top: nameTransformed.top,
-                  textAlign: nameTransformed.textAlign,
+                  textAlign: nameTransformed.textAlign || frontTransformed.textAlign,
                   textTransform: nameTransformed.textTransform
                 }}>
                   {Data.name}
@@ -233,7 +235,7 @@ class HomeScreen extends Component {
                 left: companyTransformed.left,
                 letterSpacing: companyTransformed.letterSpacing,
                 position: companyTransformed.position,
-                textAlign: backTransformed.textAlign,
+                textAlign: backTransformed.textAlign || companyTransformed.textAlign,
                 textTransform: companyTransformed.textTransform,
                 top: companyTransformed.top,
                 right: companyTransformed.right,

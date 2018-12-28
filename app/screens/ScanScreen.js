@@ -34,8 +34,18 @@ export default class App extends Component {
             <Text>Camera permission is not granted</Text> :
             <BarCodeScanner
               onBarCodeRead={this._handleBarCodeRead}
-              style={StyleSheet.absoluteFill}
-            />
+              style={StyleSheet.absoluteFill}>
+
+              <Text style={styles.description}>Scan your QR code</Text>
+       
+              <Text
+                onPress={() => this.props.navigation.pop()}
+                style={styles.cancel}>
+                Cancel
+              </Text>
+
+            </BarCodeScanner>
+            
         }
       </View>
     );
@@ -46,12 +56,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+    // justifyContent: 'center',
+    // paddingTop: Constants.statusBarHeight,
+    // backgroundColor: '#ecf0f1',
   },
   camera: {
     flex: 1,
     justifyContent: 'space-between'
+  },
+  description: {
+    fontSize: 30,
+    marginTop: '5%',
+    textAlign: 'center',
+    color: 'white',
+  },
+  cancel: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'white',
+    // alignItems: 'flex-end',
+    top: 600,
+
   }
 });

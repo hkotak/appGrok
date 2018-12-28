@@ -38,7 +38,7 @@ class QRScreen extends React.Component {
 
   constructor(props) {
     super(props)
-    console.log("ALL THE PROPS", props)
+    // console.log("ALL THE PROPS", props)
   }
 
 
@@ -52,6 +52,7 @@ class QRScreen extends React.Component {
   }
 
   qrCodeData = () => {
+    console.log("PROPS", this.props.myCard)
     const {data, style, user_id} = this.props.myCard
     const newObj = {data, style, user_id}
     // console.log("CAN I STRING IT LIKE THIS???", newObj)
@@ -68,7 +69,7 @@ class QRScreen extends React.Component {
 
         <QRCode medium
           value={this.qrCodeData()}
-          size={350}
+          size={400}
         />
         <View>
           <Button
