@@ -7,7 +7,8 @@ import {
   ActivityIndicator,
   ScrollView,
   Button,
-  ImageBackground
+  ImageBackground,
+  Platform
 } from 'react-native';
 
 import { scanCard } from '../redux/actions/actions.js'
