@@ -158,7 +158,7 @@ class ContactScreen extends Component {
                             paddingTop: nameTransformed.paddingTop,
                             position: nameTransformed.position,
                             top: nameTransformed.top,
-                            textAlign: nameTransformed.textAlign,
+                            textAlign: nameTransformed.textAlign || frontTransformed.textAlign,
                             textTransform: nameTransformed.textTransform
                           }}>
                             {data.name}
@@ -211,7 +211,7 @@ class ContactScreen extends Component {
                           left: companyTransformed.left,
                           letterSpacing: companyTransformed.letterSpacing,
                           position: companyTransformed.position,
-                          textAlign: backTransformed.textAlign,
+                          textAlign: backTransformed.textAlign || companyTransformed.textAlign,
                           textTransform: companyTransformed.textTransform,
                           top: companyTransformed.top,
                           right: companyTransformed.right,
