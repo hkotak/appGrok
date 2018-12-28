@@ -145,7 +145,7 @@ class ContactScreen extends Component {
                         <View >
                           <Text style={{
                             fontSize: nameTransformed.fontSize,
-                            fontWeight: nameTransformed.fontWeight,
+                            fontWeight: (Platform.OS=== 'ios') ? nameTransformed.fontFamily : 'Roboto',
                             height: nameTransformed.height,
                             width: nameTransformed.width,
                             fontFamily: nameTransformed.fontFamily,
@@ -167,7 +167,7 @@ class ContactScreen extends Component {
                             backgroundColor: infoTransformed.backgroundColor,
                             color: css.front.color,
                             fontSize: infoTransformed.fontSize,
-                            fontFamily: css.info.fontFamily,
+                            fontFamily: (Platform.OS=== 'ios') ? infoTransformed.fontFamily : 'Roboto',
                             height: infoTransformed.height,
                             width: infoTransformed.width,
                             paddingBottom: infoTransformed.paddingBottom,
@@ -207,7 +207,7 @@ class ContactScreen extends Component {
                           backgroundColor: companyTransformed.backgroundColor,
                           fontSize: companyTransformed.fontSize,
                           fontFamily: companyTransformed.fontFamily,
-                          fontWeight: companyTransformed.fontWeight,
+                          fontWeight: (Platform.OS=== 'ios') ? companyTransformed.fontFamily : 'Roboto',
                           left: companyTransformed.left,
                           letterSpacing: companyTransformed.letterSpacing,
                           position: companyTransformed.position,
