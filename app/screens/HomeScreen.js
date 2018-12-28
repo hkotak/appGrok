@@ -8,7 +8,8 @@ import {
   ScrollView,
   Button,
   ImageBackground,
-  Image
+  Image,
+  Platform
 } from 'react-native';
 
 import { Icon } from 'react-native-elements'
@@ -172,7 +173,7 @@ class HomeScreen extends Component {
                   fontWeight: nameTransformed.fontWeight,
                   height: nameTransformed.height,
                   width: nameTransformed.width,
-                  fontFamily: nameTransformed.fontFamily,
+                  fontFamily: (Platform.OS=== 'ios') ? nameTransformed.fontFamily : 'Roboto',
                   color: frontTransformed.color || nameTransformed.color,
                   left: nameTransformed.left,
                   letterSpacing: nameTransformed.letterSpacing,
@@ -191,7 +192,7 @@ class HomeScreen extends Component {
                   backgroundColor: infoTransformed.backgroundColor,
                   color: css.front.color,
                   fontSize: infoTransformed.fontSize,
-                  fontFamily: css.info.fontFamily,
+                  fontFamily: (Platform.OS=== 'ios') ? infoTransformed.fontFamily : 'Roboto',
                   height: infoTransformed.height,
                   width: infoTransformed.width,
                   paddingBottom: infoTransformed.paddingBottom,
@@ -230,7 +231,7 @@ class HomeScreen extends Component {
                 color: companyTransformed.color,
                 backgroundColor: companyTransformed.backgroundColor,
                 fontSize: companyTransformed.fontSize,
-                fontFamily: companyTransformed.fontFamily,
+                fontFamily: (Platform.OS=== 'ios') ? companyTransformed.fontFamily : 'Roboto',
                 fontWeight: companyTransformed.fontWeight,
                 left: companyTransformed.left,
                 letterSpacing: companyTransformed.letterSpacing,
