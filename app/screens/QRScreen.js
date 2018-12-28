@@ -47,11 +47,15 @@ class QRScreen extends React.Component {
 
   componentDidMount = () => {
     console.log("QRSCREEN", this.qrCodeData())
+    // console.log("QRPROPS", this.props.myCard)
 
   }
 
   qrCodeData = () => {
-    return JSON.stringify(this.props.myCard)
+    const {data, style, user_id} = this.props.myCard
+    const newObj = {data, style, user_id}
+    // console.log("CAN I STRING IT LIKE THIS???", newObj)
+    return JSON.stringify(newObj)
   }
 
 

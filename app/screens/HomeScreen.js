@@ -34,8 +34,6 @@ const mapStateToProps = (state) => {
   // console.log("STATE", state)
   return {
     myCard: state.myCard,
-    // myCardData: state.myCardData,
-    // myCardCSS: state.myCardCSS,
     authInfo: state.authInfo
   }
 }
@@ -114,7 +112,6 @@ class HomeScreen extends Component {
 
   render() {
     console.disableYellowBox = true;
-    // console.log("AVAILABLE PROPS: ", this.props);
     const Data = this.props.myCard.data;
 
 

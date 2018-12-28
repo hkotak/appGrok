@@ -108,11 +108,11 @@ class ContactScreen extends Component {
               let companyTransformed = transform(this.transformCss(css.company))
               let nameTransformed = transform(this.transformCss(css.name))
 
-              console.log("NAME", nameTransformed)
-              console.log("INFO", infoTransformed)
-              console.log("BACK", backTransformed)
-              console.log("FRONT", frontTransformed)
-              console.log("COMPANY", companyTransformed)
+              // console.log("NAME", nameTransformed)
+              // console.log("INFO", infoTransformed)
+              // console.log("BACK", backTransformed)
+              // console.log("FRONT", frontTransformed)
+              // console.log("COMPANY", companyTransformed)
 
               let string = `${css.front.backgroundImage}`
               let backString = `${css.back.backgroundImage}`
@@ -244,8 +244,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    flexDirection: 'column',
-    padding: 15
+    // padding: 15
   },
   heading: {
     fontSize: 25,
@@ -254,15 +253,15 @@ const styles = StyleSheet.create({
   },
   contacts: {
     flex: 0,
-    width: 300,
+    width: 350,
     height: 200,
     alignItems: 'center',
     marginTop: 30,
 
   },
   flipcard: {
-    width: 300,
-    height: 200,
+    width: 350,
+    // height: '100%'
   }
 
 })
