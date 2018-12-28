@@ -88,7 +88,7 @@ class ContactScreen extends Component {
     // console.log("CSS:", css);
 
     return (
-      <ScrollView>
+      <ScrollView style={styles.background}>
         <SearchBar
           darkTheme
           onKeyUp={this._handleKeyUp}
@@ -239,15 +239,19 @@ export default connect(mapStateToProps)(ContactScreen)
 
 //~~~~ STYLESHEET ~~~~//
 const styles = StyleSheet.create({
+  background: {
+    backgroundColor: "#273746",
+
+  },
   wrapper: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'column',
-    backgroundColor: "#273746",
   },
   heading: {
+    marginTop: 15,
     fontSize: 25,
     textAlign: 'center',
     marginBottom: 15,
@@ -258,7 +262,7 @@ const styles = StyleSheet.create({
     width: 350,
     height: 200,
     alignItems: 'center',
-    marginTop: 30,
+    marginTop: 15,
 
   },
   flipcard: {
