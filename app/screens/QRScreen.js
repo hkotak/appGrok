@@ -15,9 +15,12 @@ import { ButtonGroup, Avatar } from 'react-native-elements'
 // qrcode generator
 import QRCode from 'react-native-qrcode'
 
+import {UglifyJS} from 'uglify-js'
+
 import ScanScreen from './ScanScreen.js'
 
 import { connect } from 'react-redux'
+import { from } from 'zen-observable';
 
 const mapStateToProps = (state) => {
   // console.log("STATE", state)
@@ -54,8 +57,9 @@ class QRScreen extends React.Component {
   qrCodeData = () => {
     console.log("PROPS", this.props.myCard)
     const {data, style, user_id} = this.props.myCard
-    const newObj = {data, style, user_id}
-    // console.log("CAN I STRING IT LIKE THIS???", newObj)
+    const newObj = UglifyJS.minify({data, style, user_id})
+
+    console.log("CAN I STRING IT LIKE THIS???", (newObj))
     return JSON.stringify(newObj)
   }
 
